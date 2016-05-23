@@ -1,15 +1,22 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import classes from './HomeView.scss'
+import Map from 'components/Map'
 
-export const HomeView = () => (
-  <div>
-    <h4>Welcome!</h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className={classes.duck}
-      src={DuckImage} />
-  </div>
-)
+export const HomeView = () => {
+  const handleCountySelect = (thing) => {
+    console.log(thing.name);
+    console.log(thing.fips);
+  }
+  let someArray = [
+    {fips: '41045', color: 'red'},
+    {fips: '41001', color: 'blue'}
+  ]
+
+  return (
+    <div>
+      <h4>Welcome!</h4>
+      <Map countyColors={someArray} width={'500px'} height={'500px'}
+        selectedCounty={'41'} onCountySelect={handleCountySelect} />
+    </div>)
+}
 
 export default HomeView
