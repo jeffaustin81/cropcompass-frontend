@@ -2,14 +2,13 @@ import React from 'react'
 import Header from '../../components/Header'
 import classes from './CoreLayout.scss'
 import '../../styles/core.scss'
+import SideMenu from '../../components/SideMenu/SideMenu'
 
 export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
+  <div>
     <Header />
-    <div className={classes.mainContainer}>
-      {children}
-    </div>
-  </div>
+
+</div>
 )
 
 CoreLayout.propTypes = {
