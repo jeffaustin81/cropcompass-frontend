@@ -2,10 +2,10 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import classes from './Header.scss'
 
-export const Header = () => (
-  <div>
-    <header>
-      <div className="logo">
+export const Header = () => {
+
+    return (<header>
+      <div className="logo" style={{flex: 10}}>
         <img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" />
       </div>
       <nav>
@@ -17,14 +17,13 @@ export const Header = () => (
         </a></li>
 
         <li><a href="#">
-          <img src="../../icons/crop-header-icons-off-white/crop-apple2x.png" alt="Crop Icon" width="35" height="35"/>
+          <img src="../../icons/crop-header-icons-off-white/crop-hazelnut2x.png" alt="Crop Icon" width="35" height="35"/>
             <p>Choose Crop</p>
         </a></li>
 
         </ul>
       </nav>
-    </header>
-  </div>
-)
+    </header>)
+}
 
 export default Header
