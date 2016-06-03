@@ -1,26 +1,24 @@
-import React from 'react'
-import Sidebar from 'react-sidebar'
+import React from 'react';
+import Menu from '../Menu/Menu';
+import MenuItem from '../MenuItem/MenuItem';
 
 var SideMenu = React.createClass({
-  getInitialState: function() {
-    return {sidebarOpen: false};
-  },
 
-  onSetSidebarOpen: function(open) {
-    this.setState({sidebarOpen: open});
-  },
+    showRight: function() {
+        this.refs.right.show();
+    },
 
-  render: function() {
-    var sidebarContent = <b>Sidebar content</b>;
+    render: function() {
+        return <div>
+            <button onClick={this.showRight}>Show Right Menu!</button>
 
-    return (
-      <Sidebar sidebar={sidebarContent}
-               open={this.state.sidebarOpen}
-               onSetOpen={this.onSetSidebarOpen}>
-        <b>Main content</b>
-      </Sidebar>
-    );
-  }
+            <Menu ref="right" alignment="right">
+                <MenuItem hash="first-page">First Page</MenuItem>
+                <MenuItem hash="second-page">Second Page</MenuItem>
+                <MenuItem hash="third-page">Third Page</MenuItem>
+            </Menu>
+        </div>;
+    }
 });
 
-module.exports = SideMenu;
+export default SideMenu;
