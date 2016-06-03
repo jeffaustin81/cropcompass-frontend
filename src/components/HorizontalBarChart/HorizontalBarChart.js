@@ -3,7 +3,7 @@ import Bar from './Bar'
 export default class HorizontalBarChart extends React.Component{
 
   render(){
-
+    //let topCrops = this.props.data
     let topCrops = [
       {
         cropName: "corn",
@@ -39,7 +39,7 @@ export default class HorizontalBarChart extends React.Component{
     })
     return(
       <div>
-      <h1>{title}</h1>
+      <h1>{this.props.titletitle}</h1>
       {barNodes}
       </div>
     )
