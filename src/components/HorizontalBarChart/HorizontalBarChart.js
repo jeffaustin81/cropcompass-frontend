@@ -3,7 +3,9 @@ import Bar from './Bar'
 export default class HorizontalBarChart extends React.Component{
 
   render(){
+    let title = "Senators' favorite crops by grams consumed yearly"
     //let topCrops = this.props.data
+    //let title = this,props.title
     let topCrops = [
       {
         cropName: "corn",
@@ -28,7 +30,6 @@ export default class HorizontalBarChart extends React.Component{
     ]
     console.log(topCrops)
     let data = {}
-    let title = "Senators' favorite crops by grams consumed yearly"
     let sumTotalofTopFive = topCrops.map(function(crop){
       return crop.cropNumber
     }).reduce(function(last, current){
@@ -39,7 +40,7 @@ export default class HorizontalBarChart extends React.Component{
     })
     return(
       <div>
-      <h1>{this.props.titletitle}</h1>
+      <h1>{title}</h1>
       {barNodes}
       </div>
     )
