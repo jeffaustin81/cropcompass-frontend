@@ -1,6 +1,5 @@
 import React from 'react';
-// import Menu from '../Menu/Menu';
-// import MenuItem from '../MenuItem/MenuItem';
+
 
 var SideMenu = React.createClass({
 
@@ -10,13 +9,7 @@ var SideMenu = React.createClass({
 
     render: function() {
         return <div>
-            // <button onClick={this.showRight}>Show Right Menu!</button>
-            //
-            // <Menu ref="right" alignment="right">
-            //     <MenuItem hash="first-page">First Page</MenuItem>
-            //     <MenuItem hash="second-page">Second Page</MenuItem>
-            //     <MenuItem hash="third-page">Third Page</MenuItem>
-            // </Menu>
+          <h1>Hello I am a Menu!</h1>
         </div>;
     }
 });
