@@ -1,5 +1,6 @@
 import React from 'react'
 import Map from 'components/Map'
+import HorizontalBarChart from 'components/HorizontalBarChart/HorizontalBarChart'
 
 export const HomeView = () => {
   const handleCountySelect = (thing) => {
@@ -16,6 +17,7 @@ export const HomeView = () => {
       <h4>Welcome!</h4>
       <Map countyColors={someArray} width={'500px'} height={'500px'}
         selectedCounty={'41'} onCountySelect={handleCountySelect} />
+      <HorizontalBarChart />
     </div>)
 }
 

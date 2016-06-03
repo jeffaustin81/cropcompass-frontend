@@ -10,15 +10,17 @@ var SideMenu = React.createClass({
 
     render: function() {
         return <div>
-            // <button onClick={this.showRight}>Show Right Menu!</button>
-            //
-            // <Menu ref="right" alignment="right">
-            //     <MenuItem hash="first-page">First Page</MenuItem>
-            //     <MenuItem hash="second-page">Second Page</MenuItem>
-            //     <MenuItem hash="third-page">Third Page</MenuItem>
-            // </Menu>
         </div>;
     }
 });
 
 export default SideMenu;
+
+
+    // <button onClick={this.showRight}>Show Right Menu!</button>
+    //
+    // <Menu ref="right" alignment="right">
+    //     <MenuItem hash="first-page">First Page</MenuItem>
+    //     <MenuItem hash="second-page">Second Page</MenuItem>
+    //     <MenuItem hash="third-page">Third Page</MenuItem>
+    // </Menu>
