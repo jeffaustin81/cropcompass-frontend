@@ -27,10 +27,10 @@ export default class Bar extends React.Component{
     return(
       <div>
         <div className="row">
-            <div className="col-xs-4 text-right">
+            <div className="col-xs-2 text-right">
               <h2>{cropName}</h2>
             </div>
-            <div className="col-xs-8">
+            <div className="col-xs-10">
             <div style={barStyle}>  </div>
             <h4>{cropNumber}</h4>
             </div>
