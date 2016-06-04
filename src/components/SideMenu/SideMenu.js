@@ -1,6 +1,6 @@
 import React from 'react';
-// import Menu from '../Menu/Menu';
-// import MenuItem from '../MenuItem/MenuItem';
+import { IndexLink, Link } from 'react-router'
+
 
 var SideMenu = React.createClass({
 
@@ -10,6 +10,10 @@ var SideMenu = React.createClass({
 
     render: function() {
         return <div>
+
+          <h1>Hello I am a Menu!</h1>
+
+
         </div>;
     }
 });
