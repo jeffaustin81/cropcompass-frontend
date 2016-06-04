@@ -39,7 +39,7 @@ export default class HorizontalBarChart extends React.Component{
       return (<Bar cropName={crop.cropName} position={index} cropNumber={crop.cropNumber} sumTotalofTopFive={sumTotalofTopFive} />)
     })
     return(
-      <div className="col-md-12">
+      <div>
       <h1>{title}</h1>
       {barNodes}
       </div>
