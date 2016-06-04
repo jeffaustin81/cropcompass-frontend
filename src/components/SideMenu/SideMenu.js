@@ -9,22 +9,12 @@ var SideMenu = React.createClass({
     },
 
     render: function() {
-        return <div>
-
-          <h1>Hello I am a Menu!</h1>
-
-
-        </div>;
+        return (
+          <div className="col-md-12">
+            <h1>Hello I am a Menu!</h1>
+          </div>
+        )
     }
 });
 
 export default SideMenu;
-
-
-    // <button onClick={this.showRight}>Show Right Menu!</button>
-    //
-    // <Menu ref="right" alignment="right">
-    //     <MenuItem hash="first-page">First Page</MenuItem>
-    //     <MenuItem hash="second-page">Second Page</MenuItem>
-    //     <MenuItem hash="third-page">Third Page</MenuItem>
-    // </Menu>
