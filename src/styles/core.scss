@@ -1,7 +1,7 @@
 :global {
   @import 'base';
-  //Some best-practice CSS that's useful for most apps
-  //Just remove them if they're not what you want
+  // Some best-practice CSS that's useful for most apps
+  // Just remove them if they're not what you want
   // html {
   //
   // }
@@ -18,4 +18,11 @@
   // *:after {
   //   box-sizing: inherit;
   // }
+  #map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div > a {
+    display: none;
+  }
+  .row {
+    margin-left: 2.5%;
+    margin-right: 5%;
+  }
 }

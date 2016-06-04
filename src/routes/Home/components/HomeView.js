@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from 'components/Header'
 import Map from 'components/Map'
 import FarmedLand from 'components/FarmedLand'
 import FarmInfo from 'components/FarmInfo'
@@ -20,16 +21,20 @@ export const HomeView = () => {
 
   return (
     <div>
-      <Map countyColors={someArray} width={'500px'} height={'500px'}
-        selectedCounty={'41'} onCountySelect={handleCountySelect} />
+      <Header />
+      <div className="row">
+        <Map countyColors={someArray} width={'500px'} height={'500px'}
+          selectedCounty={'41'} onCountySelect={handleCountySelect} />
         <FarmedLand />
         <FarmInfo />
         <TopCrops />
         <Subsidies />
         <CropProduction />
         <ImportExport/>
-      <HorizontalBarChart />
-    </div>)
+        <HorizontalBarChart />
+      </div>
+    </div>
+  )
 }
 
 export default HomeView
