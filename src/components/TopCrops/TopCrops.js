@@ -11,7 +11,7 @@ export const TopCrops = () => {
         <h1>TopCrops Component</h1>
         </div>
         <div className="col-md-9">
-        <HorizontalBarChart />
+        <HorizontalBarChart countyName="Douglas" chartTitle="topCrops"/>
         </div>
       </div>
     )

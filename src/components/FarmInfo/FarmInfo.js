@@ -11,7 +11,7 @@ export const FarmInfo = () => {
         <h1>FarmInfo Component</h1>
         </div>
         <div className="col-md-9">
-        <HorizontalBarChart />
+        <HorizontalBarChart countyName="Multnomah" chartTitle="farmInfo"/>
         </div>
       </div>
     )

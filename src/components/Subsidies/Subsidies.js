@@ -12,7 +12,7 @@ export const Subsidies = () => {
           <h1>Subsidies Component</h1>
           </div>
           <div className="col-md-9">
-          <HorizontalBarChart />
+          <HorizontalBarChart countyName="Coos" chartTitle="subsidies"/>
           </div>
         </div>
     )

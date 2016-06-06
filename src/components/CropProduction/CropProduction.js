@@ -11,7 +11,7 @@ export const CropProduction = () => {
         <h1>CropProduction Component</h1>
         </div>
         <div className="col-md-9">
-        <HorizontalBarChart />
+        <HorizontalBarChart chartTitle="cropProduction" countyName="Jackson"/>
         </div>
       </div>
     )

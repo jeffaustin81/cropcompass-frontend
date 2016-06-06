@@ -7,6 +7,7 @@ import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction'
 import ImportExport from 'components/ImportExport'
+import CountySelector from 'components/CountySelector/CountySelector'
 
 export const HomeView = () => {
   const handleCountySelect = (thing) => {
@@ -25,6 +26,7 @@ export const HomeView = () => {
         <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
+        <CountySelector />
         <FarmedLand />
         <FarmInfo />
         <TopCrops />

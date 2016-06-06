@@ -11,7 +11,7 @@ export const FarmedLand = () => {
         <h1>FarmedLand Component</h1>
         </div>
         <div className="col-md-9">
-        <HorizontalBarChart />
+        <HorizontalBarChart chartTitle="farmedLand" countyName="Lake"/>
         </div>
       </div>
     )
