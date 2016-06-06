@@ -7,7 +7,6 @@ import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction'
 import ImportExport from 'components/ImportExport'
-import HorizontalBarChart from 'components/HorizontalBarChart/HorizontalBarChart'
 
 export const HomeView = () => {
   const handleCountySelect = (thing) => {
@@ -22,17 +21,16 @@ export const HomeView = () => {
   return (
     <div>
       <Header />
-      <div className="row">
-        <Map countyColors={someArray} width={'500px'} height={'500px'}
+      <div className="row" style={{height:"50em"}}>
+        <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
+      </div>
         <FarmedLand />
         <FarmInfo />
         <TopCrops />
         <Subsidies />
         <CropProduction />
         <ImportExport/>
-        <HorizontalBarChart />
-      </div>
     </div>
   )
 }

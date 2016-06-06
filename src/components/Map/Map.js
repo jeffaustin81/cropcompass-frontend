@@ -150,8 +150,8 @@ class Map extends React.Component {
       }
     }
     return (
-      <div id='map' style={{width: this.props.width, height: this.props.height}}
-        className='container leaflet-container leaflet-retina leaflet-fade-anim'></div>
+      <div id='map' style={{width: this.props.width, height: this.props.height, padding: "1em"}}
+        className='leaflet-container leaflet-retina leaflet-fade-anim'></div>
     )
   }
 }
@@ -171,8 +171,8 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-  height: '500px',
-  width: '500px',
+  height: '100%',
+  width: '100%',
   zoomLevel: 7,
   highliteClassName: 'awesome-default-highlite',
   defaultColor: '#FFFFFF'
