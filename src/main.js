@@ -5,6 +5,24 @@ import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+import CropCompassReducer from './Reducers/rootReducer'
+import thunk from 'redux-thunk';
+
+
+
+
+// ========================================================
+// Browser History Setup
+// ========================================================
+
+
+// ========================================================
+// Store and History Instantiation
+// ========================================================
+// Create redux store and sync with react-router-redux. We have installed the
+// react-router-redux reducer under the routerKey "router" in src/routes/index.js,
+// so we need to provide a custom `selectLocationState` to inform
+// react-router-redux of its location.
 
 // ========================================================
 // Browser History Setup
