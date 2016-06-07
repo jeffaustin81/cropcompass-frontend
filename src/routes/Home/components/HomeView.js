@@ -7,17 +7,38 @@ import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction'
 import ImportExport from 'components/ImportExport'
-import CountySelector from 'components/CountySelector/CountySelector'
+import { connect } from 'react-redux'
 
-export const HomeView = () => {
-  const handleCountySelect = (thing) => {
-    console.log(thing.name);
-    console.log(thing.fips);
+class HomeView extends React.Component {
+  componentWillMount(){
+    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=Multnomah`, (d) =>
+          {
+                  let rawData = d.data.sort(function(a, b) {
+                      return b.acres - a.acres;
+                  })
+                  this.props.putCountyDataInState(rawData)
+          })
   }
+
+
+
+  render(){
   let someArray = [
     {fips: '41045', color: 'red'},
     {fips: '41001', color: 'blue'}
   ]
+
+    const handleCountySelect = (thing) => {
+      this.props.putOneCountyInState(thing.name)
+    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
+          {
+                  let rawData = d.data.sort(function(a, b) {
+                      return b.acres - a.acres;
+                  })
+                  this.props.putCountyDataInState(rawData)
+        })
+    }
+
 
   return (
     <div>
@@ -26,15 +47,36 @@ export const HomeView = () => {
         <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
-        <CountySelector />
-        <FarmedLand />
-        <FarmInfo />
-        <TopCrops />
-        <Subsidies />
-        <CropProduction />
-        <ImportExport/>
+        <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+        <FarmInfo selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+        <TopCrops selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+        <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+        <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+        <ImportExport selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
     </div>
   )
+  }
+}
+const mapStateToProps = (state) => {
+	    return {
+        selectedCounty: state.countyName,
+        countyData: state.countyData,
+
+        }
 }
 
-export default HomeView
+const putOneCountyInState = (countyName) => {
+	return {type:"SELECT_COUNTY", payload: countyName }
+}
+
+const putCountyDataInState = (countyData) => {
+	return {type:"ADD_COUNTY_DATA", payload: countyData }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {putOneCountyInState: (countyName) => dispatch(putOneCountyInState(countyName)),
+    putCountyDataInState: (countyData) => dispatch(putCountyDataInState(countyData))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
