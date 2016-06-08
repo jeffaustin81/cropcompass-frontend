@@ -25,4 +25,23 @@
     margin-left: 2.5%;
     margin-right: 5%;
   }
+  body, header {
+    background-color: #f6f5f0;
+    font-family: 'Dosis', sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Grand Hotel', cursive;
+  }
+  h1 {
+    font-size: 48px;
+    color: #523C03;
+  }
+  h2 {
+    font-size: 35px;
+    color: #523C03;
+  }
+  h3 {
+    font-size: 26px;
+    color: #523C03;
+  }
 }
