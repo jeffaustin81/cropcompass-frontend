@@ -7,6 +7,7 @@ import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction'
 import ImportExport from 'components/ImportExport'
+import MainSelector from 'components/MainSelector'
 import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
@@ -47,11 +48,12 @@ class HomeView extends React.Component {
         <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
-        <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+        <MainSelector />
+        <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <FarmInfo selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <TopCrops selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
-        <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
-        <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+        <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+        <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <ImportExport selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
     </div>
   )

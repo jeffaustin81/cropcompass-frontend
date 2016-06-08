@@ -44,4 +44,15 @@
     font-size: 26px;
     color: #523C03;
   }
+  #main-selector {
+    label {
+      margin-right: 20px;
+      margin-left: 40%;
+    }
+    select {
+      padding: 20px;
+      height: 50px;
+      width: 150px;
+    }
+  }
 }
