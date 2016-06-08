@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 import HorizontalBarChart from 'components/VisualizationsD3/HorizontalBarChart/HorizontalBarChart'
 
 
-export const ImportExport = () => {
+export const ImportExport = (props) => {
 
     return (
       <div className="row info-row">
@@ -11,7 +11,7 @@ export const ImportExport = () => {
         <h1>ImportExport Component</h1>
         </div>
         <div className="col-md-9">
-        <HorizontalBarChart countyName="Benton" chartTitle="importExport"/>
+        <HorizontalBarChart countyName={props.selectedCounty} countyData={props.countyData} chartTitle="importExport"/>
         </div>
       </div>
     )

@@ -4,13 +4,22 @@ import { connect } from 'react-redux'
 export default class CountySelector extends React.Component {
 
 
+    handleSelect(e){
+      e.preventDefault()
+      this.props.selectCounty(e.target.value)
+    }
+
 render(){
-  let { selectCounty } = this.props
-  return(
+  let { selectCounty, selectedCounty } = this.props
+
+
+return(
     <div>
     Current Selected County: {this.props.selectedCounty}
-      <select onChange={ (countyName) => selectCounty(countyName)} name="" id="countySelect">
-      		<option value="Baker">Baker</option>
+    <br/>
+      <select value={this.props.selectedCounty} defaultValue="" onChange={this.handleSelect.bind(this)} name="" id="countySelect">
+          <option value="" disabled>Pick one</option>
+          <option value="Baker">Baker</option>
       		<option value="Benton">Benton</option>
       		<option value="Clackamas">Clackamas</option>
       		<option value="Clatsop">Clatsop</option>
@@ -54,7 +63,7 @@ render(){
 const mapStateToProps = (state) => {
 
 	    return {
-        selectedCounty: state.selectedCounty,
+        selectedCounty: state.countyName,
         }
 }
 

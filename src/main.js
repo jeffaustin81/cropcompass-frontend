@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import createStore from './store/createStore'
+import { createStore, applyMiddleware } from 'redux'
 import AppContainer from './containers/AppContainer'
 import CropCompassReducer from './Reducers/rootReducer'
 import thunk from 'redux-thunk';
-
-
 
 
 // ========================================================
@@ -38,11 +36,18 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // react-router-redux reducer under the routerKey "router" in src/routes/index.js,
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
-const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState, browserHistory)
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router
-})
+let initialState = {
+    countyName: "Multnomah",
+    cropName: "",
+    countyData: []
+}
+
+let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+let store = createStoreWithMiddleware(
+											CropCompassReducer,
+											initialState,
+                      window.devToolsExtension ? window.devToolsExtension() : f => f
+                      )
 
 // ========================================================
 // Developer Tools Setup
@@ -64,9 +69,6 @@ let render = (routerKey = null) => {
   ReactDOM.render(
     <AppContainer
       store={store}
-      history={history}
-      routes={routes}
-      routerKey={routerKey}
     />,
     MOUNT_NODE
   )

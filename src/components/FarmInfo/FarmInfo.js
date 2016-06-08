@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 import HorizontalBarChart from 'components/VisualizationsD3/HorizontalBarChart/HorizontalBarChart'
 
 
-export const FarmInfo = () => {
+export const FarmInfo = (props) => {
 
     return (
       <div className="row info-row">
@@ -11,7 +11,7 @@ export const FarmInfo = () => {
         <h1>FarmInfo Component</h1>
         </div>
         <div className="col-md-9">
-        <HorizontalBarChart countyName="Multnomah" chartTitle="farmInfo"/>
+        <HorizontalBarChart countyName={props.selectedCounty} countyData={props.countyData} chartTitle="farmInfo"/>
         </div>
       </div>
     )
