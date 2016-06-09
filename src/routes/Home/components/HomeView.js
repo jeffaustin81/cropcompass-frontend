@@ -25,8 +25,43 @@ class HomeView extends React.Component {
 
   render(){
   let someArray = [
-    {fips: '41045', color: 'red'},
-    {fips: '41001', color: 'blue'}
+    {fips: '41001', color: '#E1D837'},
+    {fips: '41003', color: '#E1D837'},
+    {fips: '41005', color: '#E1D837'},
+    {fips: '41007', color: '#E1D837'},
+    {fips: '41009', color: '#E1D837'},
+    {fips: '41011', color: '#E1D837'},
+    {fips: '41013', color: '#E1D837'},
+    {fips: '41015', color: '#E1D837'},
+    {fips: '41017', color: '#E1D837'},
+    {fips: '41019', color: '#E1D837'},
+    {fips: '41021', color: '#E1D837'},
+    {fips: '41023', color: '#E1D837'},
+    {fips: '41025', color: '#E1D837'},
+    {fips: '41027', color: '#E1D837'},
+    {fips: '41029', color: '#E1D837'},
+    {fips: '41031', color: '#E1D837'},
+    {fips: '41033', color: '#E1D837'},
+    {fips: '41035', color: '#E1D837'},
+    {fips: '41037', color: '#E1D837'},
+    {fips: '41039', color: '#E1D837'},
+    {fips: '41041', color: '#E1D837'},
+    {fips: '41043', color: '#E1D837'},
+    {fips: '41045', color: '#E1D837'},
+    {fips: '41047', color: '#E1D837'},
+    {fips: '41049', color: '#E1D837'},
+    {fips: '41051', color: '#E1D837'},
+    {fips: '41053', color: '#E1D837'},
+    {fips: '41055', color: '#E1D837'},
+    {fips: '41057', color: '#E1D837'},
+    {fips: '41059', color: '#E1D837'},
+    {fips: '41061', color: '#E1D837'},
+    {fips: '41063', color: '#E1D837'},
+    {fips: '41065', color: '#E1D837'},
+    {fips: '41067', color: '#E1D837'},
+    {fips: '41069', color: '#E1D837'},
+    {fips: '41071', color: '#E1D837'},
+
   ]
 
     const handleCountySelect = (thing) => {

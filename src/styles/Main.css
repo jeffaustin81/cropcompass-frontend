@@ -1,0 +1,19 @@
+@import url(//fonts.googleapis.com/css?family=Grand+Hotel);
+@import url(//fonts.googleapis.com/css?family=Dosis);
+
+body{
+  font-family: 'Dosis', sans-serif;
+}
+
+h1{
+  font-family: 'Grand Hotel', sans-serif;
+  font-size: 48px
+}
+h2{
+  font-family: 'Grand Hotel', sans-serif;
+  font-size: 35px
+}
+h3{
+  font-family: 'Grand Hotel', sans-serif;
+  font-size: 26px
+}
