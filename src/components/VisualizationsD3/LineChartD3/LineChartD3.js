@@ -2,7 +2,6 @@ import { default as React, PropTypes } from 'react';
 
 export default class LineChartD3 extends React.Component {
   componentDidMount(){
-
     const dataset = [{
         x: 1976,
         y: 200000
@@ -169,7 +168,6 @@ export default class LineChartD3 extends React.Component {
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                svg.call(tip);
 
                 svg.append("g")
                     .attr("class", "x axis")

@@ -11,8 +11,8 @@ import LineChartD3 from 'components/VisualizationsD3/LineChartD3/LineChartD3'
 import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
-  componentWillMount(){
-    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=Multnomm ah`, (d) =>
+  componentDidMount(){
+    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=Multnomah`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
@@ -31,7 +31,7 @@ class HomeView extends React.Component {
 
     const handleCountySelect = (thing) => {
       this.props.putOneCountyInState(thing.name)
-    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
+      d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
@@ -48,7 +48,6 @@ class HomeView extends React.Component {
         <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
-      <LineChartD3 />
 
         <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
         <FarmInfo selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
@@ -56,6 +55,7 @@ class HomeView extends React.Component {
         <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
         <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
         <ImportExport selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+        <LineChartD3 />
 
     </div>
   )
