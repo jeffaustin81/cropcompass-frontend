@@ -8,10 +8,11 @@ import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction'
 import ImportExport from 'components/ImportExport'
 import MainSelector from 'components/MainSelector'
+import LineChartD3 from 'components/VisualizationsD3/LineChartD3/LineChartD3'
 import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
-  componentWillMount(){
+  componentDidMount(){
     d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=Multnomah`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
@@ -31,7 +32,7 @@ class HomeView extends React.Component {
 
     const handleCountySelect = (thing) => {
       this.props.putOneCountyInState(thing.name)
-    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
+      d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
@@ -48,13 +49,20 @@ class HomeView extends React.Component {
         <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
+<<<<<<< HEAD
         <MainSelector />
         <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+=======
+
+        <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+>>>>>>> upstream/line-chart-d3
         <FarmInfo selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <TopCrops selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <ImportExport selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+        <LineChartD3 />
+
     </div>
   )
   }
