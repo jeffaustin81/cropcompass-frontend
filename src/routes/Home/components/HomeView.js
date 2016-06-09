@@ -46,7 +46,7 @@ class HomeView extends React.Component {
     <div>
       <Header />
       <div className="row" style={{height:"50em"}}>
-        <Map countyColors={someArray} width={'100%'} height={'100%'}
+        <Map countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
         <MainSelector />

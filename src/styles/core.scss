@@ -21,6 +21,9 @@
   #map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div > a {
     display: none;
   }
+  :focus {
+    outline: none;
+  }
   .row {
     margin-left: 2.5%;
     margin-right: 5%;
