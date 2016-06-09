@@ -49,13 +49,8 @@ class HomeView extends React.Component {
         <Map countyColors={someArray} width={'100%'} height={'100%'}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
-<<<<<<< HEAD
         <MainSelector />
-        <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
-=======
-
         <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
->>>>>>> upstream/line-chart-d3
         <FarmInfo selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <TopCrops selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
