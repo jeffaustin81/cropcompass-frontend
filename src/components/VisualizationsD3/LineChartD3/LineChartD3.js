@@ -1,129 +1,7 @@
 import { default as React, PropTypes } from 'react';
 
 export default class LineChartD3 extends React.Component {
-  componentDidMount(){
-    const dataset = [{
-        x: 1976,
-        y: 200000
-    }, {
-        x: 1977,
-        y: 328813
-    }, {
-        x: 1978,
-        y: 234986
-    }, {
-        x: 1979,
-        y: 443721
-    }, {
-        x: 1980,
-        y: 333666
-    }, {
-        x: 1981,
-        y: 202922
-    }, {
-        x: 1982,
-        y: 773729
-    }, {
-        x: 1983,
-        y: 909876
-    }, {
-        x: 1984,
-        y: 456789
-    }, {
-        x: 1985,
-        y: 238867
-    }, {
-        x: 1986,
-        y: 293847
-    }, {
-        x: 1987,
-        y: 483374
-    }, {
-        x: 1988,
-        y: 499922
-    }, {
-        x: 1989,
-        y: 335577
-    }, {
-        x: 1990,
-        y: 827364
-    }, {
-        x: 1991,
-        y: 882223
-    }, {
-        x: 1992,
-        y: 334455
-    }, {
-        x: 1993,
-        y: 772211
-    }, {
-        x: 1994,
-        y: 112255
-    }, {
-        x: 1995,
-        y: 437262
-    }, {
-        x: 1996,
-        y: 662522
-    }, {
-        x: 1997,
-        y: 445577
-    }, {
-        x: 1998,
-        y: 222277
-    }, {
-        x: 1999,
-        y: 683833
-    }, {
-        x: 2000,
-        y: 198762
-    }, {
-        x: 2001,
-        y: 334477
-    }, {
-        x: 2002,
-        y: 289977
-    }, {
-        x: 2003,
-        y: 445533
-    }, {
-        x: 2004,
-        y: 233456
-    }, {
-        x: 2005,
-        y: 128374
-    }, {
-        x: 2006,
-        y: 445587
-    }, {
-        x: 2007,
-        y: 737485
-    }, {
-        x: 2008,
-        y: 123433
-    }, {
-        x: 2009,
-        y: 556633
-    }, {
-        x: 2010,
-        y: 883736
-    }, {
-        x: 2011,
-        y: 593300
-    }, {
-        x: 2012,
-        y: 746382
-    }, {
-        x: 2013,
-        y: 773344
-    }, {
-        x: 2014,
-        y: 884466
-    }, {
-        x: 2015,
-        y: 337744
-    }, ];
-
+  addAxes(){
     let margin = {
             top: 30,
             right: 100,
@@ -132,8 +10,6 @@ export default class LineChartD3 extends React.Component {
         },
     width = 1000 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-
-
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
             return d.x;
@@ -162,14 +38,14 @@ export default class LineChartD3 extends React.Component {
         .outerTickSize(0)
         .tickPadding(10);
 
-                var svg = d3.select("#mySVG").append("svg")
+      var svg = d3.select("#mySVG").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-                svg.append("g")
+      svg.append("g")
                     .attr("class", "x axis")
                     .attr("transform", "translate(0," + height + ")")
                     .call(xAxisFunction)
@@ -179,134 +55,17 @@ export default class LineChartD3 extends React.Component {
                     .attr("dy", ".35em")
                     .attr("transform", "translate(0,23), rotate(-45)");
 
-                svg.append("g")
+      svg.append("g")
                     .attr("class", "y axis")
                     .call(yAxisFunction);
 
-      }
-  render() {
-    const dataset = [{
-        x: 1976,
-        y: 200000
-    }, {
-        x: 1977,
-        y: 328813
-    }, {
-        x: 1978,
-        y: 234986
-    }, {
-        x: 1979,
-        y: 443721
-    }, {
-        x: 1980,
-        y: 333666
-    }, {
-        x: 1981,
-        y: 202922
-    }, {
-        x: 1982,
-        y: 773729
-    }, {
-        x: 1983,
-        y: 909876
-    }, {
-        x: 1984,
-        y: 456789
-    }, {
-        x: 1985,
-        y: 238867
-    }, {
-        x: 1986,
-        y: 293847
-    }, {
-        x: 1987,
-        y: 483374
-    }, {
-        x: 1988,
-        y: 499922
-    }, {
-        x: 1989,
-        y: 335577
-    }, {
-        x: 1990,
-        y: 827364
-    }, {
-        x: 1991,
-        y: 882223
-    }, {
-        x: 1992,
-        y: 334455
-    }, {
-        x: 1993,
-        y: 772211
-    }, {
-        x: 1994,
-        y: 112255
-    }, {
-        x: 1995,
-        y: 437262
-    }, {
-        x: 1996,
-        y: 662522
-    }, {
-        x: 1997,
-        y: 445577
-    }, {
-        x: 1998,
-        y: 222277
-    }, {
-        x: 1999,
-        y: 683833
-    }, {
-        x: 2000,
-        y: 198762
-    }, {
-        x: 2001,
-        y: 334477
-    }, {
-        x: 2002,
-        y: 289977
-    }, {
-        x: 2003,
-        y: 445533
-    }, {
-        x: 2004,
-        y: 233456
-    }, {
-        x: 2005,
-        y: 128374
-    }, {
-        x: 2006,
-        y: 445587
-    }, {
-        x: 2007,
-        y: 737485
-    }, {
-        x: 2008,
-        y: 123433
-    }, {
-        x: 2009,
-        y: 556633
-    }, {
-        x: 2010,
-        y: 883736
-    }, {
-        x: 2011,
-        y: 593300
-    }, {
-        x: 2012,
-        y: 746382
-    }, {
-        x: 2013,
-        y: 773344
-    }, {
-        x: 2014,
-        y: 884466
-    }, {
-        x: 2015,
-        y: 337744
-    }, ];
+  }
 
+  componentDidMount(){
+    this.addAxes()
+      }
+
+  render() {
     let margin = {
             top: 30,
             right: 100,
@@ -365,16 +124,41 @@ export default class LineChartD3 extends React.Component {
 
     let areaCalc = areaFunction(dataset)
 
+    function showToolTip(thisKey) {
+      console.log('showToolTip')
+      document.getElementById(`tip${thisKey}`).style.opacity = '1'
 
+        }
+    function hideToolTip(thisKey) {
+        document.getElementById(`tip${thisKey}`).style.opacity = '0'
+      }
+
+    let arrayOfThisKey = []
     let circleNodes = dataset.map( (d, index) => {
+            let thisKey = parseInt(Date.now() + index)
+            arrayOfThisKey.push(thisKey)
+            let circleColor= "#D6CD1E"
             let cxCalc = xScale(d.x)
             let cyCalc = yScale(d.y)
             return(
-              <circle cx={cxCalc} key={Date.now + index} cy={cyCalc} r="6"></circle>
+              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="6">
+              </circle>
+
             )
     })
 
-
+    let toolTipNodes = dataset.map((d, index) => {
+      let leftPosition = xScale(d.x)
+      let topPosition = yScale(d.y) + 60
+      return(
+      <div key={"tip" + arrayOfThisKey[index]} class="d3-tip n" id={"tip" + arrayOfThisKey[index]}
+                        style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#D6CD1E",
+                        border: "solid black 1px", padding: "15px", borderRadius: "80%", position: 'absolute',
+                        opacity: '0', pointerEvents: 'none', top: `${topPosition}px`, left: `${leftPosition}px`}}>
+        {d.y}
+      </div>
+      )
+    })
     return (
       <div className="col-md-12 line-chart-box">
         <h2>Line Chart!</h2>
@@ -390,9 +174,164 @@ export default class LineChartD3 extends React.Component {
           {circleNodes}
         </g>
         </svg>
-
+        {toolTipNodes}
       </div>
 
     )
   }
 };
+
+const dataset = [{
+   x: 1976,
+   y: 200000
+}, {
+   x: 1977,
+   y: 328813
+}, {
+   x: 1978,
+   y: 234986
+}, {
+   x: 1979,
+   y: 443721
+}, {
+   x: 1980,
+   y: 333666
+}, {
+   x: 1981,
+   y: 202922
+}, {
+   x: 1982,
+   y: 773729
+}, {
+   x: 1983,
+   y: 909876
+}, {
+   x: 1984,
+   y: 456789
+}, {
+   x: 1985,
+   y: 238867
+}, {
+   x: 1986,
+   y: 293847
+}, {
+   x: 1987,
+   y: 483374
+}, {
+   x: 1988,
+   y: 499922
+}, {
+   x: 1989,
+   y: 335577
+}, {
+   x: 1990,
+   y: 827364
+}, {
+   x: 1991,
+   y: 882223
+}, {
+   x: 1992,
+   y: 334455
+}, {
+   x: 1993,
+   y: 772211
+}, {
+   x: 1994,
+   y: 112255
+}, {
+   x: 1995,
+   y: 437262
+}, {
+   x: 1996,
+   y: 662522
+}, {
+   x: 1997,
+   y: 445577
+}, {
+   x: 1998,
+   y: 222277
+}, {
+   x: 1999,
+   y: 683833
+}, {
+   x: 2000,
+   y: 198762
+}, {
+   x: 2001,
+   y: 334477
+}, {
+   x: 2002,
+   y: 289977
+}, {
+   x: 2003,
+   y: 445533
+}, {
+   x: 2004,
+   y: 233456
+}, {
+   x: 2005,
+   y: 128374
+}, {
+   x: 2006,
+   y: 445587
+}, {
+   x: 2007,
+   y: 737485
+}, {
+   x: 2008,
+   y: 123433
+}, {
+   x: 2009,
+   y: 556633
+}, {
+   x: 2010,
+   y: 883736
+}, {
+   x: 2011,
+   y: 593300
+}, {
+   x: 2012,
+   y: 746382
+}, {
+   x: 2013,
+   y: 773344
+}, {
+   x: 2014,
+   y: 884466
+}, {
+   x: 2015,
+   y: 337744
+}, ];
+
+/*
+let circleNodes = dataset.map( (d, index) => {
+        let thisKey = (Date.now + index)
+        let showToolTip = () => {
+            let tip = document.getElementById("tip" + thisKey)
+            if (tip !== null){
+              tip.style.display = 'block'
+          }
+        }
+        let hideToolTip = () => {
+            let tip = document.getElementById("tip" + thisKey)
+            if (tip !== null){
+
+            tip.style.display = 'none'
+
+          }
+        }
+
+        let circleColor= "#D6CD1E"
+        let cxCalc = xScale(d.x)
+        let cyCalc = yScale(d.y)
+        return(
+          <div>
+          <circle onmouseover={showToolTip()} onmouseleave={hideToolTip()} cx={cxCalc} key={thisKey} cy={cyCalc} fill={circleColor} r="6">
+          </circle>
+          <div key={"tip" + thisKey} class="d3-tip" style={{display: "none"}} id={"tip" + thisKey}>
+            {d.y}
+          </div>
+          </div>
+        )
+})
+*/
