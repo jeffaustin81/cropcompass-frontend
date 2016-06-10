@@ -112,10 +112,5 @@ const putCountyDataInState = (countyData) => {
 	return {type:"ADD_COUNTY_DATA", payload: countyData }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {putOneCountyInState: (countyName) => dispatch(putOneCountyInState(countyName)),
-    putCountyDataInState: (countyData) => dispatch(putCountyDataInState(countyData))
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
+export default connect(mapStateToProps, {putOneCountyInState, putCountyDataInState})(HomeView)

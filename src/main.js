@@ -41,7 +41,7 @@ let initialState = {
     cropName: "",
     countyData: [],
     cropImageName: "hazelnut",
-    cycleFlag: "false"
+    cycleFlag: false
 }
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)

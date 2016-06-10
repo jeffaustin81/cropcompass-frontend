@@ -5,23 +5,22 @@ import SideMenu from '../SideMenu/SideMenu';
 import { connect } from 'react-redux'
 
 class Header extends React.Component {
-/*      componentWillReceiveProps(nextProps){
-          if (nextProps.cycleFlag === true){
-            nextProps.cycleThrough(nextProps.cropImageName)
-          }
-        }
-*/
+
+    triggerToggleCycleFlag = () => {
+      this.props.toggleCycleFlag()
+    }
+
+
+    componentWillReceiveProps(nextProps){
+      let cycleThrough = this.props.cycleThrough
+      let cropImageName = this.props.cropImageName
+      if(nextProps.cycleFlag === true){
+         cycleThrough(cropImageName)
+      }
+    }
+
     render(){
     let { cropImageName, cycleThrough, toggleCycleFlag, cycleFlag } = this.props
-    //let cycleThroughFlagToggle = () => {
-    //  cycling = !cycling
-    //  while (cycling === true){
-      //setInterval(
-
-          //, 500)
-    //  }
-
-
     return (
       <div>
         <header>
@@ -37,7 +36,7 @@ class Header extends React.Component {
               </a></li>
 
               <li><a href="#">
-                <img onClick={cycleThrough.bind(this, cropImageName)}
+                <img onMouseEnter={this.triggerToggleCycleFlag.bind(this)} onMouseLeave={this.triggerToggleCycleFlag.bind(this)}
                 src={`../../icons/crop-header-icons-off-white/crop-${cropImageName}2x.png`}
                 alt="Crop Icon" width="35" height="35"/>
                 <p>Choose Crop</p>
@@ -59,19 +58,15 @@ const mapStateToProps = (state) => {
         }
 }
 
+const CHANGE_CROP_IMAGE = "CHANGE_CROP_IMAGE"
+const TOGGLE_CYCLE_FLAG = "TOGGLE_CYCLE_FLAG"
+
 const cycleThrough = (cropImageName) => {
-	return {type: "CHANGE_CROP_IMAGE", payload: cropImageName }
+	return {type: CHANGE_CROP_IMAGE, payload: cropImageName }
 }
 
 const toggleCycleFlag = () => {
 	return {type: "TOGGLE_CYCLE_FLAG" }
 }
 
-
-const mapDispatchToProps = (dispatch) => {
-  return {cycleThrough: (cropImageName) => dispatch(cycleThrough(cropImageName)),
-    toggleCycleFlag: () => dispatch(toggleCycleFlag())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, {cycleThrough, toggleCycleFlag})(Header)

@@ -41,15 +41,12 @@ const cropImageName = (state = "", action) => {
     switch(action.type) {
       case 'CHANGE_CROP_IMAGE':
       if(action.payload === 'hazelnut'){
-        console.log('changing to leaf')
         return 'leaf'
       }
       else if(action.payload === 'leaf'){
-        console.log('changing to apple')
         return 'apple'
       }
       else {
-        console.log('changing to hazelnut')
         return 'hazelnut'
       }
       default:
