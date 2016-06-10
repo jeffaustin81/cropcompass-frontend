@@ -6,7 +6,7 @@ import HorizontalBarChart from 'components/VisualizationsD3/HorizontalBarChart/H
 export const CropProduction = (props) => {
 
     return (
-      <div className="row info-row">
+      <div className="row text-center info-row">
         <div className="col-md-3">
         <h1>CropProduction Component</h1>
         </div>

@@ -1,4 +1,5 @@
 import { default as React, PropTypes } from 'react';
+import CuteButton from '../../CuteButton/CuteButton'
 
 export default class LineChartD3 extends React.Component {
   addAxes(){
@@ -66,6 +67,7 @@ export default class LineChartD3 extends React.Component {
       }
 
   render() {
+    let { selectedCrop, selectedCounty, countyData } = this.props
     let margin = {
             top: 30,
             right: 100,
@@ -160,8 +162,8 @@ export default class LineChartD3 extends React.Component {
       )
     })
     return (
-      <div className="col-md-12 line-chart-box">
-        <h2>Line Chart!</h2>
+      <div className="info-row line-chart-box text-center">
+        <CuteButton><h2>{selectedCrop} in {selectedCounty} is going nuts!</h2></CuteButton>
         <svg id="mySVG" className="line-chart" width="1000" height="400">
         <g transform="translate(100,30)">
           <rect width="800" height="400" fill="#f2f0df"></rect>

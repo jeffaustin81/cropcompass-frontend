@@ -2,21 +2,68 @@ import React from 'react';
 import Spring from 'react-motion'
 
 class SideMenu extends React.Component{
+    handleClick(county){
+      console.log(this.props)
+      this.props.onCountySelect({name:county})
+    }
 
     render(){
-      let { putOneCropInState } = this.props
+      let { putOneItemInState, menuType, showMenu } = this.props
       let cropList = ["corn", "parsnips", "kale", "broccoli", "hay", "celery", "peas", "hazelnuts", "carrots", "potatoes"]
+      let countyList = ["Baker",
+      "Benton",
+      "Clackamas",
+      "Clatstop",
+      "Colombia",
+      "Coos",
+      "Crook",
+      "Curry",
+      "Deschutes",
+      "Douglas",
+      "Gilliam",
+      "Grant",
+      "Harney",
+      "Hood River",
+      "Jackson",
+      "Jefferson",
+      "Josephine",
+      "Klamath",
+      "Lake",
+      "Lane",
+      "Lincoln",
+      "Linn",
+      "Malheur",
+      "Marion",
+      "Morrow",
+      "Multnomah",
+      "Polk",
+      "Sherman",
+      "Tilamook",
+      "Umatilla",
+      "Wallowa",
+      "Wasco",
+      "Washington",
+      "Wheeler",
+      "Yamhill",
+    ]
+
+
       let cropNodes = cropList.map( (crop, index) => {
-        return (<li key={Date.now + index} onClick={putOneCropInState.bind(this, crop)}><strong>{crop}</strong></li>)
+        return (<div style={{display: "inline-block", padding: "5px"}} key={Date.now + index} onClick={putOneItemInState.bind(this, crop)}><strong>{crop}</strong></div>)
       })
-      let showMenuStyles = {zIndex: "10", display: "block", borderRadius: "10px", textAlign: "center", width: "20%", right:"-20px", position: "fixed", background: "#5EAA00", color: "white"}
-      let hideMenuStyles = {display: "none", width: "25%", right:"-1px", position: "fixed", background: "#273D7A", color: "white"}
+      let countyNodes = countyList.map( (county, index) => {
         return (
-          <div style={this.props.showMenu ? showMenuStyles : hideMenuStyles}>
-          <h2 style={{color:"white"}}>Choose a crop</h2>
-          <ul style={{listStyle:"none"}}>
-          {cropNodes}
-          </ul>
+          <div style={{display: "inline-block", padding: "5px"}} key={Date.now + index} onClick={this.handleClick.bind(this, county)}><strong>{county}</strong></div>
+        )
+      })
+      let showCropStyles = {marginTop: "150px", zIndex: "4", display: "block", opacity: ".8", borderRadius: "10px", textAlign: "center", width: "20%", right:"30px", position: "fixed", background: "#5EAA00", color: "white"}
+      let showCountyStyles = {marginTop: "150px", zIndex: "4", display: "block", opacity: ".8", borderRadius: "10px", textAlign: "center", width: "20%", left:"30px", position: "fixed", background: "#5EAA00", color: "white"}
+      let hideStyles = {zIndex: "10", display: "none", borderRadius: "10px", textAlign: "center", width: "20%", left:"-20px", position: "fixed", background: "#5EAA00", color: "white"}
+
+        return (
+          <div style={showMenu && menuType === "crop" ? showCropStyles : showMenu && menuType === "county" ? showCountyStyles : hideStyles}>
+          <h2 style={{color:"white"}}>Choose a {menuType}</h2>
+          {menuType === "county" ? countyNodes : cropNodes}
           </div>
         )
     }

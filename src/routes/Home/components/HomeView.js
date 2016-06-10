@@ -84,19 +84,21 @@ class HomeView extends React.Component {
   return (
     <div>
       <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty} selectedCrop={selectedCrop}/>
-      <SideMenu showMenu={showMenu} putOneCropInState={putOneCropInState}> the menu is here</SideMenu>
+      <SideMenu showMenu={showMenu} menuType="crop" handleShowMenu={handleShowMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
+      <SideMenu showMenu={showMenu} menuType="county" handleShowMenu={handleShowMenu} onCountySelect={handleCountySelect} putOneItemInState={putOneCountyInState}> the menu is here</SideMenu>
+      <div onClick={showMenu ? handleShowMenu : null}>
       <div className="row" style={{height:"50em"}}>
         <Map countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
-        <MainSelector />
         <FarmedLand selectedCounty={selectedCounty} countyData={countyData}/>
         <FarmInfo selectedCounty={selectedCounty} countyData={countyData} />
         <TopCrops selectedCounty={selectedCounty} countyData={countyData} />
+        <LineChartD3 selectedCounty={selectedCounty} selectedCrop={selectedCrop} countyData={countyData}/>
         <Subsidies selectedCounty={selectedCounty} countyData={countyData} />
         <CropProduction selectedCounty={selectedCounty} countyData={countyData} />
         <ImportExport selectedCounty={selectedCounty} countyData={countyData} />
-        <LineChartD3 />
+        </div>
     </div>
   )
   }
@@ -104,7 +106,7 @@ class HomeView extends React.Component {
 const mapStateToProps = (state) => {
 	    return {
         selectedCounty: state.countyName,
-        selectedCrop: state.selectedCrop,
+        selectedCrop: state.cropName,
         countyData: state.countyData,
         showMenu: state.showMenu
         }
