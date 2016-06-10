@@ -13,6 +13,7 @@ const countyName = (state = "", action) => {
 const cropName = (state = "", action) => {
     switch(action.type) {
       case 'SELECT_CROP':
+      console.log(action)
         return action.payload
       default:
         return state
@@ -54,8 +55,17 @@ const cropImageName = (state = "", action) => {
     }
 }
 
+
+const showMenu = (state = "", action) => {
+    switch(action.type) {
+      case 'TOGGLE_SHOW_MENU':
+        return !state
+      default:
+        return state
+    }
+}
 const CropCompassReducer = combineReducers({
-  countyName, cropName, countyData, cropImageName, cycleFlag
+  countyName, cropName, countyData, cropImageName, cycleFlag, showMenu
 })
 
 export default CropCompassReducer

@@ -38,10 +38,11 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // react-router-redux of its location.
 let initialState = {
     countyName: "Multnomah",
-    cropName: "",
+    cropName: "corn",
     countyData: [],
     cropImageName: "hazelnut",
-    cycleFlag: false
+    cycleFlag: false,
+    showMenu: false
 }
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
