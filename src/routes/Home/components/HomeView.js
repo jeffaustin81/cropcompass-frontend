@@ -7,6 +7,7 @@ import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction'
 import ImportExport from 'components/ImportExport'
+import MainSelector from 'components/MainSelector'
 import LineChartD3 from 'components/VisualizationsD3/LineChartD3/LineChartD3'
 import { connect } from 'react-redux'
 
@@ -80,15 +81,15 @@ class HomeView extends React.Component {
     <div>
       <Header />
       <div className="row" style={{height:"50em"}}>
-        <Map countyColors={someArray} width={'100%'} height={'100%'}
+        <Map countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
           selectedCounty={'41'} onCountySelect={handleCountySelect} />
       </div>
-
+        <MainSelector />
         <FarmedLand selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
         <FarmInfo selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <TopCrops selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
-        <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
-        <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData}/>
+        <Subsidies selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
+        <CropProduction selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <ImportExport selectedCounty={this.props.selectedCounty} countyData={this.props.countyData} />
         <LineChartD3 />
 
