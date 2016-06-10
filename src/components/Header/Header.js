@@ -28,7 +28,7 @@ class Header extends React.Component {
           <div className="logo" style={{flex: 10}}>
             <img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" />
           </div>
-          <nav>
+          <nav  style={{zIndex: "5"}}>
             <ul>
 
               <li><a href="#">
