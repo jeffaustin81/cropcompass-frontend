@@ -39,7 +39,9 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 let initialState = {
     countyName: "Multnomah",
     cropName: "",
-    countyData: []
+    countyData: [],
+    cropImageName: "hazelnut",
+    cycleFlag: "false"
 }
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)

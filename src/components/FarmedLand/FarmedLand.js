@@ -6,7 +6,7 @@ import { IndexLink, Link } from 'react-router'
 export const FarmedLand = (props) => {
 
     return (
-      <div className="row">
+      <div className="info-row row">
         <div className="col-md-3">
         <h1>FarmedLand Component</h1>
         </div>

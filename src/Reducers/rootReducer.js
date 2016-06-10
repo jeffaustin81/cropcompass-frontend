@@ -28,8 +28,37 @@ const countyData = (state = "", action) => {
     }
 }
 
+const cycleFlag = (state = "", action) => {
+    switch(action.type) {
+      case 'TOGGLE_CYCLE_FLAG':
+        return !state
+      default:
+        return state
+    }
+}
+
+const cropImageName = (state = "", action) => {
+    switch(action.type) {
+      case 'CHANGE_CROP_IMAGE':
+      if(action.payload === 'hazelnut'){
+        console.log('changing to leaf')
+        return 'leaf'
+      }
+      else if(action.payload === 'leaf'){
+        console.log('changing to apple')
+        return 'apple'
+      }
+      else {
+        console.log('changing to hazelnut')
+        return 'hazelnut'
+      }
+      default:
+        return state
+    }
+}
+
 const CropCompassReducer = combineReducers({
-  countyName, cropName, countyData
+  countyName, cropName, countyData, cropImageName, cycleFlag
 })
 
 export default CropCompassReducer

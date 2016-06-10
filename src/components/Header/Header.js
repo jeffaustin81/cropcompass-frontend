@@ -2,8 +2,25 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import classes from './Header.scss'
 import SideMenu from '../SideMenu/SideMenu';
+import { connect } from 'react-redux'
 
-export const Header = () => {
+class Header extends React.Component {
+/*      componentWillReceiveProps(nextProps){
+          if (nextProps.cycleFlag === true){
+            nextProps.cycleThrough(nextProps.cropImageName)
+          }
+        }
+*/
+    render(){
+    let { cropImageName, cycleThrough, toggleCycleFlag, cycleFlag } = this.props
+    //let cycleThroughFlagToggle = () => {
+    //  cycling = !cycling
+    //  while (cycling === true){
+      //setInterval(
+
+          //, 500)
+    //  }
+
 
     return (
       <div>
@@ -20,7 +37,9 @@ export const Header = () => {
               </a></li>
 
               <li><a href="#">
-                <img src="../../icons/crop-header-icons-off-white/crop-hazelnut2x.png" alt="Crop Icon" width="35" height="35"/>
+                <img onClick={cycleThrough.bind(this, cropImageName)}
+                src={`../../icons/crop-header-icons-off-white/crop-${cropImageName}2x.png`}
+                alt="Crop Icon" width="35" height="35"/>
                 <p>Choose Crop</p>
               </a></li>
 
@@ -29,7 +48,30 @@ export const Header = () => {
         </header>
         <SideMenu />
       </div>
-  )
+    )
+  }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+	    return {
+        cropImageName: state.cropImageName,
+        cycleFlag: state.cycleFlag
+        }
+}
+
+const cycleThrough = (cropImageName) => {
+	return {type: "CHANGE_CROP_IMAGE", payload: cropImageName }
+}
+
+const toggleCycleFlag = () => {
+	return {type: "TOGGLE_CYCLE_FLAG" }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {cycleThrough: (cropImageName) => dispatch(cycleThrough(cropImageName)),
+    toggleCycleFlag: () => dispatch(toggleCycleFlag())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
