@@ -26,7 +26,7 @@ class Header extends React.Component {
     const cropName = this.props.cropName || ""
     return (
       <div>
-        <header style={{zIndex: "5", position: "fixed"}} >
+        <header style={{zIndex: "5", height: "15%", position: "fixed"}} >
           <div className="logo" style={{flex: 10}}>
             <img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" />
 

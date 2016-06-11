@@ -56,12 +56,12 @@ class SideMenu extends React.Component{
           <div style={{display: "inline-block", padding: "5px"}} key={Date.now + index} onClick={this.handleClick.bind(this, county)}><strong>{county}</strong></div>
         )
       })
-      let showCropStyles = {marginTop: "150px", zIndex: "4", display: "block", opacity: ".8", borderRadius: "10px", textAlign: "center", width: "20%", right:"30px", position: "fixed", background: "#5EAA00", color: "white"}
-      let showCountyStyles = {marginTop: "150px", zIndex: "4", display: "block", opacity: ".8", borderRadius: "10px", textAlign: "center", width: "20%", left:"30px", position: "fixed", background: "#5EAA00", color: "white"}
-      let hideStyles = {zIndex: "10", display: "none", borderRadius: "10px", textAlign: "center", width: "20%", left:"-20px", position: "fixed", background: "#5EAA00", color: "white"}
+      let showCropStyles = {marginTop: "10%", zIndex: "4", display: "block", opacity: ".8", minHeight: "50%", borderRadius: "10px", textAlign: "center", right:"30px", position: "fixed", background: "#5EAA00", color: "white"}
+      let showCountyStyles = {marginTop: "10%", zIndex: "4", display: "block", opacity: ".8",  minHeight: "50%", borderRadius: "10px", textAlign: "center",left:"30px", position: "fixed", background: "#5EAA00", color: "white"}
+      let hideStyles = {zIndex: "10", display: "none", borderRadius: "10px", textAlign: "center",  minHeight: "50%", left:"-20px", position: "fixed", background: "#5EAA00", color: "white"}
 
         return (
-          <div style={showMenu && menuType === "crop" ? showCropStyles : showMenu && menuType === "county" ? showCountyStyles : hideStyles}>
+          <div className="col-sm-3 col-xs-10" style={showMenu && menuType === "crop" ? showCropStyles : showMenu && menuType === "county" ? showCountyStyles : hideStyles}>
           <h2 style={{color:"white"}}>Choose a {menuType}</h2>
           {menuType === "county" ? countyNodes : cropNodes}
           </div>
