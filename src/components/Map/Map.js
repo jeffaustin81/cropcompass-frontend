@@ -58,7 +58,7 @@ class Map extends React.Component {
       stroke: true,
       weight: 2,
       opacity: 1,
-      color: 'black',
+      color: '#6F5204',
       dashArray: '3',
       fillColor: this.getColor(layer),
       fill: true,
@@ -81,10 +81,10 @@ class Map extends React.Component {
     layer.setStyle({
       className: this.props.highliteClassName,
       weight: 5,
-      color: '#08306b',
+      color: '#5EAA00',
       dashArray: '',
       fillOpacity: 0.7,
-      fillColor: '#08306b'
+      fillColor: '#5EAA00'
     });
 
     if (!L.Browser.ie && !L.Browser.opera) {
@@ -150,7 +150,9 @@ class Map extends React.Component {
       }
     }
     return (
-      <div id='map' style={{width: this.props.width, height: this.props.height, padding: '1em'}}
+
+      <div id='map' style={{marginTop: "200px", width: this.props.width, height: this.props.height, padding: '1em'}}
+
         className='leaflet-container leaflet-retina leaflet-fade-anim'></div>
     )
   }
@@ -175,7 +177,7 @@ Map.defaultProps = {
   width: '100%',
   zoomLevel: 7,
   highliteClassName: 'awesome-default-highlite',
-  defaultColor: '#FFFFFF'
+  defaultColor: '#A1C02A'
 };
 
 export default Map;

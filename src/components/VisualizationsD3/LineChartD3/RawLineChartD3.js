@@ -7,7 +7,7 @@ var margin = {
     width = 1000 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-export default var dataset = [{
+export default const dataset = [{
     x: 1976,
     y: 200000
 }, {
