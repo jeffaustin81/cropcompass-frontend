@@ -1,3 +1,12 @@
+.woosh-top{
+  animation: slide 1s
+}
+
+@keyframes slide{
+  from {margin-top: -1000px}
+  to {margin-top: 0px}
+}
+
 .menu {
     display:block;
 

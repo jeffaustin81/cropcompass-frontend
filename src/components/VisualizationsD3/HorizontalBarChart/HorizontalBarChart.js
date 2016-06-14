@@ -13,7 +13,7 @@ export default class HorizontalBarChart extends React.Component {
     }
 
   render() {
-    console.log('********************doing the render with this county:' + this.state.countyName)
+    console.info('bar chart render with this county::' + this.state.countyName)
     let width = 600;
     let height = 400;
     let { putCountyDataInState } = this.props
