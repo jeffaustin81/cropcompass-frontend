@@ -16,27 +16,22 @@ export default class DonutD3 extends React.Component{
           return d.population;
         });
 
-  let colorValues = ["rgb(82,59,3)", "rgb(222,222,206)"]
-  let arcNodes = pie(dataset).map( (d, index) => {
+  let circleNodes = pie(dataset).map( (d, index) => {
+    let arcCalc = arc(d)
+    let colorValues = ["rgb(82,59,3)", "rgb(222,222,206)"]
     let pathStyle = {fill: colorValues[index]}
 
-    let arcCalc = arc(d)
-    return (
-      <g  key={d.age + index} className="arc">
-            <path key={d+index} d={arcCalc} style={pathStyle}>
-            </path>
-            <image href="../../icons/crop-icons-yellow/hazelnut-yellow3x.png" width="220" height="220" x="-100" y="-110">
-            </image>
-      </g>
-    )
-  })
-  let circleNodes = dataset.map( (d, index) => {
     return (
 
       <div key={d.age + index}>
         <svg class="organicDonut" width={width} height={height}>
             <g transform="translate(480,250)">
-                {arcNodes}
+              <g key={d.age + index} className="arc">
+                    <path key={d+index} d={arcCalc} style={pathStyle}>
+                    </path>
+                    <image href="../../icons/crop-icons-yellow/hazelnut-yellow3x.png" width="220" height="220" x="-100" y="-110">
+                    </image>
+              </g>
             </g>
         </svg>
       </div>
