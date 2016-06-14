@@ -23,5 +23,15 @@ h3{
   background: #E2DFCE;
   border-radius: 15px;
   margin-top: 30px;
-  padding: 20px
+  padding: 20px;
+  -webkit-box-shadow: 15px 15px 8px -9px rgba(214,214,214,1);
+  -moz-box-shadow: 15px 15px 8px -9px rgba(214,214,214,1);
+  box-shadow: 15px 15px 8px -9px rgba(214,214,214,1);
+  transition: box-shadow .5s ease
+}
+
+info-row:hover{
+  -webkit-box-shadow: 15px 15px 8px -2px rgba(214,214,214,1);
+  -moz-box-shadow: 15px 15px 8px -2px rgba(214,214,214,1);
+  box-shadow: 15px 15px 8px -2px rgba(214,214,214,1);
 }
