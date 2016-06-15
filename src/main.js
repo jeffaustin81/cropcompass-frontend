@@ -37,7 +37,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
 let initialState = {
-    countyName: "Multnomah",
+    countyName: {name: "Multnomah", fips: "41051"},
     cropName: "corn",
     countyData: [],
     cropImageName: "hazelnut",

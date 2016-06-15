@@ -145,11 +145,10 @@ class Map extends React.Component {
                 color = "#5EAA00"
                 break;
         }
-        if(this.props.selectedCounty === item.name){
+        if(this.props.selectedCounty.fips === item.fips){
           color = "orange"
           console.log('trigger')
         }
-        console.log(this.props.selectedCounty)
         mapColor[item.fips] = color;
       })
       this.colorMap = mapColor;

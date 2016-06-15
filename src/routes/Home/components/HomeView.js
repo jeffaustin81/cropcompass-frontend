@@ -71,7 +71,7 @@ class HomeView extends React.Component {
   ]
 
     const handleCountySelect = (thing) => {
-      this.props.putOneCountyInState(thing.name)
+      this.props.putOneCountyInState({name: thing.name, fips: thing.fips})
       d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
@@ -83,7 +83,7 @@ class HomeView extends React.Component {
 
   return (
     <div style={{xOverflow: "hidden"}}>
-      <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty} selectedCrop={selectedCrop}/>
+      <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop}/>
       {showMenu ?
       <div>
       <SideMenu showMenu={showMenu} menuType="crop" handleShowMenu={handleShowMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
@@ -96,13 +96,13 @@ class HomeView extends React.Component {
         <Map selectedCounty={selectedCounty} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
            onCountySelect={handleCountySelect} />
       </div>
-        <FarmedLand selectedCounty={selectedCounty} countyData={countyData}/>
-        <FarmInfo selectedCounty={selectedCounty} countyData={countyData} />
-        <TopCrops selectedCounty={selectedCounty} countyData={countyData} />
-        <LineChartD3 selectedCounty={selectedCounty} selectedCrop={selectedCrop} countyData={countyData}/>
-        <Subsidies selectedCounty={selectedCounty} countyData={countyData} />
-        <CropProduction selectedCounty={selectedCounty} countyData={countyData} />
-        <ImportExport selectedCounty={selectedCounty} countyData={countyData} />
+        <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData}/>
+        <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData} />
+        <TopCrops selectedCounty={selectedCounty.name} countyData={countyData} />
+        <LineChartD3 selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData}/>
+        <Subsidies selectedCounty={selectedCounty.name} countyData={countyData} />
+        <CropProduction selectedCounty={selectedCounty.name} countyData={countyData} />
+        <ImportExport selectedCounty={selectedCounty.name} countyData={countyData} />
         </div>
     </div>
   )
