@@ -55,7 +55,7 @@ class HomeView extends React.Component {
     {fips: '41043', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
     {fips: '41045', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
     {fips: '41047', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41051', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
+    {fips: '41051', color: '#E1D837', name: 'Multnomah', numberOfFarms: '5000'},
     {fips: '41049', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
     {fips: '41053', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
     {fips: '41055', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
@@ -71,7 +71,7 @@ class HomeView extends React.Component {
   ]
 
     const handleCountySelect = (thing) => {
-      this.props.putOneCountyInState(thing.name)
+      this.props.putOneCountyInState({name: thing.name, fips: thing.fips})
       d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
@@ -83,7 +83,7 @@ class HomeView extends React.Component {
 
   return (
     <div style={{xOverflow: "hidden"}}>
-      <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty} selectedCrop={selectedCrop}/>
+      <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop}/>
       {showMenu ?
       <div>
       <SideMenu showMenu={showMenu} menuType="crop" handleShowMenu={handleShowMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
@@ -93,16 +93,16 @@ class HomeView extends React.Component {
       }
       <div onClick={showMenu ? handleShowMenu : null}>
       <div className="row" style={{height:"50em"}}>
-        <Map countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
-          selectedCounty={'41'} onCountySelect={handleCountySelect} />
+        <Map selectedCounty={selectedCounty} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
+           onCountySelect={handleCountySelect} />
       </div>
-        <FarmedLand selectedCounty={selectedCounty} countyData={countyData}/>
-        <FarmInfo selectedCounty={selectedCounty} countyData={countyData} />
-        <TopCrops selectedCounty={selectedCounty} countyData={countyData} />
-        <LineChartD3 selectedCounty={selectedCounty} selectedCrop={selectedCrop} countyData={countyData}/>
-        <Subsidies selectedCounty={selectedCounty} countyData={countyData} />
-        <CropProduction selectedCounty={selectedCounty} countyData={countyData} />
-        <ImportExport selectedCounty={selectedCounty} countyData={countyData} />
+        <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData}/>
+        <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData} />
+        <TopCrops selectedCounty={selectedCounty.name} countyData={countyData} />
+        <LineChartD3 selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData}/>
+        <Subsidies selectedCounty={selectedCounty.name} countyData={countyData} />
+        <CropProduction selectedCounty={selectedCounty.name} countyData={countyData} />
+        <ImportExport selectedCounty={selectedCounty.name} countyData={countyData} />
         </div>
     </div>
   )
