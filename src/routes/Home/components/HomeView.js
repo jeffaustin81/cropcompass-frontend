@@ -5,7 +5,7 @@ import FarmedLand from 'components/FarmedLand'
 import FarmInfo from 'components/FarmInfo'
 import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
-import CropProduction from 'components/CropProduction'
+import CropProduction from 'components/CropProduction/CropProduction'
 import ImportExport from 'components/ImportExport'
 import MainSelector from 'components/MainSelector'
 import LineChartD3 from 'components/VisualizationsD3/LineChartD3/LineChartD3'
@@ -14,8 +14,9 @@ import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
   componentDidMount(){
-    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=Multnomah`, (d) =>
+    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah`, (d) =>
           {
+            console.log(d)
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
                   })
@@ -71,7 +72,7 @@ class HomeView extends React.Component {
 
     const handleCountySelect = (thing) => {
       this.props.putOneCountyInState(thing.name)
-      d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
+      d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
@@ -80,12 +81,16 @@ class HomeView extends React.Component {
         })
     }
 
-
   return (
-    <div>
+    <div style={{xOverflow: "hidden"}}>
       <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty} selectedCrop={selectedCrop}/>
+      {showMenu ?
+      <div>
       <SideMenu showMenu={showMenu} menuType="crop" handleShowMenu={handleShowMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
       <SideMenu showMenu={showMenu} menuType="county" handleShowMenu={handleShowMenu} onCountySelect={handleCountySelect} putOneItemInState={putOneCountyInState}> the menu is here</SideMenu>
+      </div>
+      : ""
+      }
       <div onClick={showMenu ? handleShowMenu : null}>
       <div className="row" style={{height:"50em"}}>
         <Map countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
