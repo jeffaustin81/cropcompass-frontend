@@ -55,7 +55,7 @@ class HomeView extends React.Component {
     {fips: '41043', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
     {fips: '41045', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
     {fips: '41047', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41051', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
+    {fips: '41051', color: '#E1D837', name: 'Multnomah', numberOfFarms: '5000'},
     {fips: '41049', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
     {fips: '41053', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
     {fips: '41055', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
@@ -93,8 +93,8 @@ class HomeView extends React.Component {
       }
       <div onClick={showMenu ? handleShowMenu : null}>
       <div className="row" style={{height:"50em"}}>
-        <Map countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
-          selectedCounty={'41'} onCountySelect={handleCountySelect} />
+        <Map selectedCounty={selectedCounty} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
+           onCountySelect={handleCountySelect} />
       </div>
         <FarmedLand selectedCounty={selectedCounty} countyData={countyData}/>
         <FarmInfo selectedCounty={selectedCounty} countyData={countyData} />

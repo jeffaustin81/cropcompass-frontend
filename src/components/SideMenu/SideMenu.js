@@ -60,9 +60,11 @@ class SideMenu extends React.Component{
       return(
         <Motion defaultStyle={{x: 0}} style={{x: spring(15)}}>
       {val => {
+        let iconName = ''
+        menuType === 'county' ? iconName = 'location-iconx2' : iconName = 'crop-hazelnut2x'
         let showCropStyles = {marginTop: `${val.x}%`, zIndex: "4", display: "block", opacity: ".8", minHeight: "50%", borderRadius: "10px", textAlign: "center", right:"2%", position: "fixed", background: "#5EAA00", color: "white"}
         let showCountyStyles = {marginTop: `${val.x}%`, zIndex: "4", display: "block", opacity: ".8",  minHeight: "50%", borderRadius: "10px", textAlign: "center",left:"2%", position: "fixed", background: "#5EAA00", color: "white"}
-        return <div className="col-sm-3 col-xs-5" style={showMenu && menuType === "crop" ? showCropStyles : showCountyStyles}> <h3 style={{color:"white"}}>Choose a {menuType}</h3> {menuType === "county" ? countyNodes : cropNodes} </div>
+        return <div className="col-sm-3 col-xs-5" style={showMenu && menuType === "crop" ? showCropStyles : showCountyStyles}> <h3 style={{color:"white"}}><img src={`../../icons/crop-header-icons-off-white/${iconName}.png`}/> Choose a {menuType}</h3> {menuType === "county" ? countyNodes : cropNodes} </div>
       }}
       </Motion>
       )
