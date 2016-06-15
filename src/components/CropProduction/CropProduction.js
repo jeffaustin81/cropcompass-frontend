@@ -18,7 +18,7 @@ export const CropProduction = (props) => {
         <div className="col-md-3">
         <DonutD3 dataset={dataset} width="400" height="200"/>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-offset-1 col-md-5">
         <HorizontalBarChart chartTitle="cropProduction" countyData={props.countyData} countyName={props.selectedCounty}/>
         </div>
       </div>

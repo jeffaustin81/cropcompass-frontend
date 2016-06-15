@@ -127,7 +127,25 @@ class Map extends React.Component {
     if (this.geoLayer) {
       let mapColor = {};
       this.props.countyColors.map((item) => {
-        mapColor[item.fips] = item.color;
+        let color = ''
+        switch(item.numberOfFarms) {
+            case "1000":
+                color = "#E1D837"
+                break;
+            case "2000":
+                color = "#BCCA30"
+                break;
+            case "3000":
+                color = "#A1C02A"
+                break;
+            case "4000":
+                color = "#87B725"
+                break;
+            case "5000":
+                color = "#5EAA00"
+                break;
+        }
+        mapColor[item.fips] = color;
       })
       this.colorMap = mapColor;
       let fips = this.props.focusedCounty || '41';
