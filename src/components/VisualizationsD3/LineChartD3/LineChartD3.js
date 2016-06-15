@@ -151,22 +151,22 @@ export default class LineChartD3 extends React.Component {
 
     let toolTipNodes = dataset.map((d, index) => {
       let leftPosition = xScale(d.x)
-      let topPosition = yScale(d.y) + 60
+      let topPosition = yScale(d.y)
       return(
       <div key={"tip" + arrayOfThisKey[index]} class="d3-tip n" id={"tip" + arrayOfThisKey[index]}
                         style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#D6CD1E",
                         border: "solid black 1px", padding: "15px", borderRadius: "80%", position: 'absolute',
-                        opacity: '0', pointerEvents: 'none', top: `${topPosition}px`, left: `${leftPosition}px`}}>
+                        opacity: '0', pointerEvents: 'none', minHeight: "10px", top: `${topPosition + 1900}px`, left: `${leftPosition + 200}px`}}>
         {d.y}
       </div>
       )
     })
     return (
-      <div className="info-row line-chart-box text-center">
+      <div className="row text-center info-row">
         <CuteButton><h2>{selectedCrop} in {selectedCounty} is going nuts!</h2></CuteButton>
-        <svg id="mySVG" className="line-chart" width="1000" height="400">
+        <svg id="mySVG" className="line-chart" width={width + 150} height={height + 100}>
         <g transform="translate(100,30)">
-          <rect width="800" height="400" fill="#f2f0df"></rect>
+          <rect width={width} height={height} fill="#f2f0df"></rect>
           <g className="y axis">
           </g>
           <g className="x axis">

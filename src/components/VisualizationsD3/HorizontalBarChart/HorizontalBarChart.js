@@ -13,9 +13,9 @@ export default class HorizontalBarChart extends React.Component {
     }
 
   render() {
-    console.info('bar chart render with this county::' + this.state.countyName)
-    let width = 600;
-    let height = 400;
+    console.info('bar chart render with this county:' + this.state.countyName)
+    let width = this.props.width || 350;
+    let height = (width * .66);
     let { putCountyDataInState } = this.props
     let colorScale = ["#5EAA00", "#87B725", "#A1C02A", "#BCCA30", "#E1D837"]
         let dataset = this.props.countyData.slice(1,6)
@@ -32,7 +32,7 @@ export default class HorizontalBarChart extends React.Component {
                  )
               })
     return (
-      <div className="col-md-12 horizontal-bar-chart">
+      <div className="horizontal-bar-chart">
         <h2>{this.props.countyName} county info:</h2>
         <div className={this.props.chartTitle}>
         {barNodes}

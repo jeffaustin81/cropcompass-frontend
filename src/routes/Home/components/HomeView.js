@@ -14,8 +14,9 @@ import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
   componentDidMount(){
-    d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=Multnomah`, (d) =>
+    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah`, (d) =>
           {
+            console.log(d)
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
                   })
@@ -71,7 +72,7 @@ class HomeView extends React.Component {
 
     const handleCountySelect = (thing) => {
       this.props.putOneCountyInState(thing.name)
-      d3.json(`http://api.cropcompass.org/data/nass_commodity_area?region=${thing.name}`, (d) =>
+      d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
