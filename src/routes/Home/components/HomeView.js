@@ -8,7 +8,6 @@ import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction/CropProduction'
 import ImportExport from 'components/ImportExport'
 import MainSelector from 'components/MainSelector'
-import LineChartD3 from 'components/VisualizationsD3/LineChartD3/LineChartD3'
 import SideMenu from 'components/SideMenu/SideMenu'
 import { connect } from 'react-redux'
 
@@ -126,10 +125,9 @@ class HomeView extends React.Component {
         <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData}/>
         <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData} />
         <TopCrops selectedCounty={selectedCounty.name} countyData={countyData} />
-        <LineChartD3 selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData}/>
-        <Subsidies selectedCounty={selectedCounty.name} countyData={countyData} />
-        <CropProduction selectedCounty={selectedCounty.name} countyData={countyData} />
-        <ImportExport selectedCounty={selectedCounty.name} countyData={countyData} />
+        <Subsidies subsidiesNumber="450" selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <CropProduction selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <ImportExport selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         </div>
     </div>
   )

@@ -1,10 +1,10 @@
-
 @import url(//fonts.googleapis.com/css?family=Grand+Hotel);
 @import url(//fonts.googleapis.com/css?family=Dosis);
 
 body{
   font-family: 'Dosis', sans-serif;
   background: #F6F5F0;
+  overflow-x: hidden;
 }
 
 h1{
@@ -21,16 +21,16 @@ h3{
 }
 
 .info-row{
-  background: #E2DFCE;
+  background: white;
   border-radius: 15px;
   margin-top: 30px;
   padding: 20px;
-  box-shadow: 15px 15px 8px -9px rgba(214,214,214,1);
- transition: box-shadow .5s ease-in-out;
+box-shadow: 6px 5px 44px -6px rgba(140,143,140,1);
+transition: box-shadow .4s ease-in-out;
 
 
 }
 
 .info-row:hover{
-  box-shadow: 15px 15px 8px -3px rgba(214,214,214,1)
+box-shadow: 6px 5px 44px 4px rgba(140,143,140,1);
 }

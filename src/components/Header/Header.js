@@ -42,15 +42,13 @@ class Header extends React.Component {
 
 
           <nav>
-
             <ul>
-              <CuteButton>
-
-                            <h4>  Current crop: </h4> {cropName}
-                        </CuteButton>
-                        <CuteButton>
-                          <h4>  Current county: </h4>{selectedCounty}
-                        </CuteButton>
+                                  <CuteButton>
+                                      <h4>  Current crop: </h4> {cropName}
+                                  </CuteButton>
+                                  <CuteButton>
+                                    <h4>  Current county: </h4>{selectedCounty}
+                                  </CuteButton>
               <li onClick={this.triggerCountyMenuShow.bind(this)}><a>
                 <img src="../../icons/crop-header-icons-off-white/location-iconx2.png" alt="Location Icon" width="23" height="30"/>
                 <p>Choose County</p>

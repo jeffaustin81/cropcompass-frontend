@@ -81,7 +81,7 @@ class Map extends React.Component {
     layer.setStyle({
       className: this.props.highliteClassName,
       weight: 5,
-      color: '#5EAA00',
+      color: '#6F5204',
       dashArray: '',
       fillOpacity: 0.7,
       fillColor: '#5EAA00'
