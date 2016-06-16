@@ -20,9 +20,28 @@ const cropName = (state = "", action) => {
     }
 }
 
-const countyData = (state = "", action) => {
+const countyData = (state = [], action) => {
     switch(action.type) {
       case 'ADD_COUNTY_DATA':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+const cropData = (state = [], action) => {
+    switch(action.type) {
+      case 'ADD_CROP_DATA':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+
+const cropList = (state = [], action) => {
+    switch(action.type) {
+      case 'FETCH_CROPS_LIST':
         return action.payload
       default:
         return state
@@ -56,16 +75,22 @@ const cropImageName = (state = "", action) => {
 }
 
 
-const showMenu = (state = "", action) => {
+const showMenus = (state = {cropMenu: false, countyMenu: false}, action) => {
     switch(action.type) {
-      case 'TOGGLE_SHOW_MENU':
-        return !state
+      case 'TOGGLE_SHOW_COUNTY_MENU':
+        return {cropMenu: state.cropMenu, countyMenu: !state.countyMenu}
+      case 'TOGGLE_SHOW_CROP_MENU':
+        return {countyMenu: state.countyMenu, cropMenu: !state.cropMenu}
+      case 'CLEAR_ALL_MENUS':
+        return {cropMenu: false, countyMenu: false}
       default:
         return state
     }
 }
+
 const CropCompassReducer = combineReducers({
-  countyName, cropName, countyData, cropImageName, cycleFlag, showMenu
+  countyName, cropName, countyData, cropImageName,
+  cycleFlag, cropList, cropData, showMenus
 })
 
 export default CropCompassReducer

@@ -22,51 +22,73 @@ class HomeView extends React.Component {
                   })
                   this.props.putCountyDataInState(rawData)
           })
-  }
+
+    d3.json('http://api.cropcompass.org:8000/data/commodity_area/', (d) =>
+          {
+            console.log(d)
+                  let rawData = d.data.map( (item) => {
+                    return item.commodity
+                  })
+                  console.info(rawData)
+                  let nonRepeated = []
+
+                  for(let i=0;i<rawData.length;i++){
+                    if (nonRepeated.indexOf(rawData[i]) < 0){
+                      nonRepeated.push(rawData[i])
+                    }
+                  }
+                  console.table(nonRepeated)
+                  this.props.putCropListInState(nonRepeated)
+                  })
+
+              }
+
+
+
 
 
 
   render(){
-    let { handleShowMenu, putOneCropInState,
-      putCountyDataInState, putOneCountyInState,
-       showMenu, selectedCrop, selectedCounty, countyData } = this.props
+    let { putOneCropInState, handleOffMenu,
+      putCountyDataInState, putOneCountyInState, handleShowCropMenu, handleShowCountyMenu,
+       showMenus, selectedCrop, selectedCounty, countyData, cropList, cropData } = this.props
   let someArray = [
-    {fips: '41001', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41003', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41005', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41007', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41009', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
-    {fips: '41011', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41013', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41015', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41017', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41019', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
-    {fips: '41021', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41023', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41027', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41025', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41029', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
-    {fips: '41031', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41033', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41035', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41037', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41039', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
-    {fips: '41041', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41043', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41045', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41047', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
+    {fips: '41001', color: '#E1D837', name: 'Baker', numberOfFarms: '1000'},
+    {fips: '41003', color: '#E1D837', name: 'Benton', numberOfFarms: '2000'},
+    {fips: '41005', color: '#E1D837', name: 'Clackamas', numberOfFarms: '3000'},
+    {fips: '41007', color: '#E1D837', name: 'Clastop', numberOfFarms: '4000'},
+    {fips: '41009', color: '#E1D837', name: 'Columbia', numberOfFarms: '5000'},
+    {fips: '41011', color: '#E1D837', name: 'Coos', numberOfFarms: '1000'},
+    {fips: '41013', color: '#E1D837', name: 'Crook', numberOfFarms: '2000'},
+    {fips: '41015', color: '#E1D837', name: 'Curry', numberOfFarms: '3000'},
+    {fips: '41017', color: '#E1D837', name: 'Deschutes', numberOfFarms: '4000'},
+    {fips: '41019', color: '#E1D837', name: 'Douglas', numberOfFarms: '5000'},
+    {fips: '41021', color: '#E1D837', name: 'Gilliam', numberOfFarms: '1000'},
+    {fips: '41023', color: '#E1D837', name: 'Grant', numberOfFarms: '2000'},
+    {fips: '41027', color: '#E1D837', name: 'Harney', numberOfFarms: '3000'},
+    {fips: '41025', color: '#E1D837', name: 'Hood River', numberOfFarms: '4000'},
+    {fips: '41029', color: '#E1D837', name: 'Jackson', numberOfFarms: '5000'},
+    {fips: '41031', color: '#E1D837', name: 'Jefferson', numberOfFarms: '1000'},
+    {fips: '41033', color: '#E1D837', name: 'Josephine', numberOfFarms: '2000'},
+    {fips: '41035', color: '#E1D837', name: 'Klamath', numberOfFarms: '3000'},
+    {fips: '41037', color: '#E1D837', name: 'Lake', numberOfFarms: '4000'},
+    {fips: '41039', color: '#E1D837', name: 'Lane', numberOfFarms: '5000'},
+    {fips: '41041', color: '#E1D837', name: 'Lincoln', numberOfFarms: '1000'},
+    {fips: '41043', color: '#E1D837', name: 'Linn', numberOfFarms: '2000'},
+    {fips: '41045', color: '#E1D837', name: 'Malheur', numberOfFarms: '3000'},
+    {fips: '41047', color: '#E1D837', name: 'Marion', numberOfFarms: '4000'},
+    {fips: '41049', color: '#E1D837', name: 'Morrow', numberOfFarms: '1000'},
     {fips: '41051', color: '#E1D837', name: 'Multnomah', numberOfFarms: '5000'},
-    {fips: '41049', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41053', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41055', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41057', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41059', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
-    {fips: '41061', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
-    {fips: '41063', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '2000'},
-    {fips: '41065', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '3000'},
-    {fips: '41067', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '4000'},
-    {fips: '41069', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '5000'},
-    {fips: '41071', color: '#E1D837', name: 'nameOfCounty', numberOfFarms: '1000'},
+    {fips: '41053', color: '#E1D837', name: 'Polk', numberOfFarms: '2000'},
+    {fips: '41055', color: '#E1D837', name: 'Sherman', numberOfFarms: '3000'},
+    {fips: '41057', color: '#E1D837', name: 'Tillamook', numberOfFarms: '4000'},
+    {fips: '41059', color: '#E1D837', name: 'Umatilla', numberOfFarms: '5000'},
+    {fips: '41061', color: '#E1D837', name: 'Union', numberOfFarms: '1000'},
+    {fips: '41063', color: '#E1D837', name: 'Wallowa', numberOfFarms: '2000'},
+    {fips: '41065', color: '#E1D837', name: 'Wasco', numberOfFarms: '3000'},
+    {fips: '41067', color: '#E1D837', name: 'Washington', numberOfFarms: '4000'},
+    {fips: '41069', color: '#E1D837', name: 'Wheeler', numberOfFarms: '5000'},
+    {fips: '41071', color: '#E1D837', name: 'Yamhill', numberOfFarms: '1000'},
 
   ]
 
@@ -83,15 +105,20 @@ class HomeView extends React.Component {
 
   return (
     <div style={{xOverflow: "hidden"}}>
-      <Header handleShowMenu={handleShowMenu} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop}/>
-      {showMenu ?
+      <Header handleOffMenu={handleOffMenu} handleShowCropMenu={handleShowCropMenu} handleShowCountyMenu={handleShowCountyMenu} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop}/>
+      {showMenus.cropMenu ?
       <div>
-      <SideMenu showMenu={showMenu} menuType="crop" handleShowMenu={handleShowMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
-      <SideMenu showMenu={showMenu} menuType="county" handleShowMenu={handleShowMenu} onCountySelect={handleCountySelect} putOneItemInState={putOneCountyInState}> the menu is here</SideMenu>
+      <SideMenu cropList={cropList} countyList={someArray} showMenus={showMenus} menuType="crop" handleOffMenu={handleOffMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
       </div>
       : ""
       }
-      <div onClick={showMenu ? handleShowMenu : null}>
+      { showMenus.countyMenu ?
+      <div>
+      <SideMenu cropList={cropList} countyList={someArray} showMenus={showMenus} menuType="county" handleOffMenu={handleOffMenu} onCountySelect={handleCountySelect} putOneItemInState={putOneCountyInState}> the menu is here</SideMenu>
+      </div>
+      : ""
+      }
+      <div onClick={showMenus.cropMenu || showMenus.countyMenu ? handleOffMenu : null}>
       <div className="row" style={{height:"50em"}}>
         <Map selectedCounty={selectedCounty} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
            onCountySelect={handleCountySelect} />
@@ -113,7 +140,9 @@ const mapStateToProps = (state) => {
         selectedCounty: state.countyName,
         selectedCrop: state.cropName,
         countyData: state.countyData,
-        showMenu: state.showMenu
+        showMenus: state.showMenus,
+        cropList: state.cropList,
+        cropData: state.cropData
         }
 }
 
@@ -129,9 +158,20 @@ const putCountyDataInState = (countyData) => {
 	return {type:"ADD_COUNTY_DATA", payload: countyData }
 }
 
-const handleShowMenu = () => {
-	return {type:"TOGGLE_SHOW_MENU"}
+const putCropListInState = (cropsList) => {
+	return {type:"FETCH_CROPS_LIST", payload: cropsList }
 }
 
+const handleShowCountyMenu = () => {
+	return {type:"TOGGLE_SHOW_COUNTY_MENU"}
+}
 
-export default connect(mapStateToProps, {putOneCountyInState, putCountyDataInState, handleShowMenu, putOneCropInState})(HomeView)
+const handleOffMenu = () => {
+	return {type:"CLEAR_ALL_MENUS"}
+}
+
+const handleShowCropMenu = () => {
+	return {type:"TOGGLE_SHOW_CROP_MENU"}
+}
+
+export default connect(mapStateToProps, {putOneCountyInState, handleOffMenu, handleShowCropMenu, handleShowCountyMenu, putCropListInState, putCountyDataInState, putOneCropInState})(HomeView)
