@@ -10,9 +10,15 @@ class Header extends React.Component {
       this.props.toggleCycleFlag()
     }
 
-    triggerMenuShow = () => {
-      this.props.handleShowMenu()
+    triggerCropMenuShow = () => {
+      this.props.handleShowCropMenu()
     }
+
+    triggerCountyMenuShow = () => {
+      this.props.handleShowCountyMenu()
+    }
+
+
     componentWillReceiveProps(nextProps){
       let cycleThrough = this.props.cycleThrough
       let cropImageName = this.props.cropImageName
@@ -22,7 +28,7 @@ class Header extends React.Component {
     }
 
     render(){
-    let { cropImageName, cycleThrough, toggleCycleFlag, cycleFlag, selectedCounty } = this.props
+    let { cropImageName, cycleThrough, toggleCycleFlag, cycleFlag, selectedCounty, handleOffMenu } = this.props
     const cropName = this.props.cropName || ""
     return (
       <div>
@@ -36,21 +42,19 @@ class Header extends React.Component {
 
 
           <nav>
-
             <ul>
-              <CuteButton>
-
-                            <h4>  Current crop: </h4> {cropName}
-                        </CuteButton>
-                        <CuteButton>
-                          <h4>  Current county: </h4>{selectedCounty}
-                        </CuteButton>
-              <li onClick={this.triggerMenuShow.bind(this)}><a>
+                                  <CuteButton>
+                                      <h4>  Current crop: </h4> {cropName}
+                                  </CuteButton>
+                                  <CuteButton>
+                                    <h4>  Current county: </h4>{selectedCounty}
+                                  </CuteButton>
+              <li onClick={this.triggerCountyMenuShow.bind(this)}><a>
                 <img src="../../icons/crop-header-icons-off-white/location-iconx2.png" alt="Location Icon" width="23" height="30"/>
                 <p>Choose County</p>
               </a></li>
 
-              <li onClick={this.triggerMenuShow.bind(this)}><a>
+              <li onClick={this.triggerCropMenuShow.bind(this)}><a>
                 <img onMouseEnter={this.triggerToggleCycleFlag.bind(this)} onMouseLeave={this.triggerToggleCycleFlag.bind(this)}
                 src={`../../icons/crop-header-icons-off-white/crop-${cropImageName}2x.png`}
                 alt="Crop Icon" width="35" height="35"/>

@@ -39,7 +39,7 @@ export default class LineChartD3 extends React.Component {
         .outerTickSize(0)
         .tickPadding(10);
 
-      var svg = d3.select("#mySVG").append("svg")
+      var svg = d3.select(`#mySVG${this.props.title.length}`).append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
@@ -67,7 +67,7 @@ export default class LineChartD3 extends React.Component {
       }
 
   render() {
-    let { selectedCrop, selectedCounty, countyData } = this.props
+    let { selectedCrop, selectedCounty, countyData, title } = this.props
     let margin = {
             top: 30,
             right: 100,
@@ -162,9 +162,9 @@ export default class LineChartD3 extends React.Component {
       )
     })
     return (
-      <div className="row text-center info-row">
-        <CuteButton><h2>{selectedCrop} in {selectedCounty} is going nuts!</h2></CuteButton>
-        <svg id="mySVG" className="line-chart" width={width + 150} height={height + 100}>
+      <div>
+        <CuteButton><h2>{title}</h2></CuteButton>
+        <svg id={`mySVG${title.length}`} className="line-chart" width={width + 150} height={height + 100}>
         <g transform="translate(100,30)">
           <rect width={width} height={height} fill="#f2f0df"></rect>
           <g className="y axis">
