@@ -164,14 +164,14 @@ class HomeView extends React.Component {
       }
       <div onClick={showMenus.cropMenu || showMenus.countyMenu ? handleOffMenu : null}>
       <div className="row" style={{height:"50em"}}>
-        <Map selectedCounty={selectedCounty.name} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
+        <Map selectedCounty={selectedCounty} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
            onCountySelect={handleCountySelect} />
       </div>
         <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
         <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
         <TopCrops year="2012" selectedCounty={selectedCounty.name} countyData={countyData} />
         <Subsidies subsidiesNumber="450" selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
-        <CropProduction selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} productionHistory={this.props.countyData.commoditiesByHarvestHistory} countyData={countyData.commoditiesByAcre} />
+        <CropProduction selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} productionHistory={countyData.commoditiesByHarvestHistory}/>
         <ImportExport productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>
     </div>

@@ -179,7 +179,7 @@ class Map extends React.Component {
   }
 }
 Map.propTypes = {
-  selectedCounty: PropTypes.string,
+  selectedCounty: PropTypes.Object,
   focusedCounty: PropTypes.string,
   countyColors: PropTypes.arrayOf(React.PropTypes.shape({
     fips: React.PropTypes.string,

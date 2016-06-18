@@ -22,7 +22,7 @@ export default class LineChartD3 extends React.Component {
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,100])
+        .domain([0,3000])
         .range([height, 0]);
 
     let xAxisFunction = d3.svg.axis()
@@ -90,7 +90,7 @@ export default class LineChartD3 extends React.Component {
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,100])
+        .domain([0,3000])
         .range([height, 0]);
 
 
@@ -109,10 +109,10 @@ export default class LineChartD3 extends React.Component {
     let lineFunction = d3.svg.line()
         .interpolate("cardinal")
         .x(function(d) {
-            return xScale(d.year);
+          return yScale(d.harvested_acres);
         })
         .y(function(d) {
-            return yScale(d.harvested_acres);
+          return xScale(d.year);
         });
 
     let lineCalc = lineFunction(dataset)
@@ -120,11 +120,11 @@ export default class LineChartD3 extends React.Component {
     let areaFunction = d3.svg.area()
         .interpolate("cardinal")
         .x(function(d) {
-            return xScale(d.year);
+          return yScale(d.harvested_acres);
         })
         .y0(height)
         .y1(function(d) {
-            return yScale(d.harvested_acres);
+          return xScale(d.year);
         });
 
     let areaCalc = areaFunction(dataset)
@@ -160,7 +160,7 @@ export default class LineChartD3 extends React.Component {
                         style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#D6CD1E",
                         border: "solid black 1px", padding: "15px", borderRadius: "80%", position: 'absolute',
                         opacity: '0', pointerEvents: 'none', minHeight: "10px", top: `${topPosition + 1900}px`, left: `${leftPosition + 200}px`}}>
-        {d.y}
+        {d.harvested_acres}
       </div>
       )
     })
