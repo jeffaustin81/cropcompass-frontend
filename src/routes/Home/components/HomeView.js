@@ -12,31 +12,49 @@ import SideMenu from 'components/SideMenu/SideMenu'
 import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
-  componentDidMount(){
-    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah`, (d) =>
+  componentWillMount(){
+    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah&year=2012`, (d) =>
           {
-            console.log(d)
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
                   })
-                  this.props.putCountyDataInState(rawData)
+                  this.props.putCountyCommodityAcreDataInState(rawData)
           })
+          d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&year=2012`, (d) =>
+                      {
+                              let rawData = d.data.sort(function(a, b) {
+                                  return b.harvested_acres - a.harvested_acres;
+                              })
+                              this.props.putCountyCommodityHarvestDataInState(rawData)
+                      })
+
+    d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&commodity=Hazelnuts`, (d) =>
+                    {
+                            let rawData = d.data.sort(function(a, b) {
+                                return b.harvested_acres - a.harvested_acres;
+                            })
+                            this.props.putCountyCommodityHarvestHistoryInState(rawData)
+                        })
+
+    d3.json(`http://api.cropcompass.org:8000/data/subsidy_dollars/?county=Multnomah&year=2012`, (d) =>
+                {
+                    let rawData = d.data.sort(function(a, b) {
+                        return b.subsidy_dollars - a.subsidy_dollars;
+                        })
+                    this.props.putCountySubsidyDataInState(rawData)
+                        })
 
     d3.json('http://api.cropcompass.org:8000/data/commodity_area/', (d) =>
           {
-            console.log(d)
                   let rawData = d.data.map( (item) => {
                     return item.commodity
                   })
-                  console.info(rawData)
                   let nonRepeated = []
-
                   for(let i=0;i<rawData.length;i++){
                     if (nonRepeated.indexOf(rawData[i]) < 0){
                       nonRepeated.push(rawData[i])
                     }
                   }
-                  console.table(nonRepeated)
                   this.props.putCropListInState(nonRepeated)
                   })
 
@@ -48,9 +66,9 @@ class HomeView extends React.Component {
 
 
   render(){
-    let { putOneCropInState, handleOffMenu,
-      putCountyDataInState, putOneCountyInState, handleShowCropMenu, handleShowCountyMenu,
-       showMenus, selectedCrop, selectedCounty, countyData, cropList, cropData } = this.props
+    let { putOneCropInState, putOneCountyInState, handleOffMenu,
+      putCountyCommodityAcreDataInState, handleShowCropMenu, handleShowCountyMenu,
+       showMenus, selectedCrop, countyData, selectedCounty, cropList, cropData } = this.props
   let someArray = [
     {fips: '41001', color: '#E1D837', name: 'Baker', numberOfFarms: '1000'},
     {fips: '41003', color: '#E1D837', name: 'Benton', numberOfFarms: '2000'},
@@ -91,15 +109,42 @@ class HomeView extends React.Component {
 
   ]
 
-    const handleCountySelect = (thing) => {
-      this.props.putOneCountyInState({name: thing.name, fips: thing.fips})
-      d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}`, (d) =>
-          {
-                  let rawData = d.data.sort(function(a, b) {
-                      return b.acres - a.acres;
+    const handleCountySelect = (county, crop) => {
+      if(crop===undefined){crop = selectedCrop}
+      putOneCountyInState(county)
+      putOneCropInState(crop)
+      let thing = county
+      d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}&year=2012`, (d) =>
+            {
+                    let rawData = d.data.sort(function(a, b) {
+                        return b.acres - a.acres;
+                    })
+                    this.props.putCountyCommodityAcreDataInState(rawData)
+            })
+      d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=${thing.fips}&year=2012`, (d) =>
+                  {
+                          let rawData = d.data.sort(function(a, b) {
+                              return b.harvested_acres - a.harvested_acres;
+                          })
+                          this.props.putCountyCommodityHarvestDataInState(rawData)
                   })
-                  this.props.putCountyDataInState(rawData)
-        })
+      d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=${thing.fips}&commodity=${crop}`, (d) =>
+                      {
+                              let rawData = d.data.sort(function(a, b) {
+                                  return b.harvested_acres - a.harvested_acres;
+                              })
+                              this.props.putCountyCommodityHarvestHistoryInState(rawData)
+                          })
+
+      d3.json(`http://api.cropcompass.org:8000/data/subsidy_dollars/?county=${thing.name}&year=2012`, (d) =>
+                  {
+                      let rawData = d.data.sort(function(a, b) {
+                          return b.subsidy_dollars - a.subsidy_dollars;
+                          })
+                      this.props.putCountySubsidyDataInState(rawData)
+                          })
+
+
     }
 
   return (
@@ -107,27 +152,27 @@ class HomeView extends React.Component {
       <Header handleOffMenu={handleOffMenu} handleShowCropMenu={handleShowCropMenu} handleShowCountyMenu={handleShowCountyMenu} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop}/>
       {showMenus.cropMenu ?
       <div>
-      <SideMenu cropList={cropList} countyList={someArray} showMenus={showMenus} menuType="crop" handleOffMenu={handleOffMenu} putOneItemInState={putOneCropInState}> the menu is here</SideMenu>
+      <SideMenu cropList={cropList} countyList={someArray} showMenus={showMenus} menuType="crop" handleOffMenu={handleOffMenu} onSelect={handleCountySelect} putOneCountyInState={putOneCountyInState} putOneCropInState={putOneCropInState} selectedCrop={selectedCrop} selectedCounty={selectedCounty}> the menu is here</SideMenu>
       </div>
       : ""
       }
       { showMenus.countyMenu ?
       <div>
-      <SideMenu cropList={cropList} countyList={someArray} showMenus={showMenus} menuType="county" handleOffMenu={handleOffMenu} onCountySelect={handleCountySelect} putOneItemInState={putOneCountyInState}> the menu is here</SideMenu>
+      <SideMenu cropList={cropList} countyList={someArray} showMenus={showMenus} menuType="county" handleOffMenu={handleOffMenu} onSelect={handleCountySelect} putOneCountyInState={putOneCountyInState} putOneCropInState={putOneCropInState} selectedCrop={selectedCrop} selectedCounty={selectedCounty}> the menu is here</SideMenu>
       </div>
       : ""
       }
       <div onClick={showMenus.cropMenu || showMenus.countyMenu ? handleOffMenu : null}>
       <div className="row" style={{height:"50em"}}>
-        <Map selectedCounty={selectedCounty} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
+        <Map selectedCounty={selectedCounty.name} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
            onCountySelect={handleCountySelect} />
       </div>
-        <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData}/>
-        <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData} />
-        <TopCrops selectedCounty={selectedCounty.name} countyData={countyData} />
+        <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
+        <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
+        <TopCrops year="2012" selectedCounty={selectedCounty.name} countyData={countyData} />
         <Subsidies subsidiesNumber="450" selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
-        <CropProduction selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
-        <ImportExport selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <CropProduction selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} productionHistory={this.props.countyData.commoditiesByHarvestHistory} countyData={countyData.commoditiesByAcre} />
+        <ImportExport productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>
     </div>
   )
@@ -148,12 +193,24 @@ const putOneCountyInState = (countyName) => {
 	return {type:"SELECT_COUNTY", payload: countyName }
 }
 
-const putOneCropInState = (cropName) => {
-	return {type:"SELECT_CROP", payload: cropName }
+const putOneCropInState = (cropInfo) => {
+	return {type:"SELECT_CROP", payload: cropInfo }
 }
 
-const putCountyDataInState = (countyData) => {
-	return {type:"ADD_COUNTY_DATA", payload: countyData }
+const putCountyCommodityHarvestDataInState = (countyData) => {
+	return {type:"ADD_COUNTY_COMMODITY_HARVEST_DATA", payload: countyData }
+}
+
+const putCountyCommodityHarvestHistoryInState = (countyData) => {
+	return {type:"ADD_COUNTY_COMMODITY_HARVEST_HISTORY", payload: countyData }
+}
+
+const putCountyCommodityAcreDataInState = (countyData) => {
+	return {type:"ADD_COUNTY_COMMODITY_ACRE_DATA", payload: countyData }
+}
+
+const putCountySubsidyDataInState = (countyData) => {
+	return {type:"ADD_COUNTY_SUBSIDY_DATA", payload: countyData }
 }
 
 const putCropListInState = (cropsList) => {
@@ -172,4 +229,14 @@ const handleShowCropMenu = () => {
 	return {type:"TOGGLE_SHOW_CROP_MENU"}
 }
 
-export default connect(mapStateToProps, {putOneCountyInState, handleOffMenu, handleShowCropMenu, handleShowCountyMenu, putCropListInState, putCountyDataInState, putOneCropInState})(HomeView)
+export default connect(mapStateToProps,
+        {putOneCountyInState,
+          handleOffMenu,
+          handleShowCropMenu,
+          handleShowCountyMenu,
+          putCropListInState,
+          putCountyCommodityAcreDataInState,
+          putCountyCommodityHarvestDataInState,
+          putCountyCommodityHarvestHistoryInState,
+          putCountySubsidyDataInState,
+          putOneCropInState})(HomeView)

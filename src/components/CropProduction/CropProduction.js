@@ -8,8 +8,6 @@ import Words from '../Words/Words'
 
 
 export const CropProduction = (props) => {
-  let dataset = props.countyData.slice(2,4)
-
     return (
       <div className="row text-center info-row">
         <div className="row">
@@ -20,7 +18,7 @@ export const CropProduction = (props) => {
         <br/>
         <div className="row">
             <div className="col-md-6">
-              <LineChartD3 selectedCounty={props.selectedCounty} title={`${props.selectedCrop} production in ${props.selectedCounty} by year`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
+              <LineChartD3 selectedCounty={props.selectedCounty} yAxis="harvested_acres" dataset={props.productionHistory} title={`${props.selectedCrop} production in ${props.selectedCounty} by year`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
             </div>
             <div className="col-md-6">
               <Words title="Crop Production and Environment">

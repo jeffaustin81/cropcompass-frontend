@@ -6,7 +6,7 @@ import DonutD3 from 'components/VisualizationsD3/DonutD3/TryDonut'
 import Words from '../Words/Words'
 
 export const Subsidies = (props) => {
-  let dataset = props.countyData.slice(2,4)
+    let subsidies = props.countyData.subsidies
 
     return (
 
@@ -27,7 +27,7 @@ export const Subsidies = (props) => {
               </Words>
             </div>
             <div className="col-md-8">
-              <HorizontalBarChart countyName={props.selectedCounty} countyData={props.countyData} chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
+              <HorizontalBarChart countyName={props.selectedCounty} countyData={subsidies} xMetric="subsidy_dollars" chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
             </div>
           </div>
         </div>

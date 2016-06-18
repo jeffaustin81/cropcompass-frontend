@@ -2,21 +2,21 @@ import React from 'react';
 import { Motion, spring } from 'react-motion'
 
 class SideMenu extends React.Component{
-    handleClick(county){
-      console.log(this.props)
-      this.props.onCountySelect({name:county.name, fips: county.fips})
+    handleClick(payload){
+      this.props.onSelect(payload.newCounty, payload.newCrop)
     }
 
 
     render(){
-      let { putOneItemInState, menuType, showMenus, countyList, cropList } = this.props
+
+      let {menuType, showMenus, countyList, cropList, putOneCropInState, putOneCountyInState, selectedCrop, selectedCounty} = this.props
 
       let cropNodes = cropList.map( (crop, index) => {
-        return (<div style={{display: "inline-block", padding: "1%"}} key={Date.now + index} onClick={putOneItemInState.bind(this, crop)}><strong>{crop}</strong></div>)
+        return (<div style={{display: "inline-block", padding: "1%"}} key={Date.now + index} onClick={this.handleClick.bind(this, {newCounty: selectedCounty, newCrop: crop})}><strong>{crop}</strong></div>)
       })
       let countyNodes = countyList.map( (county, index) => {
         return (
-          <div style={{display: "inline-block", padding: "1%"}} key={Date.now + index} onClick={this.handleClick.bind(this, county)}><strong>{county.name}</strong></div>
+          <div style={{display: "inline-block", padding: "1%"}} key={Date.now + index} onClick={this.handleClick.bind(this, {newCounty: county, newCrop: selectedCrop})}><strong>{county.name}</strong></div>
         )
       })
       return(

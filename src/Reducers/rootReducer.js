@@ -20,10 +20,39 @@ const cropName = (state = "", action) => {
     }
 }
 
-const countyData = (state = [], action) => {
+const countyData = (state = {subsidies: [], commoditiesByAcre: [], commoditiesByHarvestHistory: [], commoditiesByHarvestThisYear: []}, action) => {
     switch(action.type) {
-      case 'ADD_COUNTY_DATA':
-        return action.payload
+      case 'ADD_COUNTY_COMMODITY_ACRE_DATA':
+      return Object.assign({}, {
+                  subsidies: state.subsidies,
+                  commoditiesByAcre: action.payload,
+                  commoditiesByHarvestHistory: state.commoditiesByHarvestHistory,
+                  commoditiesByHarvestThisYear: state.commoditiesByHarvestThisYear,
+
+              })
+      case 'ADD_COUNTY_COMMODITY_HARVEST_DATA':
+      return Object.assign({}, {
+                  subsidies: state.subsidies,
+                  commoditiesByAcre: state.commoditiesByAcre,
+                  commoditiesByHarvestHistory: state.commoditiesByHarvestHistory,
+                  commoditiesByHarvestThisYear: action.payload,
+              })
+      case 'ADD_COUNTY_COMMODITY_HARVEST_HISTORY':
+      return Object.assign({}, {
+                  subsidies: state.subsidies,
+                  commoditiesByAcre: state.commoditiesByAcre,
+                  commoditiesByHarvestHistory: action.payload,
+                  commoditiesByHarvestThisYear: state.commoditiesByHarvestThisYear,
+                      })
+
+      case 'ADD_COUNTY_SUBSIDY_DATA':
+      return Object.assign({}, {
+                  subsidies: action.payload,
+                  commoditiesByAcre: state.commoditiesByAcre,
+                  commoditiesByHarvestHistory: state.commoditiesByHarvestHistory,
+                  commoditiesByHarvestThisYear: state.commoditiesByHarvestThisYear,
+              })
+
       default:
         return state
     }

@@ -38,10 +38,10 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // react-router-redux of its location.
 let initialState = {
     countyName: {name: "Multnomah", fips: "41051"},
-    cropName: "corn",
+    cropName: "Hazelnuts",
     cropList: [],
     cropData: [],
-    countyData: [],
+    countyData: {subsidies: [], commoditiesByAcre: [], commoditiesByHarvestHistory: [], commoditiesByHarvestThisYear: []},
     cropImageName: "hazelnut",
     cycleFlag: false,
     showMenus: {cropMenu: false, countyMenu: false}

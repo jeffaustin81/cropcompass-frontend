@@ -15,13 +15,16 @@ export default class HorizontalBarChart extends React.Component {
   render() {
     let width = this.props.width || 350;
     let height = (width * .66);
+    let xMetric = this.props.xMetric
     let { putCountyDataInState } = this.props
     let colorScale = ["#5EAA00", "#87B725", "#A1C02A", "#BCCA30", "#E1D837"]
-        let dataset = this.props.countyData.slice(1,6)
-        let xScale = d3.scale.linear().domain([0, d3.max(dataset, function(d){return d.acres;})]).range([0, width])
+        let dataset = this.props.countyData.slice(0,6)
+        let xScale = d3.scale.linear().domain([0, d3.max(dataset, function(d){return d[xMetric];})]).range([0, width])
         let widthArray = dataset.map(function(d) {
-                      return xScale(d.acres);
+                      return xScale(d[xMetric]);
                        })
+        let lessThanFive = ""
+        if (dataset.length < 5) { lessThanFive = "There are fewer than 5 data points in this query."}
         let barNodes = dataset.map(function(d, index){
               return(
                 <div key={Date.now() + index} style={{borderRadius: "3px", height: "20px", width: `${widthArray[index]}px`,
@@ -35,6 +38,7 @@ export default class HorizontalBarChart extends React.Component {
         <h2>{this.props.chartTitle}</h2>
         <div className={this.props.chartTitle}>
         {barNodes}
+        {lessThanFive}
         </div>
 
       </div>

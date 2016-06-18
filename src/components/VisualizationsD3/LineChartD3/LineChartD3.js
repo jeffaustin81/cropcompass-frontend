@@ -3,6 +3,8 @@ import CuteButton from '../../CuteButton/CuteButton'
 
 export default class LineChartD3 extends React.Component {
   addAxes(){
+    let selectedCrop = this.props.selectedCrop
+    let dataset = this.props.dataset
     let margin = {
             top: 30,
             right: 100,
@@ -13,14 +15,14 @@ export default class LineChartD3 extends React.Component {
     height = 400 - margin.top - margin.bottom;
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
-            return d.x;
+            return d.year;
         }), d3.max(dataset, function(d) {
-            return d.x;
+            return d.year;
         })])
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,1000000])
+        .domain([0,100])
         .range([height, 0]);
 
     let xAxisFunction = d3.svg.axis()
@@ -67,7 +69,8 @@ export default class LineChartD3 extends React.Component {
       }
 
   render() {
-    let { selectedCrop, selectedCounty, countyData, title } = this.props
+    let { selectedCrop, selectedCounty, countyData, title, dataset } = this.props
+
     let margin = {
             top: 30,
             right: 100,
@@ -80,14 +83,14 @@ export default class LineChartD3 extends React.Component {
 
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
-            return d.x;
+            return d.year;
         }), d3.max(dataset, function(d) {
-            return d.x;
+            return d.year;
         })])
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,1000000])
+        .domain([0,100])
         .range([height, 0]);
 
 
@@ -97,7 +100,7 @@ export default class LineChartD3 extends React.Component {
           <g class="tick" transform="translate(${calculatedValue[{index]})" style="opacity: 1;">
                 <line y2="-340" x2="0"></line>
                 <text dy=".35em" y="0" x="9" transform="translate(0,23), rotate(-45)" style="text-anchor: middle;">
-                    {d.x}
+                    {d.year}
                 </text>
           </g>
         )
@@ -106,10 +109,10 @@ export default class LineChartD3 extends React.Component {
     let lineFunction = d3.svg.line()
         .interpolate("cardinal")
         .x(function(d) {
-            return xScale(d.x);
+            return xScale(d.year);
         })
         .y(function(d) {
-            return yScale(d.y);
+            return yScale(d.harvested_acres);
         });
 
     let lineCalc = lineFunction(dataset)
@@ -117,11 +120,11 @@ export default class LineChartD3 extends React.Component {
     let areaFunction = d3.svg.area()
         .interpolate("cardinal")
         .x(function(d) {
-            return xScale(d.x);
+            return xScale(d.year);
         })
         .y0(height)
         .y1(function(d) {
-            return yScale(d.y);
+            return yScale(d.harvested_acres);
         });
 
     let areaCalc = areaFunction(dataset)
@@ -140,8 +143,8 @@ export default class LineChartD3 extends React.Component {
             let thisKey = parseInt(Date.now() + index)
             arrayOfThisKey.push(thisKey)
             let circleColor= "#D6CD1E"
-            let cxCalc = xScale(d.x)
-            let cyCalc = yScale(d.y)
+            let cxCalc = xScale(d.year)
+            let cyCalc = yScale(d.harvested_acres)
             return(
               <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="6">
               </circle>
@@ -150,8 +153,8 @@ export default class LineChartD3 extends React.Component {
     })
 
     let toolTipNodes = dataset.map((d, index) => {
-      let leftPosition = xScale(d.x)
-      let topPosition = yScale(d.y)
+      let leftPosition = xScale(d.year)
+      let topPosition = yScale(d.harvested_acres)
       return(
       <div key={"tip" + arrayOfThisKey[index]} class="d3-tip n" id={"tip" + arrayOfThisKey[index]}
                         style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#D6CD1E",
@@ -183,7 +186,9 @@ export default class LineChartD3 extends React.Component {
   }
 };
 
-const dataset = [{
+/*
+
+const hardData = [{
    x: 1976,
    y: 200000
 }, {
@@ -305,7 +310,7 @@ const dataset = [{
    y: 337744
 }, ];
 
-/*
+
 let circleNodes = dataset.map( (d, index) => {
         let thisKey = (Date.now + index)
         let showToolTip = () => {

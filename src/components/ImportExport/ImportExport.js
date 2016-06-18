@@ -27,11 +27,7 @@ export const ImportExport = (props) => {
         </div>
         <br/>
         <div className="row">
-          <LineChartD3 selectedCounty={props.selectedCounty} title={`${props.selectedCrop} imports in ${props.selectedCounty} by year`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
-        </div>
-        <br/>
-        <div className="row">
-          <LineChartD3 selectedCounty={props.selectedCounty} title={`${props.selectedCrop} exports in ${props.selectedCounty} by year.`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
+          <LineChartD3 dataset={props.productionHistory} selectedCounty={props.selectedCounty} title={`${props.selectedCrop} exports in ${props.selectedCounty} by year.`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
         </div>
       </div>
     )
