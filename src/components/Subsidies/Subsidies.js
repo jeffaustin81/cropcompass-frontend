@@ -7,13 +7,10 @@ import Words from '../Words/Words'
 
 export const Subsidies = (props) => {
     let subsidies = props.countyData.subsidies
-    console.log(props.countyData)
     let justDollars = subsidies.map( (d,i) => {
       return d.subsidy_dollars
     })
-    console.log(justDollars)
     let subsidiesNumber = justDollars.reduce((a, b) => a + b, 0);
-    console.log(subsidiesNumber)
     return (
 
         <div className="row text-center info-row">

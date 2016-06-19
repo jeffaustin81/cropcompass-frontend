@@ -15,14 +15,14 @@ import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
   componentWillMount(){
-    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah&year=2012`, (d) =>
+    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah&year=2010`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
                   })
                   this.props.putCountyCommodityAcreDataInState(rawData)
           })
-          d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&year=2012`, (d) =>
+          d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&year=2010`, (d) =>
                       {
                               let rawData = d.data.sort(function(a, b) {
                                   return b.harvested_acres - a.harvested_acres;
@@ -33,12 +33,12 @@ class HomeView extends React.Component {
     d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&commodity=Hazelnuts`, (d) =>
                     {
                             let rawData = d.data.sort(function(a, b) {
-                                return b.harvested_acres - a.harvested_acres;
+                                return b.year - a.year;
                             })
                             this.props.putCountyCommodityHarvestHistoryInState(rawData)
                         })
 
-    d3.json(`http://api.cropcompass.org:8000/data/subsidy_dollars/?county=Multnomah&year=2012`, (d) =>
+    d3.json(`http://api.cropcompass.org:8000/data/subsidy_dollars/?county=Multnomah&year=2010`, (d) =>
                 {
                     let rawData = d.data.sort(function(a, b) {
                         return b.subsidy_dollars - a.subsidy_dollars;
@@ -106,7 +106,7 @@ class HomeView extends React.Component {
       d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=${thing.fips}&commodity=${crop}`, (d) =>
                       {
                               let rawData = d.data.sort(function(a, b) {
-                                  return b.harvested_acres - a.harvested_acres;
+                                  return b.year - a.year;
                               })
                               this.props.putCountyCommodityHarvestHistoryInState(rawData)
                           })
@@ -163,10 +163,10 @@ class HomeView extends React.Component {
       </div>
 
         <FarmedLand selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
-        <FarmInfo selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
+        <FarmInfo selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
         <TopCrops selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData} />
         <Subsidies selectedYear={selectedYear} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
-        <CropProduction selectedYear={selectedYear} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
+        <CropProduction selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
         <ImportExport selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>
     </div>
