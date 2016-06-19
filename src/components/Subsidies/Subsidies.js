@@ -6,28 +6,34 @@ import DonutD3 from 'components/VisualizationsD3/DonutD3/TryDonut'
 import Words from '../Words/Words'
 
 export const Subsidies = (props) => {
-  let dataset = props.countyData.slice(2,4)
-
+    let subsidies = props.countyData.subsidies
+    console.log(props.countyData)
+    let justDollars = subsidies.map( (d,i) => {
+      return d.subsidy_dollars
+    })
+    console.log(justDollars)
+    let subsidiesNumber = justDollars.reduce((a, b) => a + b, 0);
+    console.log(subsidiesNumber)
     return (
 
         <div className="row text-center info-row">
           <div className="row">
           <CuteButton>
-          <h1>Subsidies in {props.selectedCounty}</h1>
+          <h1>Subsidies in {props.selectedCounty} in {props.selectedYear}</h1>
           </CuteButton>
           </div>
           <br/>
           <div className="row">
             <div className="col-md-4">
               <CuteButton>
-              <h2>${props.subsidiesNumber} million</h2><h3> in annual subsidies</h3>
+              <h2>${subsidiesNumber}</h2><h3> in subsidies on {props.selectedYear}</h3>
               </CuteButton>
               <Words title="Why do subsidies matter?">
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.
               </Words>
             </div>
             <div className="col-md-8">
-              <HorizontalBarChart countyName={props.selectedCounty} countyData={props.countyData} chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
+              <HorizontalBarChart countyName={props.selectedCounty} countyData={subsidies} xMetric="subsidy_dollars" chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
             </div>
           </div>
         </div>

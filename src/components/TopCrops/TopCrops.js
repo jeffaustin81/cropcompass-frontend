@@ -6,21 +6,22 @@ import CuteButton from '../CuteButton/CuteButton'
 import Words from '../Words/Words'
 
 export const TopCrops = (props) => {
-  let dataset = props.countyData.slice(2,4)
+  let commoditiesByAcre = props.countyData.commoditiesByAcre.slice(1,7)
+  let commoditiesByHarvestThisYear = props.countyData.commoditiesByHarvestThisYear.slice(1,7)
 
     return (
       <div className="row text-center info-row">
         <div className="row">
           <CuteButton>
-            <h1>TopCrops Component</h1>
+            <h1>Top Crops in {props.selectedCounty}</h1>
           </CuteButton>
         </div>
         <div className="row">
             <div className="col-md-6">
-            <HorizontalBarChart countyName={props.selectedCounty}  countyData={props.countyData} chartTitle="Top crops by revenue"/>
+            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByAcre} xMetric="acres" chartTitle={`Top crops by acreage in (**most recent year, usually 2012??**)`}/>
             </div>
             <div className="col-md-6">
-            <HorizontalBarChart countyName={props.selectedCounty}  countyData={props.countyData} chartTitle="Top crops by harvest"/>
+            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByHarvestThisYear} xMetric="harvested_acres" chartTitle={`Top crops by harvested acres in ${props.selectedYear}`}/>
             </div>
         </div>
       </div>

@@ -1,8 +1,13 @@
+
 import { default as React, PropTypes } from 'react';
 import CuteButton from '../../CuteButton/CuteButton'
 
 export default class LineChartD3 extends React.Component {
   addAxes(){
+    let {xMetric, yMetric, dataset} = this.props
+     dataset = dataset.map( (d, index) => {
+      return {x: d[xMetric], y: d[yMetric]}
+    })
     let margin = {
             top: 30,
             right: 100,
@@ -20,7 +25,7 @@ export default class LineChartD3 extends React.Component {
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,1000000])
+        .domain([0, 3000])
         .range([height, 0]);
 
     let xAxisFunction = d3.svg.axis()
@@ -67,7 +72,14 @@ export default class LineChartD3 extends React.Component {
       }
 
   render() {
-    let { selectedCrop, selectedCounty, countyData, title } = this.props
+    let { selectedCrop, selectedCounty, countyData, title, xMetric, yMetric, dataset } = this.props
+    dataset = dataset.map( (d, index) => {
+      return {x: d[xMetric], y: d[yMetric]}
+    })
+    //console.info("here is the generated dataset, which produces a tilted graph:")
+    //console.table(dataset)
+    //console.info("here is nathan's hardcoded dataset, which produces a prefectly fine graph:")
+    //console.table(hardDataset)
     let margin = {
             top: 30,
             right: 100,
@@ -87,7 +99,7 @@ export default class LineChartD3 extends React.Component {
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,1000000])
+        .domain([0,3000])
         .range([height, 0]);
 
 
@@ -127,7 +139,6 @@ export default class LineChartD3 extends React.Component {
     let areaCalc = areaFunction(dataset)
 
     function showToolTip(thisKey) {
-      console.log('showToolTip')
       document.getElementById(`tip${thisKey}`).style.opacity = '1'
 
         }
@@ -183,7 +194,7 @@ export default class LineChartD3 extends React.Component {
   }
 };
 
-const dataset = [{
+const hardDataset = [{
    x: 1976,
    y: 200000
 }, {
