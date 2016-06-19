@@ -1,5 +1,4 @@
 import { default as React, PropTypes } from 'react';
-import d3 from 'd3';
 
 export default class DonutD3 extends React.Component{
   render(){
