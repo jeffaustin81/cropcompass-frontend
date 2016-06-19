@@ -33,7 +33,7 @@ class Header extends React.Component {
       <div>
         <header style={{zIndex: "6", height: "17%", minHeight:"120px", position: "fixed"}} >
           <div className="logo" style={{flex: 10}}>
-            <Link to='splash'><img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" /></Link>
+            <Link to='/'><img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" /></Link>
 
 
           </div>

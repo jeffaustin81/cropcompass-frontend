@@ -17,8 +17,8 @@ class AppContainer extends React.Component {
     return (
       <Provider store={store}>
       <Router history={hashHistory}>
-              <Route name="splash" path="/splash" component={SplashPage}></Route>
-              <Route name="data" path="/data" component={HomeView}></Route>
+              <Route name="splash" path="/" component={SplashPage}></Route>
+              <Route name="data" path="data" component={HomeView}></Route>
     </Router>
 
 

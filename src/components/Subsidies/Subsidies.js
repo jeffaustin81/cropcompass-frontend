@@ -19,14 +19,14 @@ export const Subsidies = (props) => {
         <div className="row text-center info-row">
           <div className="row">
           <CuteButton>
-          <h1>Subsidies in {props.selectedCounty}</h1>
+          <h1>Subsidies in {props.selectedCounty} in {props.selectedYear}</h1>
           </CuteButton>
           </div>
           <br/>
           <div className="row">
             <div className="col-md-4">
               <CuteButton>
-              <h2>${subsidiesNumber}</h2><h3> in annual subsidies</h3>
+              <h2>${subsidiesNumber}</h2><h3> in subsidies on {props.selectedYear}</h3>
               </CuteButton>
               <Words title="Why do subsidies matter?">
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.

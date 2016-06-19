@@ -78,10 +78,10 @@ class HomeView extends React.Component {
   render(){
     let { putOneCropInState, putOneCountyInState, handleOffMenu,
       putCountyCommodityAcreDataInState, handleShowCropMenu, handleShowCountyMenu,
-       showMenus, selectedCrop, countyData, selectedCounty, cropList, changeYear, selectedYear, cropData, countyList, sortMapBy, sortMapByChange } = this.props
+       showMenus, selectedCrop, countyData, selectedCounty, cropList,
+       changeYear, selectedYear, cropData, countyList, sortMapBy, sortMapByChange } = this.props
 
 
-  let someArray = countyList
 
     const handleCountySelect = (county, crop, selectedYear) => {
       if(crop===undefined){crop = selectedCrop}
@@ -135,6 +135,10 @@ class HomeView extends React.Component {
 
     }
 
+
+    let someArray = countyList
+
+
   return (
     <div style={{xOverflow: "hidden"}}>
       <Header handleOffMenu={handleOffMenu} handleShowCropMenu={handleShowCropMenu} handleShowCountyMenu={handleShowCountyMenu} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop}/>
@@ -158,12 +162,12 @@ class HomeView extends React.Component {
            onCountySelect={handleCountySelect} />
       </div>
 
-        <FarmedLand selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
-        <FarmInfo selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
+        <FarmedLand selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
+        <FarmInfo selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
         <TopCrops selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData} />
-        <Subsidies selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
-        <CropProduction selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
-        <ImportExport productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
+        <Subsidies selectedYear={selectedYear} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <CropProduction selectedYear={selectedYear} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
+        <ImportExport selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>
     </div>
   )
