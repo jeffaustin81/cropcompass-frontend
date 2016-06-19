@@ -30,10 +30,10 @@ export default class HorizontalBarChart extends React.Component {
         let barNodes = dataset.map(function(d, index){
               return(
                 <div key={Date.now() + index}>
-                <div style={{borderRadius: "3px",  height: "20px", width: `${widthArray[index]}px`,
-                  backgroundColor: `${colorScale[index]}`}}>
-               </div>
-               {d.commodity} - {d[xMetric]}
+                  <div style={{borderRadius: "3px",  height: "20px", width: `${widthArray[index]}px`,
+                    backgroundColor: `${colorScale[index]}`}}>
+                 </div>
+                  {d.commodity} - {d[xMetric]}
                </div>
                  )
               })
