@@ -6,7 +6,7 @@ import Words from '../Words/Words'
 
 export const TopCrops = (props) => {
 
-  let dataset = props.countyData.slice(2,4)
+
   let infoRow = {
     background: "white",
     borderRadius: "5px",
