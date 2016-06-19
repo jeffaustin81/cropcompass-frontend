@@ -6,6 +6,7 @@ import FarmInfo from 'components/FarmInfo'
 import TopCrops from 'components/TopCrops'
 import Subsidies from 'components/Subsidies'
 import CropProduction from 'components/CropProduction/CropProduction'
+import CropDiversity from 'components/CropDiversity/CropDiversity'
 import ImportExport from 'components/ImportExport'
 import MainSelector from 'components/MainSelector'
 import SideMenu from 'components/SideMenu/SideMenu'
@@ -165,7 +166,8 @@ class HomeView extends React.Component {
         <FarmedLand selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
         <FarmInfo selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
         <TopCrops selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData} />
-        <Subsidies selectedYear={selectedYear} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <CropDiversity selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <Subsidies selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <CropProduction selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
         <ImportExport selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>

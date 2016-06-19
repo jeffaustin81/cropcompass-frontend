@@ -8,24 +8,23 @@ import Words from '../Words/Words'
 
 
 export const CropProduction = (props) => {
-  console.log(props.countyList)
-  console.log(props.selectedCounty.name)
+
   let thisCountyLevels = props.countyList.filter( (d) => {
-    return d.county === props.selectedCounty.name
+    return d.county === props.selectedCounty
   })
-  console.log(thisCountyLevels)
-  let productionLevel = thisCountyLevels.cropProduction
-  console.log(productionLevel)
+  let productionLevel = ""
+  if(thisCountyLevels.length > 0) { productionLevel = thisCountyLevels[0].cropProduction}
   let dataset = props.dataset || ""
     return (
       <div className="row text-center info-row">
         <div className="row">
         <CuteButton>
-        {productionLevel}
         <h1>{props.selectedCounty} production of {props.selectedCrop.toLowerCase()} </h1>
         { dataset.length > 0 ?
         <h1>  between {dataset[dataset.length - 1]['year']} and {dataset[0]['year']}</h1>
            :<h1> since 1976 </h1>}
+        <h2>Generally, crop production is {productionLevel} here compared to other counties in Oregon.</h2>
+
         </CuteButton>
         </div>
         <br/>
