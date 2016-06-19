@@ -27,9 +27,11 @@ export default class HorizontalBarChart extends React.Component {
         if (dataset.length < 5) { lessThanFive = "There are fewer than 5 data points in this query."}
         let barNodes = dataset.map(function(d, index){
               return(
-                <div key={Date.now() + index} style={{borderRadius: "3px", height: "20px", width: `${widthArray[index]}px`,
+                <div key={Date.now() + index}>
+                <div style={{borderRadius: "3px",  height: "20px", width: `${widthArray[index]}px`,
                   backgroundColor: `${colorScale[index]}`}}>
-                      {d.commodity}
+               </div>
+               {d.commodity} - {d[xMetric]}
                </div>
                  )
               })

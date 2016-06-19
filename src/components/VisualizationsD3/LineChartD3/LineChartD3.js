@@ -1,10 +1,13 @@
+
 import { default as React, PropTypes } from 'react';
 import CuteButton from '../../CuteButton/CuteButton'
 
 export default class LineChartD3 extends React.Component {
   addAxes(){
-    let selectedCrop = this.props.selectedCrop
-    let dataset = this.props.dataset
+    let {xMetric, yMetric, dataset} = this.props
+     dataset = dataset.map( (d, index) => {
+      return {x: d[xMetric], y: d[yMetric]}
+    })
     let margin = {
             top: 30,
             right: 100,
@@ -15,14 +18,14 @@ export default class LineChartD3 extends React.Component {
     height = 400 - margin.top - margin.bottom;
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
-            return d.year;
+            return d.x;
         }), d3.max(dataset, function(d) {
-            return d.year;
+            return d.x;
         })])
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,3000])
+        .domain([0, 3000])
         .range([height, 0]);
 
     let xAxisFunction = d3.svg.axis()
@@ -69,8 +72,14 @@ export default class LineChartD3 extends React.Component {
       }
 
   render() {
-    let { selectedCrop, selectedCounty, countyData, title, dataset } = this.props
-
+    let { selectedCrop, selectedCounty, countyData, title, xMetric, yMetric, dataset } = this.props
+    dataset = dataset.map( (d, index) => {
+      return {x: d[xMetric], y: d[yMetric]}
+    })
+    //console.info("here is the generated dataset, which produces a tilted graph:")
+    //console.table(dataset)
+    //console.info("here is nathan's hardcoded dataset, which produces a prefectly fine graph:")
+    //console.table(hardDataset)
     let margin = {
             top: 30,
             right: 100,
@@ -83,9 +92,9 @@ export default class LineChartD3 extends React.Component {
 
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
-            return d.year;
+            return d.x;
         }), d3.max(dataset, function(d) {
-            return d.year;
+            return d.x;
         })])
         .range([0, width]);
 
@@ -100,7 +109,7 @@ export default class LineChartD3 extends React.Component {
           <g class="tick" transform="translate(${calculatedValue[{index]})" style="opacity: 1;">
                 <line y2="-340" x2="0"></line>
                 <text dy=".35em" y="0" x="9" transform="translate(0,23), rotate(-45)" style="text-anchor: middle;">
-                    {d.year}
+                    {d.x}
                 </text>
           </g>
         )
@@ -109,10 +118,10 @@ export default class LineChartD3 extends React.Component {
     let lineFunction = d3.svg.line()
         .interpolate("cardinal")
         .x(function(d) {
-          return yScale(d.harvested_acres);
+            return xScale(d.x);
         })
         .y(function(d) {
-          return xScale(d.year);
+            return yScale(d.y);
         });
 
     let lineCalc = lineFunction(dataset)
@@ -120,17 +129,16 @@ export default class LineChartD3 extends React.Component {
     let areaFunction = d3.svg.area()
         .interpolate("cardinal")
         .x(function(d) {
-          return yScale(d.harvested_acres);
+            return xScale(d.x);
         })
         .y0(height)
         .y1(function(d) {
-          return xScale(d.year);
+            return yScale(d.y);
         });
 
     let areaCalc = areaFunction(dataset)
 
     function showToolTip(thisKey) {
-      console.log('showToolTip')
       document.getElementById(`tip${thisKey}`).style.opacity = '1'
 
         }
@@ -143,8 +151,8 @@ export default class LineChartD3 extends React.Component {
             let thisKey = parseInt(Date.now() + index)
             arrayOfThisKey.push(thisKey)
             let circleColor= "#D6CD1E"
-            let cxCalc = xScale(d.year)
-            let cyCalc = yScale(d.harvested_acres)
+            let cxCalc = xScale(d.x)
+            let cyCalc = yScale(d.y)
             return(
               <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="6">
               </circle>
@@ -153,14 +161,14 @@ export default class LineChartD3 extends React.Component {
     })
 
     let toolTipNodes = dataset.map((d, index) => {
-      let leftPosition = xScale(d.year)
-      let topPosition = yScale(d.harvested_acres)
+      let leftPosition = xScale(d.x)
+      let topPosition = yScale(d.y)
       return(
       <div key={"tip" + arrayOfThisKey[index]} class="d3-tip n" id={"tip" + arrayOfThisKey[index]}
                         style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#D6CD1E",
                         border: "solid black 1px", padding: "15px", borderRadius: "80%", position: 'absolute',
                         opacity: '0', pointerEvents: 'none', minHeight: "10px", top: `${topPosition + 1900}px`, left: `${leftPosition + 200}px`}}>
-        {d.harvested_acres}
+        {d.y}
       </div>
       )
     })
@@ -186,9 +194,7 @@ export default class LineChartD3 extends React.Component {
   }
 };
 
-/*
-
-const hardData = [{
+const hardDataset = [{
    x: 1976,
    y: 200000
 }, {
@@ -310,7 +316,7 @@ const hardData = [{
    y: 337744
 }, ];
 
-
+/*
 let circleNodes = dataset.map( (d, index) => {
         let thisKey = (Date.now + index)
         let showToolTip = () => {

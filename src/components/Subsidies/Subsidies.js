@@ -7,7 +7,13 @@ import Words from '../Words/Words'
 
 export const Subsidies = (props) => {
     let subsidies = props.countyData.subsidies
-
+    console.log(props.countyData)
+    let justDollars = subsidies.map( (d,i) => {
+      return d.subsidy_dollars
+    })
+    console.log(justDollars)
+    let subsidiesNumber = justDollars.reduce((a, b) => a + b, 0);
+    console.log(subsidiesNumber)
     return (
 
         <div className="row text-center info-row">
@@ -20,7 +26,7 @@ export const Subsidies = (props) => {
           <div className="row">
             <div className="col-md-4">
               <CuteButton>
-              <h2>${props.subsidiesNumber} million</h2><h3> in annual subsidies</h3>
+              <h2>${subsidiesNumber}</h2><h3> in annual subsidies</h3>
               </CuteButton>
               <Words title="Why do subsidies matter?">
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.

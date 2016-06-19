@@ -18,7 +18,7 @@ export const CropProduction = (props) => {
         <br/>
         <div className="row">
             <div className="col-md-6">
-              <LineChartD3 selectedCounty={props.selectedCounty} yAxis="harvested_acres" dataset={props.productionHistory} title={`${props.selectedCrop} production in ${props.selectedCounty} by year`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
+              <LineChartD3 selectedCounty={props.selectedCounty} xMetric="year" yMetric="harvested_acres" dataset={props.dataset} title={`${props.selectedCrop} production in ${props.selectedCounty} by year`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
             </div>
             <div className="col-md-6">
               <Words title="Crop Production and Environment">

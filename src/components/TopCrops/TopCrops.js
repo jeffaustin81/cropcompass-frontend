@@ -13,15 +13,15 @@ export const TopCrops = (props) => {
       <div className="row text-center info-row">
         <div className="row">
           <CuteButton>
-            <h1>Top Crops in {props.selectedCounty} in {props.year}</h1>
+            <h1>Top Crops in {props.selectedCounty}</h1>
           </CuteButton>
         </div>
         <div className="row">
             <div className="col-md-6">
-            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByAcre} xMetric="acres" chartTitle="Top crops by acreage"/>
+            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByAcre} xMetric="acres" chartTitle={`Top crops by acreage in (most recent year)`}/>
             </div>
             <div className="col-md-6">
-            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByHarvestThisYear} xMetric="harvested_acres" chartTitle="Top crops by harvested acres"/>
+            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByHarvestThisYear} xMetric="harvested_acres" chartTitle={`Top crops by harvested acres in ${props.selectedYear}`}/>
             </div>
         </div>
       </div>

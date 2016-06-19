@@ -124,28 +124,30 @@ class Map extends React.Component {
   }
 
   render () {
+    let { sortMapBy } = this.props
+    console.log(sortMapBy)
     if (this.geoLayer) {
       let mapColor = {};
       this.props.countyColors.map((item) => {
         let color = ''
-        switch(item.numberOfFarms) {
-            case "1000":
+        switch(item[sortMapBy]) {
+            case "very low":
                 color = "#E1D837"
                 break;
-            case "2000":
+            case "low":
                 color = "#BCCA30"
                 break;
-            case "3000":
+            case "moderate":
                 color = "#A1C02A"
                 break;
-            case "4000":
+            case "high":
                 color = "#87B725"
                 break;
-            case "5000":
+            case "very high":
                 color = "#5EAA00"
                 break;
         }
-        if(this.props.selectedCounty.fips === item.fips){
+        if(this.props.selectedCounty.name === item.county){
           color = "orange"
         }
         mapColor[item.fips] = color;
@@ -180,6 +182,7 @@ class Map extends React.Component {
 }
 Map.propTypes = {
   selectedCounty: PropTypes.Object,
+  sortMapBy: PropTypes.string,
   focusedCounty: PropTypes.string,
   countyColors: PropTypes.arrayOf(React.PropTypes.shape({
     fips: React.PropTypes.string,

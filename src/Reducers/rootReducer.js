@@ -10,10 +10,27 @@ const countyName = (state = {}, action) => {
     }
 }
 
+const showJournalism = (state = false, action) => {
+    switch(action.type) {
+      case 'TOGGLE_JOURNALISM':
+        return !state
+      default:
+        return state
+    }
+}
+
 const cropName = (state = "", action) => {
     switch(action.type) {
       case 'SELECT_CROP':
-      console.log(action)
+        return action.payload
+      default:
+        return state
+    }
+}
+
+const sortMapBy = (state = "", action) => {
+    switch(action.type) {
+      case 'SORT_MAP':
         return action.payload
       default:
         return state
@@ -67,10 +84,30 @@ const cropData = (state = [], action) => {
     }
 }
 
+const selectedYear = (state = "", action) => {
+    switch(action.type) {
+      case 'CHANGE_YEAR':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+
 
 const cropList = (state = [], action) => {
     switch(action.type) {
       case 'FETCH_CROPS_LIST':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+
+const countyList = (state = [], action) => {
+    switch(action.type) {
+      case 'FETCH_COUNTY_LIST':
         return action.payload
       default:
         return state
@@ -118,8 +155,8 @@ const showMenus = (state = {cropMenu: false, countyMenu: false}, action) => {
 }
 
 const CropCompassReducer = combineReducers({
-  countyName, cropName, countyData, cropImageName,
-  cycleFlag, cropList, cropData, showMenus
+  countyName, countyList, cropName, countyData, cropImageName,
+  cycleFlag, cropList, sortMapBy, cropData, showMenus, selectedYear, showJournalism
 })
 
 export default CropCompassReducer
