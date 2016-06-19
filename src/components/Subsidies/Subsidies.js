@@ -36,20 +36,29 @@ export const Subsidies = (props) => {
   }
 
     let subsidies = props.countyData.subsidies
+
     let justDollars = subsidies.map( (d,i) => {
       return d.subsidy_dollars
     })
     let subsidiesNumber = justDollars.reduce((a, b) => a + b, 0);
 
-    console.log(subsidiesNumber)
+
+      let thisCountyLevels = props.countyList.filter( (d) => {
+        return d.county === props.selectedCounty
+      })
+      let subsidyLevel = ""
+      if(thisCountyLevels.length > 0) { subsidyLevel = thisCountyLevels[0].subsidyLevel}
 
     return (
 
         <div className="row" style={paddingBorders}>
           <div className="row">
 
+          <CuteButton>
+          <h1>Subsidies in {props.selectedCounty} in {props.selectedYear}</h1>
+          <h2>Generally, crop subsidies are {subsidyLevel} here compared to other counties in Oregon.</h2>
 
-          <h1>{props.selectedCounty} Subsidies in {props.selectedYear}</h1>
+          </CuteButton>
 
           </div>
           <br/>
