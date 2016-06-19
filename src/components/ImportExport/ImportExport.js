@@ -38,6 +38,7 @@ export const ImportExport = (props) => {
             </div>
         </div>
         <br/>
+
         <div className="row" style={{marginTop: "150px"}}>
           <div className="col-md-8">
             <div className="row">
@@ -66,3 +67,5 @@ export const ImportExport = (props) => {
   }
 
 export default ImportExport
+
+//          <LineChartD3 dataset={props.productionHistory} selectedCounty={props.selectedCounty} title={`${props.selectedCrop} exports in ${props.selectedCounty} by year.`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>

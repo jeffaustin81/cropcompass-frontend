@@ -5,6 +5,7 @@ import DonutD3 from 'components/VisualizationsD3/DonutD3/TryDonut'
 import Words from '../Words/Words'
 
 export const TopCrops = (props) => {
+
   let dataset = props.countyData.slice(2,4)
   let infoRow = {
     background: "white",
@@ -20,21 +21,25 @@ export const TopCrops = (props) => {
     paddingTop: "25px",
     marginBottom: "20px"
   }
-  return (
-    <div className="row" style={paddingBorders}>
-      <div className="row">
-          <h1>{props.selectedCounty} Top Crops</h1>
-      </div>
+  let commoditiesByAcre = props.countyData.commoditiesByAcre.slice(1,7)
+  let commoditiesByHarvestThisYear = props.countyData.commoditiesByHarvestThisYear.slice(1,7)
+
+    return (
+        <div className="row" style={paddingBorders}>
+          <div className="row">
+            <h1>{props.selectedCounty} Top Crops</h1>
+        </div>
       <div className="col-md-12" style={infoRow}>
-          <div className="col-md-6">
-          <HorizontalBarChart countyName={props.selectedCounty}  countyData={props.countyData} chartTitle="Top crops by revenue"/>
-          </div>
-          <div className="col-md-6">
-          <HorizontalBarChart countyName={props.selectedCounty}  countyData={props.countyData} chartTitle="Top crops by harvest"/>
-          </div>
+            <div className="col-md-6">
+            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByAcre} xMetric="acres" chartTitle={`Top crops by acreage in (**most recent year, usually 2012??**)`}/>
+            </div>
+            <div className="col-md-6">
+            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByHarvestThisYear} xMetric="harvested_acres" chartTitle={`Top crops by harvested acres in ${props.selectedYear}`}/>
+            </div>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+
 
 export default TopCrops

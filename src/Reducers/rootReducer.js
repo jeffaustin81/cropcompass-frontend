@@ -10,20 +10,66 @@ const countyName = (state = {}, action) => {
     }
 }
 
+const showJournalism = (state = false, action) => {
+    switch(action.type) {
+      case 'TOGGLE_JOURNALISM':
+        return !state
+      default:
+        return state
+    }
+}
+
 const cropName = (state = "", action) => {
     switch(action.type) {
       case 'SELECT_CROP':
-      console.log(action)
         return action.payload
       default:
         return state
     }
 }
 
-const countyData = (state = [], action) => {
+const sortMapBy = (state = "", action) => {
     switch(action.type) {
-      case 'ADD_COUNTY_DATA':
+      case 'SORT_MAP':
         return action.payload
+      default:
+        return state
+    }
+}
+
+const countyData = (state = {subsidies: [], commoditiesByAcre: [], commoditiesByHarvestHistory: [], commoditiesByHarvestThisYear: []}, action) => {
+    switch(action.type) {
+      case 'ADD_COUNTY_COMMODITY_ACRE_DATA':
+      return Object.assign({}, {
+                  subsidies: state.subsidies,
+                  commoditiesByAcre: action.payload,
+                  commoditiesByHarvestHistory: state.commoditiesByHarvestHistory,
+                  commoditiesByHarvestThisYear: state.commoditiesByHarvestThisYear,
+
+              })
+      case 'ADD_COUNTY_COMMODITY_HARVEST_DATA':
+      return Object.assign({}, {
+                  subsidies: state.subsidies,
+                  commoditiesByAcre: state.commoditiesByAcre,
+                  commoditiesByHarvestHistory: state.commoditiesByHarvestHistory,
+                  commoditiesByHarvestThisYear: action.payload,
+              })
+      case 'ADD_COUNTY_COMMODITY_HARVEST_HISTORY':
+      return Object.assign({}, {
+                  subsidies: state.subsidies,
+                  commoditiesByAcre: state.commoditiesByAcre,
+                  commoditiesByHarvestHistory: action.payload,
+                  commoditiesByHarvestThisYear: state.commoditiesByHarvestThisYear,
+                      })
+
+      case 'ADD_COUNTY_SUBSIDY_DATA':
+      return Object.assign({}, {
+                  subsidies: action.payload,
+                  commoditiesByAcre: state.commoditiesByAcre,
+                  commoditiesByHarvestHistory: state.commoditiesByHarvestHistory,
+                  commoditiesByHarvestThisYear: state.commoditiesByHarvestThisYear,
+              })
+
       default:
         return state
     }
@@ -38,10 +84,30 @@ const cropData = (state = [], action) => {
     }
 }
 
+const selectedYear = (state = "", action) => {
+    switch(action.type) {
+      case 'CHANGE_YEAR':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+
 
 const cropList = (state = [], action) => {
     switch(action.type) {
       case 'FETCH_CROPS_LIST':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+
+const countyList = (state = [], action) => {
+    switch(action.type) {
+      case 'FETCH_COUNTY_LIST':
         return action.payload
       default:
         return state
@@ -89,8 +155,8 @@ const showMenus = (state = {cropMenu: false, countyMenu: false}, action) => {
 }
 
 const CropCompassReducer = combineReducers({
-  countyName, cropName, countyData, cropImageName,
-  cycleFlag, cropList, cropData, showMenus
+  countyName, countyList, cropName, countyData, cropImageName,
+  cycleFlag, cropList, sortMapBy, cropData, showMenus, selectedYear, showJournalism
 })
 
 export default CropCompassReducer

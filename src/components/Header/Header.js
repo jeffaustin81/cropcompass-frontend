@@ -17,7 +17,6 @@ class Header extends React.Component {
       this.props.handleShowCountyMenu()
     }
 
-
     componentWillReceiveProps(nextProps){
       let cycleThrough = this.props.cycleThrough
       let cropImageName = this.props.cropImageName
@@ -31,9 +30,9 @@ class Header extends React.Component {
     const cropName = this.props.cropName || ""
     return (
       <div>
-        <header style={{zIndex: "5", height: "17%", minHeight:"120px", position: "fixed"}} >
+        <header style={{zIndex: "6", height: "17%", minHeight:"120px", position: "fixed"}} >
           <div className="logo" style={{flex: 10}}>
-            <img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" />
+            <Link to='/'><img src="../../CC-logo.png" alt="CropCompass logo" width="200" height="100" /></Link>
 
 
           </div>

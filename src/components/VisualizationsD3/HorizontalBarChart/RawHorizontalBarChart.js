@@ -1,4 +1,5 @@
 var node = document.createElement('div');
+import d3 from 'd3';
 
       var width = 1000;
       var height = 500;

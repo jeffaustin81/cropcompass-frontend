@@ -6,6 +6,7 @@ import DonutD3 from 'components/VisualizationsD3/DonutD3/TryDonut'
 import Words from '../Words/Words'
 
 export const Subsidies = (props) => {
+
   let dataset = props.countyData.slice(2,4)
   let infoRow = {
     background: "white",
@@ -34,29 +35,42 @@ export const Subsidies = (props) => {
     fontSize: "16px"
   }
 
+    let subsidies = props.countyData.subsidies
+    console.log(props.countyData)
+    let justDollars = subsidies.map( (d,i) => {
+      return d.subsidy_dollars
+    })
+    console.log(justDollars)
+    let subsidiesNumber = justDollars.reduce((a, b) => a + b, 0);
+    console.log(subsidiesNumber)
+
     return (
 
         <div className="row" style={paddingBorders}>
           <div className="row">
 
-          <h1>{props.selectedCounty} Subsidies</h1>
+
+          <h1>{props.selectedCounty} Subsidies in {props.selectedYear}</h1>
 
           </div>
           <br/>
           <div className="col-md-12" style={infoRow}>
             <div className="col-md-8">
 
-              <h2 style={subsidyAmount}>${props.subsidiesNumber} M</h2><p style={subsidyAmountDescription}> subsidies per year in {props.selectedCounty} County</p>
+              <h2 style={subsidyAmount}>${subsidiesNumber}</h2><p style={subsidyAmountDescription}> in subsidies on {props.selectedYear}</p>
 
+
+          <br/>
               <Words title="Why do subsidies matter?">
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.
               </Words>
             </div>
+            </div>
             <div className="col-md-4">
-              <HorizontalBarChart countyName={props.selectedCounty} countyData={props.countyData} chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
+              <HorizontalBarChart countyName={props.selectedCounty} countyData={subsidies} xMetric="subsidy_dollars" chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
             </div>
           </div>
-        </div>
+
     )
   }
 
