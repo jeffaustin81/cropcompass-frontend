@@ -11,20 +11,20 @@ render(){
     <div>
         <img style={{position: 'fixed', zIndex: '-1', height:"100%", width:"100%"}} src='../../sweet_onions.jpg'/>
         <div className="col-md-offset-2 col-md-8" style={{padding: "1em", border: "5px white solid", borderBottomStyle: "hidden", height: "35%", borderRadius: "3px", marginTop: "5%", marginBottom: "3%", zIndex: '5'}}>
-          <img style={{marginLeft:"5%"}} src="../../CC-logo.png" alt="CropCompass logo" width="300" height="150" />
+          <img style={{marginLeft:"5%"}} src="../../CC-logo-wht.png" alt="CropCompass logo" width="300" height="150" />
         </div>
         <div className="col-md-offset-2 col-md-8" style={{height: "10em", borderRadius: "3px", zIndex: '5'}}>
         <p style={{fontSize: "1.5em", color: 'white', textDecoration: 'none !important'}}>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.</p>
         </div>
         <div className="col-md-offset-2 col-md-8" style={{padding: "1em", border: "5px white solid", borderTopStyle: "hidden",  height: "35%", borderRadius: "3px", zIndex: '5', textAlign: "center"}}>
           <div className="col-md-6">
-                <div className="col-md-offset-2 col-md-7" style={{marginBottom: "5%", border: "2px white solid", borderRadius: "3px", height: "15%", opacity: ".8", background:"#A1C02A"}}>
+                <div className="col-md-offset-2 col-md-7" style={{marginBottom: "5%", padding: "10px", border: "2px white solid", borderRadius: "3px", height: "15%", opacity: ".9", background:"#A1C02A"}}>
                 <span onClick={toggleJournalism}><a><p style={{fontSize: "1.5em", color: 'white', textDecoration: 'none !important'}}>
                 READ A HOMEGROWN STORY</p></a></span>
                 </div>
           </div>
           <div className="col-md-6">
-                <div className="col-md-offset-2 col-md-7" style={{marginBottom: "5%", border: "2px white solid", borderRadius: "3px", height: "15%", opacity: ".8", background:"#A1C02A"}}>
+                <div className="col-md-offset-2 col-md-7" style={{marginBottom: "5%", padding: "10px", border: "2px white solid", borderRadius: "3px", height: "15%", opacity: ".9", background:"#A1C02A"}}>
                 <span> <Link to='data'>
                 <p style={{fontSize: "1.5em", color: 'white', textDecoration: 'none !important'}}>DIG INTO THE DATA</p>
                 </Link></span>
