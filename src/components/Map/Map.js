@@ -173,7 +173,7 @@ class Map extends React.Component {
     }
     return (
       <div>
-      <div id='map' style={{marginTop: "200px", width: this.props.width, height: this.props.height, padding: '1em', marginLeft: "-50px"}}
+      <div id='map' style={{marginTop: "200px", width: this.props.width, height: this.props.height, padding: '1em', marginLeft: "-60px"}}
 
         className='leaflet-container leaflet-retina leaflet-fade-anim'></div>
     </div>
