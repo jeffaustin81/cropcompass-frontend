@@ -1,7 +1,6 @@
 import { default as React, PropTypes } from 'react';
-import CuteButton from '../../CuteButton/CuteButton'
 
-export default class LineChartD3 extends React.Component {
+export default class LineChart extends React.Component {
   addAxes(){
     let margin = {
             top: 30,
@@ -9,8 +8,8 @@ export default class LineChartD3 extends React.Component {
             bottom: 30,
             left: 100
         },
-    width = 1000 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 700 - margin.left - margin.right,
+    height = 280 - margin.top - margin.bottom;
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
             return d.x;
@@ -51,6 +50,7 @@ export default class LineChartD3 extends React.Component {
                     .attr("transform", "translate(0," + height + ")")
                     .call(xAxisFunction)
                     .selectAll("text")
+                    .style("font-size", "8px")
                     .attr("y", 0)
                     .attr("x", 9)
                     .attr("dy", ".35em")
@@ -69,13 +69,13 @@ export default class LineChartD3 extends React.Component {
   render() {
     let { selectedCrop, selectedCounty, countyData, title } = this.props
     let margin = {
-            top: 30,
-            right: 100,
-            bottom: 30,
-            left: 100
+              top: 30,
+              right: 100,
+              bottom: 30,
+              left: 100
         },
-        width = 1000 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        width = 700 - margin.left - margin.right,
+        height = 280 - margin.top - margin.bottom;
 
 
     let xScale = d3.scale.linear()
@@ -143,7 +143,7 @@ export default class LineChartD3 extends React.Component {
             let cxCalc = xScale(d.x)
             let cyCalc = yScale(d.y)
             return(
-              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="3">
+              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="2">
               </circle>
 
             )

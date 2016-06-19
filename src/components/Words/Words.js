@@ -5,7 +5,7 @@ export default class Words extends React.Component {
     render(){
       return(
         <div>
-            <h2>{this.props.title}</h2>
+            <h3>{this.props.title}</h3>
             <p>{this.props.children}</p>
         </div>
       )

@@ -36,11 +36,14 @@ export default class HorizontalBarChart extends React.Component{
       return last + current
     })
     let barNodes = topCrops.map(function(crop, index){
-      return (<Bar cropName={crop.cropName} position={index} cropNumber={crop.cropNumber} sumTotalofTopFive={sumTotalofTopFive} />)
+      return (
+        <h4>{crop.cropName}</h4>
+        <Bar cropName={crop.cropName} position={index} cropNumber={crop.cropNumber} sumTotalofTopFive={sumTotalofTopFive} />
+      )
     })
     return(
       <div>
-      <h1>{title}</h1>
+      <h3>{title}</h3>
       {barNodes}
       </div>
     )

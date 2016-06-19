@@ -12,11 +12,11 @@ class SideMenu extends React.Component{
       let { putOneItemInState, menuType, showMenus, countyList, cropList } = this.props
 
       let cropNodes = cropList.map( (crop, index) => {
-        return (<div style={{display: "inline-block", padding: "1%"}} key={Date.now + index} onClick={putOneItemInState.bind(this, crop)}><strong>{crop}</strong></div>)
+        return (<div style={{display: "inline-block", padding: "1%", cursor: "pointer"}} key={Date.now + index} onClick={putOneItemInState.bind(this, crop)}><strong>{crop}</strong></div>)
       })
       let countyNodes = countyList.map( (county, index) => {
         return (
-          <div style={{display: "inline-block", padding: "1%"}} key={Date.now + index} onClick={this.handleClick.bind(this, county)}><strong>{county.name}</strong></div>
+          <div style={{display: "inline-block", padding: "1%", cursor: "pointer"}} key={Date.now + index} onClick={this.handleClick.bind(this, county)}><strong>{county.name}</strong></div>
         )
       })
       return(

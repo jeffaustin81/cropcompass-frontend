@@ -28,7 +28,7 @@ export default class Bar extends React.Component{
       <div>
         <div className="row">
             <div className="col-xs-2 text-right">
-              <h2>{cropName}</h2>
+              <h3>{cropName}</h2>
             </div>
             <div className="col-xs-10">
             <div style={barStyle}>  </div>

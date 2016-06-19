@@ -7,26 +7,52 @@ import Words from '../Words/Words'
 
 export const Subsidies = (props) => {
   let dataset = props.countyData.slice(2,4)
+  let infoRow = {
+    background: "white",
+    borderRadius: "5px",
+    marginTop: "30px",
+    padding: "20px",
+    boxShadow: "1px 1px 25px -4px rgba(140,143,140,.5)",
+    transition: "boxShadow .4s ease-in-out"
+  }
+  let paddingBorders = {
+    borderBottom: "solid 1px #523c03",
+    paddingBottom: "50px",
+    paddingTop: "25px",
+    marginBottom: "20px"
+  }
+  let subsidyAmount = {
+    color: "#fff",
+    backgroundColor: "#523c03",
+    borderRadius: "5px",
+    display: "inline-block",
+    padding: "5px"
+  }
+  let subsidyAmountDescription = {
+    marginLeft: "20px",
+    display: "inline-block",
+    fontSize: "16px"
+  }
 
     return (
 
-        <div className="row text-center info-row">
+        <div className="row" style={paddingBorders}>
           <div className="row">
-          <CuteButton>
-          <h1>Subsidies in {props.selectedCounty}</h1>
-          </CuteButton>
+
+          <h1>{props.selectedCounty} Subsidies</h1>
+
           </div>
           <br/>
-          <div className="row">
-            <div className="col-md-4">
-              <CuteButton>
-              <h2>${props.subsidiesNumber} million</h2><h3> in annual subsidies</h3>
-              </CuteButton>
+          <div className="col-md-12" style={infoRow}>
+            <div className="col-md-8">
+
+              <h2 style={subsidyAmount}>${props.subsidiesNumber} M</h2><p style={subsidyAmountDescription}> subsidies per year in {props.selectedCounty} County</p>
+
               <Words title="Why do subsidies matter?">
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.
               </Words>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-4">
               <HorizontalBarChart countyName={props.selectedCounty} countyData={props.countyData} chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
             </div>
           </div>

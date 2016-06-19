@@ -23,6 +23,7 @@ header div.logo img {
 }
 header nav {
   padding-top: 2%;
+  padding-bottom: 2%;
 }
 header nav ul {
   display: flex;
@@ -41,6 +42,9 @@ header nav ul li {
     text-decoration: none;
     color: #523c03;
   }
+  a:hover {
+    color: #523c03;
+  }
 }
 header nav ul li:first-child a img {
   margin-top: 4px;
@@ -50,9 +54,41 @@ header nav ul li:last-child a img {
 }
 header nav ul li p {
   width: 150px;
-  margin-left: -55px;
+  margin-left: -58px;
   margin-top: 12px;
 }
 nav ul li:first-child p {
   margin-top: 14px;
+}
+
+body{
+  font-family: 'Dosis', sans-serif;
+  background: #F6F5F0;
+  overflow-x: hidden;
+}
+
+h1{
+  font-family: 'Grand Hotel', sans-serif;
+  font-size: 48px
+}
+h2{
+  font-family: 'Dosis', sans-serif;
+  font-size: 35px
+}
+h3{
+  font-family: 'Dosis', sans-serif;
+  font-size: 26px
+}
+
+.info-row{
+  background: white;
+  border-radius: 15px;
+  margin-top: 30px;
+  padding: 20px;
+  box-shadow: 6px 5px 44px -6px rgba(140,143,140,1);
+  transition: box-shadow .4s ease-in-out;
+}
+
+.info-row:hover{
+  box-shadow: 6px 5px 44px 4px rgba(140,143,140,1);
 }

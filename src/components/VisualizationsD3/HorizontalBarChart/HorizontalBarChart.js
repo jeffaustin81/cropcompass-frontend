@@ -32,7 +32,7 @@ export default class HorizontalBarChart extends React.Component {
               })
     return (
       <div className="horizontal-bar-chart">
-        <h2>{this.props.chartTitle}</h2>
+        <h3>{this.props.chartTitle}</h3>
         <div className={this.props.chartTitle}>
         {barNodes}
         </div>

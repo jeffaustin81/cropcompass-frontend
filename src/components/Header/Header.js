@@ -1,7 +1,6 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import classes from './Header.scss'
-import CuteButton from '../CuteButton/CuteButton'
 import { connect } from 'react-redux'
 
 class Header extends React.Component {
@@ -43,15 +42,9 @@ class Header extends React.Component {
 
           <nav>
             <ul>
-                                  <CuteButton>
-                                      <h4>  Current crop: </h4> {cropName}
-                                  </CuteButton>
-                                  <CuteButton>
-                                    <h4>  Current county: </h4>{selectedCounty}
-                                  </CuteButton>
               <li onClick={this.triggerCountyMenuShow.bind(this)}><a>
-                <img src="../../icons/crop-header-icons-off-white/location-iconx2.png" alt="Location Icon" width="23" height="30"/>
-                <p>Choose County</p>
+                <img src="../../icons/crop-header-icons-off-white/location-iconx2.png" alt="Location Icon" width="23" height="30" style={{marginTop: "4px"}}/>
+                <p style={{marginTop: "14px"}}>Choose County</p>
               </a></li>
 
               <li onClick={this.triggerCropMenuShow.bind(this)}><a>
