@@ -16,10 +16,12 @@ export default class MapSortButtons extends React.Component {
       border: "solid 2px #60a81d",
       color: "#60a81d",
       cursor: "pointer",
-      margin: "0",
+      margin: "0px",
       padding: "10px",
       textAlign: "center",
-      display: "inline-block"
+      display: "inline-block",
+      marginLeft: "5px",
+      marginRight: "5px"
     }
 
     let categoryList = ["subsidyLevel", "subsidyRecipients", "cropProduction", "numberOfFarms", "cropDiversity"]
@@ -43,8 +45,9 @@ export default class MapSortButtons extends React.Component {
     }
       return (
           <div key={Date.now() + index}>
-
+              <div>
                 <h3 style={_.merge({}, intitialStyles, selectedCheck)} onClick={this.handleClick.bind(this, metric)}> {metricClean}</h3>
+              </div>
 
 
             <br/>
@@ -52,7 +55,7 @@ export default class MapSortButtons extends React.Component {
       )
     })
       return(
-      <div>
+      <div style={{display: "flex", marginTop: "50px", marginLeft: "10%", alignItems: "center", justifyContent: "center", position: "absolute"}}>
           <br/>
           {buttonNodes}
       </div>
