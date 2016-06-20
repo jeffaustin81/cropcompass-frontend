@@ -59,6 +59,20 @@ import Words from '../Words/Words'
 
 
 export const CropProduction = (props) => {
+  let infoRow = {
+    background: "white",
+    borderRadius: "5px",
+    marginTop: "30px",
+    padding: "20px",
+    boxShadow: "1px 1px 25px -4px rgba(140,143,140,.5)",
+    transition: "boxShadow .4s ease-in-out"
+  }
+  let paddingBorders = {
+    borderBottom: "solid 1px #523c03",
+    paddingBottom: "50px",
+    paddingTop: "25px",
+    marginBottom: "20px"
+  }
 
   let thisCountyLevels = props.countyList.filter( (d) => {
     return d.county === props.selectedCounty
@@ -67,24 +81,24 @@ export const CropProduction = (props) => {
   if(thisCountyLevels.length > 0) { productionLevel = thisCountyLevels[0].cropProduction}
   let dataset = props.dataset || ""
     return (
-      <div className="row text-center info-row">
+      <div className="row" style={paddingBorders}>
         <div className="row">
-        <CuteButton>
+
         <h1>{props.selectedCounty} production of {props.selectedCrop.toLowerCase()} </h1>
         { dataset.length > 0 ?
         <h1>  between {dataset[dataset.length - 1]['year']} and {dataset[0]['year']}</h1>
            :<h1> since 1976 </h1>}
-        <h2>Generally, crop production is {productionLevel} here compared to other counties in Oregon.</h2>
+        <h4>Generally, crop production is {productionLevel} here compared to other counties in Oregon.</h4>
 
-        </CuteButton>
+
         </div>
         <br/>
         { dataset.length > 0 ?
-        <div className="row">
-            <div className="col-md-6">
+        <div className="row" style={infoRow}>
+            <div className="col-md-9">
               <LineChartD3 selectedCounty={props.selectedCounty} xMetric="year" yMetric="harvested_acres" dataset={props.dataset} title={`${props.selectedCrop} production in ${props.selectedCounty} by year`} selectedCrop={props.selectedCrop} countyData={props.countyData}/>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-3">
               <Words title="Crop Production and Environment">
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.
               </Words>
