@@ -12,7 +12,8 @@ export const FarmedLand = (props) => {
     borderTop: "solid 1px #523c03",
     borderBottom: "solid 1px #523c03",
     paddingTop: "50px",
-    paddingBottom: "50px"
+    paddingBottom: "50px",
+    marginTop: "175px"
   }
     return (
       <div style={mainStyle} className="row">

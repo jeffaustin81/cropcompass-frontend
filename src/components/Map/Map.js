@@ -132,20 +132,24 @@ class Map extends React.Component {
         let color = ''
         switch(item[sortMapBy]) {
             case "very low":
-                color = "#E1D837"
+                color = "#e2d837"
                 break;
             case "low":
-                color = "#BCCA30"
+                color = "#bcca30"
                 break;
             case "moderate":
-                color = "#A1C02A"
+                color = "#a2c12a"
                 break;
             case "high":
-                color = "#87B725"
+                color = "#5eaa00"
                 break;
             case "very high":
-                color = "#5EAA00"
+                color = "#539306"
                 break;
+
+
+
+
         }
         if(this.props.selectedCounty.name === item.county){
           color = "orange"
@@ -174,7 +178,7 @@ class Map extends React.Component {
     }
     return (
       <div>
-      <div id='map' style={{marginTop: "170px", width: this.props.width, height: this.props.height, padding: '1em', marginLeft: "-70px"}}
+      <div id='map' style={{marginTop: "150px", width: this.props.width, height: this.props.height, padding: '1em', marginLeft: "-50px"}}
 
         className='leaflet-container leaflet-retina leaflet-fade-anim'></div>
     </div>
