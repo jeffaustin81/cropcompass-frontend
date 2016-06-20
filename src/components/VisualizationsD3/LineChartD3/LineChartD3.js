@@ -1,6 +1,5 @@
 
 import { default as React, PropTypes } from 'react';
-import CuteButton from '../../CuteButton/CuteButton'
 
 export default class LineChartD3 extends React.Component {
   addAxes(){
@@ -160,7 +159,7 @@ export default class LineChartD3 extends React.Component {
             let cxCalc = xScale(d.x)
             let cyCalc = yScale(d.y)
             return(
-              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="6">
+              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="3">
               </circle>
 
             )
@@ -180,7 +179,7 @@ export default class LineChartD3 extends React.Component {
     })
     return (
       <div>
-        <CuteButton><h2>{title}</h2></CuteButton>
+        <h2 style={{marginLeft: "10%"}}>{title}</h2>
         <svg id={`mySVG${title.length}`} className="line-chart" width={width + 150} height={height + 100}>
         <g transform="translate(100,30)">
           <rect width={width} height={height} fill="#f2f0df"></rect>

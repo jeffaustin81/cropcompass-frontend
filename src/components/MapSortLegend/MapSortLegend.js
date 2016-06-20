@@ -9,10 +9,10 @@ export default class MapSortLegend extends React.Component {
   render(){
   const colorArray = [
     {color: "#539306", amount: "very high"},
-    {color: "#87B725", amount: "high"},
-    {color:  "#A1C02A", amount: "moderate"},
-  {color: "#BCCA30", amount: "low"},
-  {color: "#E1D837", amount: "very low"}
+    {color: "#5eaa00", amount: "high"},
+    {color:  "#a2c12a", amount: "moderate"},
+  {color: "#bcca30", amount: "low"},
+  {color: "#e2d837", amount: "very low"}
  ]
   let legendNodes = colorArray.map( (d,index) => {
     return(
