@@ -82,7 +82,11 @@ class HomeView extends React.Component {
                           })
                           this.props.fetchAllPossibleCrops(rawData)
                           })
+            d3.json('http://api.cropcompass.org:8000/data/crop_diversity/', (d) =>
+                    {
 
+                            this.props.fetchDiversityList(d)
+                            })
 
               }
 
@@ -92,7 +96,7 @@ class HomeView extends React.Component {
 
 
   render(){
-    let { putOneCropInState, putOneCountyInState, handleOffMenu,
+    let { putOneCropInState, putOneCountyInState, handleOffMenu,  fetchDiversityList, diversityList,
       putCountyCommodityAcreDataInState, handleShowCropMenu, handleShowCountyMenu, exportCrop, showHugeCropList,
        showMenus, selectedCrop, countyData, selectedCounty, cropList, handleExportClick, handleShowHugeCropList,
        changeYear, selectedYear, cropData, countyList, sortMapBy, sortMapByChange, exportsHistory, allPossibleCrops } = this.props
@@ -190,7 +194,7 @@ const changeExportChart = (crop) => {
         <FarmedLand selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
         <FarmInfo selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
         <TopCrops selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData} />
-        <CropDiversity selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
+        <CropDiversity diversityList={diversityList} selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <Subsidies selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <CropProduction selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
         <ImportExport showHugeCropList={showHugeCropList} handleShowHugeCropList={handleShowHugeCropList} changeExportChart={changeExportChart} handleExportClick={handleExportClick} exportCrop={exportCrop} allPossibleCrops={allPossibleCrops} exportsHistory={exportsHistory} selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
@@ -213,7 +217,8 @@ const mapStateToProps = (state) => {
         exportsHistory: state.exportsHistory,
         allPossibleCrops: state.allPossibleCrops,
         exportCrop: state.exportCrop,
-        showHugeCropList: state.showHugeCropList
+        showHugeCropList: state.showHugeCropList,
+        diversityList: state.diversityList
         }
 }
 
@@ -247,6 +252,11 @@ const putCountyCommodityAcreDataInState = (countyData) => {
 
 const populateExportLineChart = (exportData) => {
 	return {type:"POPULATE_EXPORTS", payload: exportData }
+}
+
+
+const fetchDiversityList = (diversityList) => {
+	return {type:"FETCH_DIVERSITY_LIST", payload: diversityList }
 }
 
 
@@ -307,6 +317,7 @@ export default connect(mapStateToProps,
           changeYear,
           fetchAllPossibleCrops,
           handleShowHugeCropList,
+          fetchDiversityList,
           putOneCropInState})(HomeView)
 
 /*

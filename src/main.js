@@ -49,6 +49,7 @@ let initialState = {
     cropImageName: "hazelnut",
     cycleFlag: false,
     exportCrop: "",
+    diversityList: [],
     showMenus: {cropMenu: false, countyMenu: false},
     allPossibleCrops: [],
     showHugeCropList: false,
