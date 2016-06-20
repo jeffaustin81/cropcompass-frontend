@@ -28,6 +28,25 @@ const cropName = (state = "", action) => {
     }
 }
 
+const exportCrop = (state = "", action) => {
+    switch(action.type) {
+      case 'CHANGE_EXPORT_CROP':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+const exportsHistory = (state = [], action) => {
+    switch(action.type) {
+      case 'POPULATE_EXPORTS':
+        return action.payload
+      default:
+        return state
+    }
+}
+
+
 const sortMapBy = (state = "", action) => {
     switch(action.type) {
       case 'SORT_MAP':
@@ -75,9 +94,9 @@ const countyData = (state = {subsidies: [], commoditiesByAcre: [], commoditiesBy
     }
 }
 
-const cropData = (state = [], action) => {
+const allPossibleCrops = (state = [], action) => {
     switch(action.type) {
-      case 'ADD_CROP_DATA':
+      case 'FETCH_ALL_POSSIBLE_CROPS':
         return action.payload
       default:
         return state
@@ -123,6 +142,15 @@ const cycleFlag = (state = "", action) => {
     }
 }
 
+const showHugeCropList = (state = false, action) => {
+    switch(action.type) {
+      case 'TOGGLE_HUGE_CROP_LIST':
+        return !state
+      default:
+        return state
+    }
+}
+
 const cropImageName = (state = "", action) => {
     switch(action.type) {
       case 'CHANGE_CROP_IMAGE':
@@ -155,8 +183,8 @@ const showMenus = (state = {cropMenu: false, countyMenu: false}, action) => {
 }
 
 const CropCompassReducer = combineReducers({
-  countyName, countyList, cropName, countyData, cropImageName,
-  cycleFlag, cropList, sortMapBy, cropData, showMenus, selectedYear, showJournalism
+  countyName, countyList, cropName, countyData, cropImageName, allPossibleCrops, exportCrop,
+  cycleFlag, cropList, sortMapBy, showMenus, selectedYear, showJournalism, exportsHistory, showHugeCropList
 })
 
 export default CropCompassReducer
