@@ -8,14 +8,18 @@ export default class LineChartD3 extends React.Component {
      dataset = dataset.map( (d, index) => {
       return {x: d[xMetric], y: d[yMetric]}
     })
+
+    console.table(dataset)
     let margin = {
             top: 30,
             right: 100,
             bottom: 30,
             left: 100
         },
-    width = 1000 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+        width = 600,
+        height = 300
+        let yMax = d3.max(dataset, function(d) {
+                return d.y})
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
             return d.x;
@@ -25,7 +29,7 @@ export default class LineChartD3 extends React.Component {
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0, 3000])
+        .domain([0, yMax])
         .range([height, 0]);
 
     let xAxisFunction = d3.svg.axis()
@@ -43,6 +47,7 @@ export default class LineChartD3 extends React.Component {
         .innerTickSize(-width)
         .outerTickSize(0)
         .tickPadding(10);
+
 
       var svg = d3.select(`#mySVG${this.props.title.length}`).append("svg")
                     .attr("width", width + margin.left + margin.right)
@@ -86,10 +91,11 @@ export default class LineChartD3 extends React.Component {
             bottom: 30,
             left: 100
         },
-        width = 1000 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        width = 600,
+        height = 300
 
-
+      let yMax = d3.max(dataset, function(d) {
+                return d.y})
     let xScale = d3.scale.linear()
         .domain([d3.min(dataset, function(d) {
             return d.x;
@@ -99,7 +105,7 @@ export default class LineChartD3 extends React.Component {
         .range([0, width]);
 
     let yScale = d3.scale.linear()
-        .domain([0,3000])
+        .domain([0, yMax ])
         .range([height, 0]);
 
 
@@ -150,11 +156,11 @@ export default class LineChartD3 extends React.Component {
     let circleNodes = dataset.map( (d, index) => {
             let thisKey = parseInt(Date.now() + index)
             arrayOfThisKey.push(thisKey)
-            let circleColor= "#C4BC21"
+            let circleColor= "#D6CD1E"
             let cxCalc = xScale(d.x)
             let cyCalc = yScale(d.y)
             return(
-              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="3">
+              <circle cx={cxCalc} onMouseEnter={showToolTip.bind(this, thisKey)} onMouseLeave={hideToolTip.bind(this, thisKey)} key={thisKey} cy={cyCalc} fill={circleColor} r="6">
               </circle>
 
             )
@@ -165,7 +171,7 @@ export default class LineChartD3 extends React.Component {
       let topPosition = yScale(d.y)
       return(
       <div key={"tip" + arrayOfThisKey[index]} class="d3-tip n" id={"tip" + arrayOfThisKey[index]}
-                        style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#C4BC21",
+                        style={{color: "white", fontWeight: "200", fontSize:"1.4em", background: "#D6CD1E",
                         border: "solid black 1px", padding: "15px", borderRadius: "80%", position: 'absolute',
                         opacity: '0', pointerEvents: 'none', minHeight: "10px", top: `${topPosition + 1900}px`, left: `${leftPosition + 200}px`}}>
         {d.y}
@@ -174,6 +180,7 @@ export default class LineChartD3 extends React.Component {
     })
     return (
       <div>
+        <CuteButton><h2>{title}</h2></CuteButton>
         <svg id={`mySVG${title.length}`} className="line-chart" width={width + 150} height={height + 100}>
         <g transform="translate(100,30)">
           <rect width={width} height={height} fill="#f2f0df"></rect>
@@ -333,7 +340,7 @@ let circleNodes = dataset.map( (d, index) => {
           }
         }
 
-        let circleColor= "#C4BC21"
+        let circleColor= "#D6CD1E"
         let cxCalc = xScale(d.x)
         let cyCalc = yScale(d.y)
         return(

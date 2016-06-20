@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 
 class HomeView extends React.Component {
   componentWillMount(){
-    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah&year=2010`, (d) =>
+    d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=Multnomah`, (d) =>
           {
                   let rawData = d.data.sort(function(a, b) {
                       return b.acres - a.acres;
@@ -30,8 +30,14 @@ class HomeView extends React.Component {
                               })
                               this.props.putCountyCommodityHarvestDataInState(rawData)
                       })
-
-    d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&commodity=Hazelnuts`, (d) =>
+        d3.json(`http://api.cropcompass.org:8000/table/oregon_exports_timeline/?commodity=Alfalfa%20Seeds%20Of%20A%20Kind%20Used%20For%20Sowing`, (d) =>
+                      {
+                              let rawData = d.data.sort(function(a, b) {
+                                  return b.year - a.year;
+                              })
+                              this.props.populateExportLineChart(rawData)
+                      })
+    d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051&commodity=Wheat`, (d) =>
                     {
                             let rawData = d.data.sort(function(a, b) {
                                 return b.year - a.year;
@@ -47,7 +53,7 @@ class HomeView extends React.Component {
                     this.props.putCountySubsidyDataInState(rawData)
                         })
 
-    d3.json('http://api.cropcompass.org:8000/data/commodity_area/?fips=41051', (d) =>
+    d3.json('http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=41051', (d) =>
           {
                   let rawData = d.data.map( (item) => {
                     return item.commodity
@@ -69,6 +75,15 @@ class HomeView extends React.Component {
                             })
                             this.props.putCountyListInState(rawData)
                             })
+            d3.json('http://api.cropcompass.org:8000/table/oregon_export_commodities/', (d) =>
+                  {
+                      let rawData = d.data.map( (item) => {
+                          return item
+                          })
+                          this.props.fetchAllPossibleCrops(rawData)
+                          })
+
+
               }
 
 
@@ -78,9 +93,9 @@ class HomeView extends React.Component {
 
   render(){
     let { putOneCropInState, putOneCountyInState, handleOffMenu,
-      putCountyCommodityAcreDataInState, handleShowCropMenu, handleShowCountyMenu,
-       showMenus, selectedCrop, countyData, selectedCounty, cropList,
-       changeYear, selectedYear, cropData, countyList, sortMapBy, sortMapByChange } = this.props
+      putCountyCommodityAcreDataInState, handleShowCropMenu, handleShowCountyMenu, exportCrop, showHugeCropList,
+       showMenus, selectedCrop, countyData, selectedCounty, cropList, handleExportClick, handleShowHugeCropList,
+       changeYear, selectedYear, cropData, countyList, sortMapBy, sortMapByChange, exportsHistory, allPossibleCrops } = this.props
 
 
 
@@ -120,7 +135,7 @@ class HomeView extends React.Component {
                       this.props.putCountySubsidyDataInState(rawData)
                           })
 
-        d3.json(`http://api.cropcompass.org:8000/data/commodity_area/?fips=${thing.fips}`, (d) =>
+        d3.json(`http://api.cropcompass.org:8000/data/oain_harvest_acres/?fips=${thing.fips}`, (d) =>
                     {
                                 let rawData = d.data.map( (item) => {
                                   return item.commodity
@@ -136,6 +151,15 @@ class HomeView extends React.Component {
 
     }
 
+const changeExportChart = (crop) => {
+  this.props.handleExportClick(crop)
+  d3.json(`http://api.cropcompass.org:8000/table/oregon_exports_timeline/?commodity=${crop}`, (d) =>
+                {
+                        let rawData = d.data.sort(function(a, b) {
+                            return b.year - a.year;
+                        })
+                        this.props.populateExportLineChart(rawData)
+                })}
 
     let someArray = countyList
 
@@ -169,7 +193,7 @@ class HomeView extends React.Component {
         <CropDiversity selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <Subsidies selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <CropProduction selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
-        <ImportExport selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
+        <ImportExport showHugeCropList={showHugeCropList} handleShowHugeCropList={handleShowHugeCropList} changeExportChart={changeExportChart} handleExportClick={handleExportClick} exportCrop={exportCrop} allPossibleCrops={allPossibleCrops} exportsHistory={exportsHistory} selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>
     </div>
   )
@@ -185,7 +209,11 @@ const mapStateToProps = (state) => {
         countyList: state.countyList,
         cropData: state.cropData,
         sortMapBy: state.sortMapBy,
-        selectedYear: state.selectedYear
+        selectedYear: state.selectedYear,
+        exportsHistory: state.exportsHistory,
+        allPossibleCrops: state.allPossibleCrops,
+        exportCrop: state.exportCrop,
+        showHugeCropList: state.showHugeCropList
         }
 }
 
@@ -201,6 +229,10 @@ const sortMapByChange = (metric) => {
 	return {type:"SORT_MAP", payload: metric }
 }
 
+const handleExportClick = (exportCrop) => {
+	return {type:"CHANGE_EXPORT_CROP", payload: exportCrop }
+}
+
 const putCountyCommodityHarvestDataInState = (countyData) => {
 	return {type:"ADD_COUNTY_COMMODITY_HARVEST_DATA", payload: countyData }
 }
@@ -212,6 +244,11 @@ const putCountyCommodityHarvestHistoryInState = (countyData) => {
 const putCountyCommodityAcreDataInState = (countyData) => {
 	return {type:"ADD_COUNTY_COMMODITY_ACRE_DATA", payload: countyData }
 }
+
+const populateExportLineChart = (exportData) => {
+	return {type:"POPULATE_EXPORTS", payload: exportData }
+}
+
 
 const putCountySubsidyDataInState = (countyData) => {
 	return {type:"ADD_COUNTY_SUBSIDY_DATA", payload: countyData }
@@ -230,6 +267,11 @@ const handleShowCountyMenu = () => {
 	return {type:"TOGGLE_SHOW_COUNTY_MENU"}
 }
 
+const handleShowHugeCropList = () => {
+	return {type:"TOGGLE_HUGE_CROP_LIST"}
+}
+
+
 const handleOffMenu = () => {
 	return {type:"CLEAR_ALL_MENUS"}
 }
@@ -238,6 +280,10 @@ const handleShowCropMenu = () => {
 	return {type:"TOGGLE_SHOW_CROP_MENU"}
 }
 
+const fetchAllPossibleCrops = (cropList) => {
+  return {type:"FETCH_ALL_POSSIBLE_CROPS", payload: cropList}
+
+}
 
 const changeYear = (newYear) => {
 	return {type:"CHANGE_YEAR", payload: newYear}
@@ -255,8 +301,12 @@ export default connect(mapStateToProps,
           putCountyCommodityHarvestDataInState,
           putCountyCommodityHarvestHistoryInState,
           putCountySubsidyDataInState,
+          populateExportLineChart,
           sortMapByChange,
+          handleExportClick,
           changeYear,
+          fetchAllPossibleCrops,
+          handleShowHugeCropList,
           putOneCropInState})(HomeView)
 
 /*

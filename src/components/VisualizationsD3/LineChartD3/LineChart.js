@@ -67,7 +67,7 @@ export default class LineChart extends React.Component {
       }
 
   render() {
-    let { selectedCrop, selectedCounty, countyData, title } = this.props
+    let { selectedCounty, countyData, title } = this.props
     let margin = {
               top: 30,
               right: 100,
