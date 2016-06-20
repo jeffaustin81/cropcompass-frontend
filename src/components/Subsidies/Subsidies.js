@@ -53,19 +53,14 @@ export const Subsidies = (props) => {
 
         <div className="row" style={paddingBorders}>
           <div className="row">
-
-          <CuteButton>
-          <h1>Subsidies in {props.selectedCounty} in {props.selectedYear}</h1>
-          <h2>Generally, crop subsidies are {subsidyLevel} here compared to other counties in Oregon.</h2>
-
-          </CuteButton>
-
+            <h1>{props.selectedCounty} Subsidies in {props.selectedYear}</h1>
+            <h4>Generally, crop subsidies are {subsidyLevel} here compared to other counties in Oregon.</h4>
           </div>
           <br/>
           <div className="col-md-12" style={infoRow}>
             <div className="col-md-8">
 
-              <h2 style={subsidyAmount}>${subsidiesNumber}</h2><p style={subsidyAmountDescription}> in subsidies on {props.selectedYear}</p>
+              <h2 style={subsidyAmount}>${subsidiesNumber}</h2><p style={subsidyAmountDescription}> in subsidies in {props.selectedYear}</p>
 
 
           <br/>
@@ -73,9 +68,9 @@ export const Subsidies = (props) => {
               Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.
               </Words>
             </div>
-            </div>
             <div className="col-md-4">
               <HorizontalBarChart countyName={props.selectedCounty} countyData={subsidies} xMetric="subsidy_dollars" chartTitle={`Most subsidized crops in ${props.selectedCounty}`}/>
+            </div>
             </div>
           </div>
 
