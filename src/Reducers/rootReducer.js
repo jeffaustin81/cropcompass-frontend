@@ -133,6 +133,16 @@ const countyList = (state = [], action) => {
     }
 }
 
+
+const diversityList = (state = [], action) => {
+    switch(action.type) {
+      case 'FETCH_DIVERSITY_LIST':
+        return action.payload
+      default:
+        return state
+    }
+}
+
 const cycleFlag = (state = "", action) => {
     switch(action.type) {
       case 'TOGGLE_CYCLE_FLAG':
@@ -183,7 +193,7 @@ const showMenus = (state = {cropMenu: false, countyMenu: false}, action) => {
 }
 
 const CropCompassReducer = combineReducers({
-  countyName, countyList, cropName, countyData, cropImageName, allPossibleCrops, exportCrop,
+  countyName, countyList, cropName, countyData, cropImageName, allPossibleCrops, exportCrop, diversityList,
   cycleFlag, cropList, sortMapBy, showMenus, selectedYear, showJournalism, exportsHistory, showHugeCropList
 })
 
