@@ -4,6 +4,7 @@ import HorizontalBarChart from 'components/VisualizationsD3/HorizontalBarChart/H
 import DonutD3 from 'components/VisualizationsD3/DonutD3/TryDonut'
 import CuteButton from '../CuteButton/CuteButton'
 import Words from '../Words/Words'
+import _ from 'lodash'
 
 export default class MapSortButtons extends React.Component {
 
@@ -11,12 +12,27 @@ export default class MapSortButtons extends React.Component {
     this.props.sortMapByChange(metric)
   }
   render(){
+    let intitialStyles = {
+      border: "solid 2px #60a81d",
+      color: "#60a81d",
+      cursor: "pointer",
+      margin: "0",
+      padding: "10px",
+      textAlign: "center",
+      display: "inline-block"
+    }
+
     let categoryList = ["subsidyLevel", "subsidyRecipients", "cropProduction", "numberOfFarms", "cropDiversity"]
     let selectedView = this.props.selectedView
     let buttonNodes = categoryList.map( (metric, index) => {
-      let selectedCheck = ""
+      let selectedCheck = {}
       if (selectedView === metric){
-        selectedCheck = 'pink'
+        selectedCheck = {
+          backgroundColor: "#60a81d",
+          color: "#fff",
+          border: "solid 2px #60a81d",
+        }
+
       }
       let metricClean = ''
       for(let i=0;i<metric.length;i++){
@@ -27,21 +43,19 @@ export default class MapSortButtons extends React.Component {
     }
       return (
           <div key={Date.now() + index}>
-            <CuteButton>
-            <h3 style={{color: selectedCheck}} onClick={this.handleClick.bind(this, metric)}> {metricClean}</h3>
-            </CuteButton>
+
+                <h3 style={_.merge({}, intitialStyles, selectedCheck)} onClick={this.handleClick.bind(this, metric)}> {metricClean}</h3>
+
+
             <br/>
           </div>
-          )
-          })
-    return(
-    <div style={{width: "20%", left:"2%", zIndex: "5", position: "absolute", top: "25%"}}>
-        <CuteButton>
-        <h2>Recolor the map</h2>
-        </CuteButton>
-        <br/>
-        {buttonNodes}
-    </div>
-    )
+      )
+    })
+      return(
+      <div>
+          <br/>
+          {buttonNodes}
+      </div>
+      )
   }
 }
