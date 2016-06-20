@@ -180,12 +180,12 @@ const changeExportChart = (crop) => {
       : ""
       }
       <div onClick={showMenus.cropMenu || showMenus.countyMenu ? handleOffMenu : null}>
-      <MapSortButtons selectedView={sortMapBy} sortMapByChange={sortMapByChange}/>
       <MapSortLegend />
       <div className="row" style={{height:"50em"}}>
         <Map selectedCounty={selectedCounty} sortMapBy={sortMapBy} countyColors={someArray} width={'100%'} height={'500px'} zoomLevel={7}
            onCountySelect={handleCountySelect} />
       </div>
+      <MapSortButtons selectedView={sortMapBy} sortMapByChange={sortMapByChange}/>
 
         <FarmedLand selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
         <FarmInfo selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
