@@ -88,7 +88,17 @@ class HomeView extends React.Component {
                             this.props.fetchDiversityList(d)
                             })
 
-              }
+
+              d3.json('http://api.cropcompass.org:8000/table/oregon_exports_top5crops/', (d) =>
+                      {
+                        let rawData = d.data.map( (item) => {
+                            return item
+
+                            })
+                            this.props.fetchTop5Exports(rawData)
+                            })
+
+                }
 
 
 
@@ -96,7 +106,7 @@ class HomeView extends React.Component {
 
 
   render(){
-    let { putOneCropInState, putOneCountyInState, handleOffMenu,  fetchDiversityList, diversityList,
+    let { putOneCropInState, putOneCountyInState, handleOffMenu,  fetchDiversityList, diversityList, top5Exports,
       putCountyCommodityAcreDataInState, handleShowCropMenu, handleShowCountyMenu, exportCrop, showHugeCropList,
        showMenus, selectedCrop, countyData, selectedCounty, cropList, handleExportClick, handleShowHugeCropList,
        changeYear, selectedYear, cropData, countyList, sortMapBy, sortMapByChange, exportsHistory, allPossibleCrops } = this.props
@@ -109,6 +119,7 @@ class HomeView extends React.Component {
       putOneCountyInState(county)
       putOneCropInState(crop)
       let thing = county
+
       d3.json(`http://api.cropcompass.org:8000/table/commodity_area/?county=${thing.name}`, (d) =>
             {
                     let rawData = d.data.sort(function(a, b) {
@@ -153,7 +164,7 @@ class HomeView extends React.Component {
                                 this.props.putCropListInState(nonRepeated)
                                 })
 
-    }
+                  }
 
 const changeExportChart = (crop) => {
   this.props.handleExportClick(crop)
@@ -197,7 +208,7 @@ const changeExportChart = (crop) => {
         <CropDiversity diversityList={diversityList} selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <Subsidies selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <CropProduction selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>
-        <ImportExport showHugeCropList={showHugeCropList} handleShowHugeCropList={handleShowHugeCropList} changeExportChart={changeExportChart} handleExportClick={handleExportClick} exportCrop={exportCrop} allPossibleCrops={allPossibleCrops} exportsHistory={exportsHistory} selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
+        <ImportExport top5Exports={top5Exports} howHugeCropList={showHugeCropList} handleShowHugeCropList={handleShowHugeCropList} changeExportChart={changeExportChart} handleExportClick={handleExportClick} exportCrop={exportCrop} allPossibleCrops={allPossibleCrops} exportsHistory={exportsHistory} selectedYear={selectedYear} productionHistory={this.props.countyData.commoditiesByHarvestHistory} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData.commoditiesByAcre} />
         </div>
     </div>
   )
@@ -218,7 +229,8 @@ const mapStateToProps = (state) => {
         allPossibleCrops: state.allPossibleCrops,
         exportCrop: state.exportCrop,
         showHugeCropList: state.showHugeCropList,
-        diversityList: state.diversityList
+        diversityList: state.diversityList,
+        top5Exports: state.top5Exports
         }
 }
 
@@ -258,7 +270,9 @@ const populateExportLineChart = (exportData) => {
 const fetchDiversityList = (diversityList) => {
 	return {type:"FETCH_DIVERSITY_LIST", payload: diversityList }
 }
-
+const fetchTop5Exports = (top5) => {
+	return {type:"FETCH_TOP_5_EXPORTS", payload: top5 }
+}
 
 const putCountySubsidyDataInState = (countyData) => {
 	return {type:"ADD_COUNTY_SUBSIDY_DATA", payload: countyData }
@@ -318,6 +332,7 @@ export default connect(mapStateToProps,
           fetchAllPossibleCrops,
           handleShowHugeCropList,
           fetchDiversityList,
+          fetchTop5Exports,
           putOneCropInState})(HomeView)
 
 /*

@@ -144,6 +144,17 @@ const diversityList = (state = [], action) => {
     }
 }
 
+
+const top5Exports = (state = [], action) => {
+    switch(action.type) {
+      case 'FETCH_TOP_5_EXPORTS':
+      console.log(action.payload)
+        return action.payload
+      default:
+        return state
+    }
+}
+
 const cycleFlag = (state = "", action) => {
     switch(action.type) {
       case 'TOGGLE_CYCLE_FLAG':
@@ -195,7 +206,7 @@ const showMenus = (state = {cropMenu: false, countyMenu: false}, action) => {
 
 const CropCompassReducer = combineReducers({
   countyName, countyList, cropName, countyData, cropImageName, allPossibleCrops, exportCrop, diversityList,
-  cycleFlag, cropList, sortMapBy, showMenus, selectedYear, showJournalism, exportsHistory, showHugeCropList
+  cycleFlag, cropList, sortMapBy, showMenus, selectedYear, showJournalism, exportsHistory, showHugeCropList, top5Exports
 })
 
 export default CropCompassReducer

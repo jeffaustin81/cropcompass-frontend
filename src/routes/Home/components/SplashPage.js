@@ -16,7 +16,7 @@ render(){
         <div className="col-md-offset-2 col-md-8" style={{height: "10em", borderRadius: "3px", zIndex: '5'}}>
         <p style={{fontSize: "1.5em", color: 'white', textDecoration: 'none !important'}}>
 
-<span style={{marginBottom: "1em", fontSize: "1.5em" }}>The Pacific Northwest is one of the most rich biospheres in the world.</span>
+<span style={{marginBottom: "1em", fontSize: "1.7em" }}>The Pacific Northwest is one of the most rich biospheres in the world.</span>
 <br/>
 We're using open data to bring transparency to the factors that shape our food system so we can understand more about what we grow in Oregon, what we sell, and why.
 </p>
