@@ -17,11 +17,13 @@ export default class MapSortButtons extends React.Component {
       color: "#60a81d",
       cursor: "pointer",
       margin: "0px",
-      padding: "10px",
+      padding: "15px",
       textAlign: "center",
       display: "inline-block",
       marginLeft: "5px",
-      marginRight: "5px"
+      marginRight: "5px",
+      fontSize: "18px",
+      backgroundColor: "#e5f1dc"
     }
 
     let categoryList = ["subsidyLevel", "subsidyRecipients", "cropProduction", "numberOfFarms", "cropDiversity"]
@@ -55,7 +57,7 @@ export default class MapSortButtons extends React.Component {
       )
     })
       return(
-      <div style={{display: "flex", marginTop: "50px", marginLeft: "10%", alignItems: "center", justifyContent: "center", position: "absolute"}}>
+      <div style={{display: "flex", marginTop: "10px", marginLeft: "20%", alignItems: "center", justifyContent: "center", position: "absolute"}}>
           <br/>
           {buttonNodes}
       </div>

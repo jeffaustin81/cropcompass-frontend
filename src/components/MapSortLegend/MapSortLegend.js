@@ -8,16 +8,16 @@ import Words from '../Words/Words'
 export default class MapSortLegend extends React.Component {
   render(){
   const colorArray = [
-    {color: "#E1D837", amount: "very low"},
+    {color: "#539306", amount: "very high"},
+    {color: "#87B725", amount: "high"},
+    {color:  "#A1C02A", amount: "moderate"},
   {color: "#BCCA30", amount: "low"},
-  {color:  "#A1C02A", amount: "moderate"},
-   {color: "#87B725", amount: "high"},
-   {color: "#5EAA00", amount: "very high"}
+  {color: "#E1D837", amount: "very low"}
  ]
   let legendNodes = colorArray.map( (d,index) => {
     return(
-      <div key={Date.now() + index} style={{ height:"10%", background: d.color}}>
-      <h3 style={{marginTop: "5%"}}>{d.amount}</h3>
+      <div key={Date.now() + index} style={{background: d.color, height: "10%"}}>
+      <h3 style={{marginTop: "0px", color: "#fff", padding: "10px"}}>{d.amount}</h3>
       </div>
     )
   })
