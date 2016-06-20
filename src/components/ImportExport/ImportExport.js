@@ -25,8 +25,6 @@ export default class ImportExport extends React.Component{
       paddingTop: "25px",
       marginBottom: "20px"
     }
-
-
     let allCropNamesEverNodes = this.props.allPossibleCrops.map( (crop,index) => {
       return(
         <div onClick={this.handleClick.bind(this, crop)} style={{display: "inline-block", padding: "5px", margin: "5px", background: "#87B725", border: "1px solid #E1D837", borderRadius: "5px"}} key={crop}>{crop}</div>
@@ -42,6 +40,9 @@ export default class ImportExport extends React.Component{
         </div>
         <div style={infoRow}>
         <div className="col-md-12">
+            <div className="col-md-6">
+            <HorizontalBarChart countyName={this.props.selectedCounty}  countyData={this.props.countyData} chartTitle={`Crop Imports`}/>
+            </div>
             <div className="col-md-6">
             <HorizontalBarChart countyName={this.props.selectedCounty}  countyData={this.props.countyData} chartTitle={`Crop Exports`}/>
             </div>

@@ -193,7 +193,7 @@ const changeExportChart = (crop) => {
 
         <FarmedLand selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre}/>
         <FarmInfo selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} countyData={countyData.commoditiesByAcre} />
-        <TopCrops selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData} />
+        <TopCrops selectedCrop={selectedCrop} selectedYear={selectedYear} selectedCounty={selectedCounty.name} countyData={countyData} />
         <CropDiversity diversityList={diversityList} selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <Subsidies selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} countyData={countyData} />
         <CropProduction selectedYear={selectedYear} countyList={countyList} selectedCounty={selectedCounty.name} selectedCrop={selectedCrop} dataset={countyData.commoditiesByHarvestHistory}/>

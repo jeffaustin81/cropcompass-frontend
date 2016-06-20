@@ -17,13 +17,17 @@ export default class HorizontalBarChart extends React.Component {
     let height = (width * .66);
     let xMetric = this.props.xMetric
     let { putCountyDataInState } = this.props
-    let colorScale = ["#5EAA00", "#87B725", "#A1C02A", "#BCCA30", "#E1D837"]
-        let dataset = this.props.countyData.slice(0,6)
+    let colorScale = ["#5EAA00", "#87B725", "#A1C02A", "#BCCA30", "#E1D837", "#5EAA00"]
+        let dataset = this.props.countyData.slice(0,5)
+        if(this.props.matchingCrop !== undefined){
+          dataset.push(this.props.matchingCrop)
+        }
         let xScale = d3.scale.linear().domain([0, d3.max(dataset, function(d){return d[xMetric];})]).range([0, width])
         let widthArray = dataset.map(function(d) {
                       return xScale(d[xMetric]);
                        })
         let lessThanFive = ""
+        console.table(dataset)
         if (dataset.length < 5 && dataset.length > 0) { lessThanFive = `There are only ${dataset.length} data points in this query.`}
         if (dataset.length === 0) { lessThanFive = 'There is no data available for this query.'}
 

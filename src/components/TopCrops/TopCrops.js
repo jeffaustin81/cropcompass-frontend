@@ -21,6 +21,21 @@ export const TopCrops = (props) => {
     paddingTop: "25px",
     marginBottom: "20px"
   }
+
+  let selectedCropAcreData = ''
+  let selectedCropHarvestData = ''
+  if (props.countyData.commoditiesByAcre !== undefined){ selectedCropAcreData = props.countyData.commoditiesByAcre.filter( (d) => {
+    return d.commodity === props.selectedCrop
+  })
+}
+
+  if (props.countyData.commoditiesByHarvestThisYear !== undefined){selectedCropHarvestData = props.countyData.commoditiesByHarvestThisYear.filter( (d) => {
+    return d.commodity === props.selectedCrop
+  })
+}
+
+  if(selectedCropAcreData !== undefined) {selectedCropAcreData = selectedCropAcreData[0]}
+  if(selectedCropHarvestData !== undefined) {selectedCropHarvestData = selectedCropHarvestData[0]}
   let commoditiesByAcre = props.countyData.commoditiesByAcre.slice(1,7)
   let commoditiesByHarvestThisYear = props.countyData.commoditiesByHarvestThisYear.slice(1,7)
 
@@ -31,10 +46,10 @@ export const TopCrops = (props) => {
         </div>
       <div className="col-md-12" style={infoRow}>
             <div className="col-md-6">
-            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByAcre} xMetric="acres" chartTitle={`Top crops by acreage in (**most recent year, usually 2012??**)`}/>
+            <HorizontalBarChart matchingCrop={selectedCropAcreData} countyName={props.selectedCounty} countyData={commoditiesByAcre} xMetric="acres" chartTitle={`Top crops by acreage in (**most recent year, usually 2012??**)`}/>
             </div>
             <div className="col-md-6">
-            <HorizontalBarChart countyName={props.selectedCounty} countyData={commoditiesByHarvestThisYear} xMetric="harvested_acres" chartTitle={`Top crops by harvested acres in ${props.selectedYear}`}/>
+            <HorizontalBarChart matchingCrop={selectedCropHarvestData} countyName={props.selectedCounty} countyData={commoditiesByHarvestThisYear} xMetric="harvested_acres" chartTitle={`Top crops by harvested acres in ${props.selectedYear}`}/>
             </div>
         </div>
       </div>
