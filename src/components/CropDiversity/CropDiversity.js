@@ -50,11 +50,21 @@ export const CropDiversity = (props) => {
     marginTop: "5px",
     borderRadius: "5px"
   }
+
   let thisCountyLevels = props.countyList.filter( (d) => {
     return d.county === props.selectedCounty
   })
   let diversityLevel = ""
   if(thisCountyLevels.length > 0) { diversityLevel = thisCountyLevels[0].cropDiversity}
+
+  let thisCountyDiversity = ''
+  let averageScore =''
+  console.log(props.diversityList)
+  if (props.diversityList.data !== undefined){
+    thisCountyDiversity = props.diversityList.data[0][props.selectedCounty].toFixed(2)
+    averageScore = props.diversityList.average_diversity_score.toFixed(2)
+ }
+
     return (
 
         <div className="row" style={paddingBorders}>
@@ -74,17 +84,17 @@ export const CropDiversity = (props) => {
                 <div className="text-center">
                   <ul style={listStyles}>
                     <li style={listItemStyles}>
-                      <p style={listNumber}>7</p>
+                      <p style={listNumber}>{averageScore}</p>
                       <p style={listParagraph}>Average</p>
                     </li>
                     <li style={listItemStyles}>
-                      <p style={middleNumber}>5</p>
+                      <p style={middleNumber}>{thisCountyDiversity}</p>
                       <p style={listParagraph}>{props.selectedCounty}</p>
                     </li>
                     <li style={listItemStyles}>
-                      <p style={listNumber}>10</p>
+                      <p style={listNumber}>3.54</p>
                       <p style={listParagraph}>Highest</p>
-                      <p>(Lane County)</p>
+                      <p>(Washington County)</p>
                     </li>
                   </ul>
                 </div>
